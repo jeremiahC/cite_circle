@@ -94,6 +94,9 @@ class Aauth {
 		if(CI_VERSION >= 2.2){
 			$this->CI->load->library('driver');
 		}
+		//add on by chevy
+		$this->CI->load->database();
+		
 		$this->CI->load->library('session');
 		$this->CI->load->library('email');
 		$this->CI->load->helper('url');

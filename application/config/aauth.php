@@ -98,7 +98,7 @@ $config_aauth["default"] = array(
 
 	'ddos_protection'                => true,
 
-	'recaptcha_active'               => true,
+	'recaptcha_active'               => false,
 	'recaptcha_login_attempts'       => 4,
 	'recaptcha_siteKey'              => '6Lc4ch4TAAAAADKcOumOw5OUBv_Yn21Sbp_gaBdC',
 	'recaptcha_secret'               => '6Lc4ch4TAAAAABv1aBBautqRw5GeF9iYJG11QalJ',

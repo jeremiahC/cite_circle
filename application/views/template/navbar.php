@@ -1,29 +1,27 @@
 <?php if  ( $this->aauth->is_loggedin() ){?>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">WebSiteName</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	      <li class="active"><?php echo anchor('home','Home')?></li>
-	      <li><?php echo anchor('login/logout','Logout')?></li>
-	    </ul>
-	  </div>
-	</nav>
+	<!-- Following Menu -->
+    <div class="ui menu">
+  	<div class="header item">
+  	<?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="ui mini image"');?>
+  	</div>
+  	 <?php echo anchor('home','Home','class="active item"')?>
+      <?php echo anchor('News', 'News Feed', 'class="item"')?>
+	   <?php echo anchor('status','Feed','class="item"')?>
+	
+  		<div class="right menu">
+          <?php echo anchor('login/logout','Log out','class="item"')?>
+  	</div>
+  	</div>
 <?php }else{?>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">WebSiteName</a>
-	    </div>
-	    <ul class="nav navbar-nav">
-	      <li class="active"><?php echo anchor('home','Home')?></li>
-	   		<li>
-			<?php echo anchor('login','Login')?>
-			</li>
-	      <li><?php echo anchor('register','Register')?></li>
-	      <li><a href="#">Page 3</a></li>
-	    </ul>
-	  </div>
-	</nav>
+	<!-- Following Menu -->
+    <div class="ui menu">
+  	<div class="header item">
+  	<?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="ui mini image"');?>
+  	</div>
+  	<?php echo anchor('home','Home','class="active item"')?>
+  		<div class="right menu">
+          <?php echo anchor('login','Log in','class="item"')?>
+          <?php echo anchor('register','Sign Up','class="item"')?>
+  	</div>
+</div>
 <?php }?>

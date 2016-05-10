@@ -6,6 +6,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		// Your own constructor code
 		$this->load->library("Aauth");
+		$this->load->helper('form');
 	}
 	
 	public function index(){
@@ -16,6 +17,7 @@ class Home extends CI_Controller {
             $data['body'] = 'home_view'; // call your content
 			$this->load->view('template/template', $data);
         }
+        
 	}
 	
 }
