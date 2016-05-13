@@ -41,7 +41,7 @@ class Register extends CI_Controller {
 			
 			if ($this->aauth->create_user($email,$password,$name) == true) {
 	
-				$data['body'] = 'pages/register_success'; // cal your content
+				$data['body'] = 'register_success'; // cal your content
 				$this->load->view('template/template', $data);
 	
 			} else {

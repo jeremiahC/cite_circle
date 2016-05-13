@@ -43,7 +43,7 @@ class Login extends CI_Controller {
 			
 			if ($this->aauth->login($username, $password, true)) {
 				// user login ok
-				$data['body'] = 'pages/login_success'; // call your content
+				$data['body'] = 'login_success'; // call your content
 				$this->load->view('template/template', $data);
 			
 			} else {

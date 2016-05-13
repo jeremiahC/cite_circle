@@ -1,6 +1,4 @@
 Library Aauth
-
-v1
 1.	made some changes of print_errors() function
 	Line 1936
 	From:
@@ -9,40 +7,3 @@ v1
 	return $msg;
 2. added $this->CI->load->database();
 	on public function __construct()
-	
-	
-v2
-3&4 purpose: to add row in DB table aauth_user_profile after register
-3. added function on line 2321 or after last function
-	public function add_profile($user_id)
-4. added on line 748 or under the create_user() function
-	$this->add_profile($user_id);
-5. login/register change to one page load
-
-added on line 91
-1.		'user_profile'                 	 => 'aauth_user_profile'
-
-
-v3
-added view folder status and transfer status_display and status_view to it
-config/aauth
-
-
-v4
-6.added to libraries Aauth.php on public function __construct()
-after line 98
-		$this->CI->load->helper('date');
-		$this->CI->load->helper('form');
-		$this->CI->load->library('upload');
-		$this->CI->load->library('form_validation');
-7.added controller
-	ProfileController
-  added model
-  	profile_model
-  added view
-  	location: view/profile
-  	profile_view
-  	update
-	
-	
-	

@@ -11,8 +11,13 @@ class News extends CI_Controller{
 	}
 
 	public function index(){
-		 $data['body'] =  'NewsPage/index';
-		 $this->load->view('template/template',$data);
+		
+		if ( $this->aauth->is_loggedin() ){
+			$data['body'] = 'status_view'; // call your content
+			$this->load->view('template/template', $data);
+		} else {
+			redirect('/');
+		}
 	}
 
 	public function post(){

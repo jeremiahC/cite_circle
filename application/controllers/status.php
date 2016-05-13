@@ -12,7 +12,7 @@ class Status extends CI_Controller {
 	function index(){
 		
 		if ( $this->aauth->is_loggedin() ){
-			$data['body'] = 'status/status_view'; // call your content
+			$data['body'] = 'status_view'; // call your content
 			$this->load->view('template/template', $data);
 		} else {
 			redirect('/');
@@ -22,7 +22,7 @@ class Status extends CI_Controller {
 	public function display_status()
 	{
 		$data['query']=$this->status_model->get_status();
-		echo $this->load->view('status/display_status',$data,TRUE);
+		echo $this->load->view('pages/display_status',$data,TRUE);
 	}
 	
 	public function insert_status()
