@@ -88,6 +88,7 @@ $config_aauth["default"] = array(
 	'pms'                            => 'aauth_pms',
 	'system_variables'               => 'aauth_system_variables',
 	'user_variables'                 => 'aauth_user_variables',
+	'user_profile'                 	 => 'aauth_user_profile',
 
 	'remember'                       => ' +3 days',
 
@@ -98,7 +99,7 @@ $config_aauth["default"] = array(
 
 	'ddos_protection'                => true,
 
-	'recaptcha_active'               => true,
+	'recaptcha_active'               => false,
 	'recaptcha_login_attempts'       => 4,
 	'recaptcha_siteKey'              => '6Lc4ch4TAAAAADKcOumOw5OUBv_Yn21Sbp_gaBdC',
 	'recaptcha_secret'               => '6Lc4ch4TAAAAABv1aBBautqRw5GeF9iYJG11QalJ',

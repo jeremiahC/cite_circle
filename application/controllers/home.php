@@ -6,16 +6,18 @@ class Home extends CI_Controller {
 		parent::__construct();
 		// Your own constructor code
 		$this->load->library("Aauth");
+		$this->load->helper('form');
 	}
 	
 	public function index(){
 	 	if ( $this->aauth->is_loggedin() ){
-            $data['body'] = 'login_success'; // call your content
+            $data['body'] = 'pages/login_success'; // call your content
 			$this->load->view('template/template', $data);
         } else {
             $data['body'] = 'home_view'; // call your content
 			$this->load->view('template/template', $data);
         }
+        
 	}
 	
 }

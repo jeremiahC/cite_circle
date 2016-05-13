@@ -12,8 +12,7 @@ class Register extends CI_Controller {
 	}
 	
 	public function index(){
-		$data['body'] = 'register_view'; // cal your content
-		$this->load->view('template/template', $data);
+		$this->load->view('register_view');
 	}
 	
 	/**
@@ -30,10 +29,8 @@ class Register extends CI_Controller {
 		$this->form_validation->set_rules('password_confirm', 'Confirm Password', 'trim|required|min_length[6]|matches[password]');
 	
 		if ($this->form_validation->run() === false) {
-				
 			// validation not ok, send validation errors to the view
-			$data['body'] = 'register_view'; // cal your content
-			$this->load->view('template/template', $data);
+			$this->load->view('register_view');
 				
 		} else {
 				
@@ -44,15 +41,13 @@ class Register extends CI_Controller {
 			
 			if ($this->aauth->create_user($email,$password,$name) == true) {
 	
-				$data['body'] = 'register_success'; // cal your content
+				$data['body'] = 'pages/register_success'; // cal your content
 				$this->load->view('template/template', $data);
 	
 			} else {
 				// send error to the view
 				$data['error'] = $this->aauth->print_errors();
-				
-				$data['body'] = 'register_view'; // cal your content
-				$this->load->view('template/template', $data);
+				$this->load->view('register_view', $data);
 			}
 				
 		}

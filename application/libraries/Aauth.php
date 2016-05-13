@@ -94,6 +94,13 @@ class Aauth {
 		if(CI_VERSION >= 2.2){
 			$this->CI->load->library('driver');
 		}
+		//add on by chevy
+		$this->CI->load->database();
+		$this->CI->load->helper('date');
+		$this->CI->load->helper('form');
+		$this->CI->load->library('upload');
+		$this->CI->load->library('form_validation');
+		
 		$this->CI->load->library('session');
 		$this->CI->load->library('email');
 		$this->CI->load->helper('url');
@@ -740,7 +747,10 @@ class Aauth {
 		if ( $this->aauth_db->insert($this->config_vars['users'], $data )){
 
 			$user_id = $this->aauth_db->insert_id();
-
+			
+			// insert user profile
+			$this->add_profile($user_id);
+			
 			// set default group
 			$this->add_member($user_id, $this->config_vars['default_group']);
 
@@ -2310,6 +2320,14 @@ class Aauth {
 	public function generate_totp_qrcode($secret){
 		$ga = new PHPGangsta_GoogleAuthenticator();
 		return $ga->getQRCodeGoogleUrl($this->config_vars['name'], $secret);
+	}
+	
+	// 	chevy function added
+	public function add_profile($user_id){
+		$data = array(
+				'user_id' => $user_id
+		);
+		$this->aauth_db->insert($this->config_vars['user_profile'], $data );
 	}
 
 } // end class

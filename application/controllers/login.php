@@ -15,18 +15,17 @@ class Login extends CI_Controller {
 		if ( $this->aauth->is_loggedin() ){
 			redirect('/');
 		} else {
-			$data['body'] = 'login_view'; // call your content
-			$this->load->view('template/template', $data);
+			$this->load->view('login_view');
 		}
 		
 	}
 	
-// 	/**
-// 	 * login function.
-// 	 *
-// 	 * @access public
-// 	 * @return void
-// 	 */
+	/**
+	 * login function.
+	 *
+	 * @access public
+	 * @return void
+	 */
 	public function login() {
 		// create the data object
 		$this->form_validation->set_rules('username', 'Username', 'required');
@@ -35,8 +34,7 @@ class Login extends CI_Controller {
 		if ($this->form_validation->run() == false) {
 		
 		// validation not ok, send validation errors to the view
-		$data['body'] = 'login_view'; // call your content
-		$this->load->view('template/template', $data);
+		$this->load->view('login_view');
 		
 		} else {
 			
@@ -45,15 +43,14 @@ class Login extends CI_Controller {
 			
 			if ($this->aauth->login($username, $password, true)) {
 				// user login ok
-				$data['body'] = 'login_success'; // call your content
+				$data['body'] = 'pages/login_success'; // call your content
 				$this->load->view('template/template', $data);
 			
 			} else {
 				// login failed
-				$data['error'] = 'Wrong username or password.';
+				$data['error'] = $this->aauth->print_errors();
 				// send error to the view
-				$data['body'] = 'login_view'; // call your content
-				$this->load->view('template/template', $data);
+				$this->load->view('login_view', $data);
 			}
 			
 		}
@@ -70,15 +67,12 @@ class Login extends CI_Controller {
 	
 		if ($this->aauth->logout()) {
 			
-			$data['body'] = 'home_view'; // cal your content
-			$this->load->view('template/template', $data);
+			$this->load->view('login_view');
 				
 		} else {
-				
 			// there user was not logged in, we cannot logged him out,
 			// redirect him to site root
 			redirect('/');
-				
 		}
 	
 	}
