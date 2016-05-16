@@ -7,7 +7,7 @@ class News extends CI_Controller{
 		// Your own constructor code
 		$this->load->library("Aauth");
 	    $this->load->database();
-	    $this->load->model('status_model');
+	    $this->load->model('newsmodel');
 	}
 
 	public function index(){
@@ -23,6 +23,10 @@ class News extends CI_Controller{
 	public function post(){
 		//create a function were a school_admin can post news or normal post
 
+	}
+
+	public function vote(){
+		$this->newsmodel->vote();
 	}
 
 // 	public function delete(){

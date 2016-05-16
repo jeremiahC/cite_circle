@@ -29,11 +29,59 @@
                     <div class="ui divider"></div>
                     <i class="thumbs up icon"></i>
                     <span>Comments</span>
+                    <button class ="ui button" id ="vote"> Vote</button>
                     
                 </div>
             </div>
         </div>
     </div>
+<div class="ui teal button" value ="1"id="vote1">
+    Vote
+</div>
+<div class="ui teal button" value = "0" id="unvote">
+    Unvote
+</div>
 
     
 </div>
+<script>
+     
+
+        $(document).ready(function() {
+            $("#vote").click(function(){
+                
+                    $.ajax({
+                        type: "POST",
+                        url: "<?php echo base_url();?>News/vote/",
+                        data:{
+                            'news_id':'1',
+                            'user_id':'1'
+
+                        },
+
+                        cache: false,
+                        success: function()
+                            {
+                            alert('ok');
+                            },
+                        error: function()
+                            {
+                            alert('fail');
+                            }
+                        });
+            });
+
+            $("#vote1").click(function(){
+                
+                $(this).addClass('active');
+                        
+
+            });
+        });
+
+
+
+
+
+
+</script>
