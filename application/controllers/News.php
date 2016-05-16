@@ -13,7 +13,7 @@ class News extends CI_Controller{
 	public function index(){
 		
 		if ( $this->aauth->is_loggedin() ){
-			$data['body'] = 'status_view'; // call your content
+			$data['body'] = 'news/index'; // call your content
 			$this->load->view('template/template', $data);
 		} else {
 			redirect('/');

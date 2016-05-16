@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 	
 	public function index(){
 	 	if ( $this->aauth->is_loggedin() ){
-            $data['body'] = 'login_success'; // call your content
+            $data['body'] = 'pages/login_success'; // call your content
 			$this->load->view('template/template', $data);
         } else {
             $data['body'] = 'home_view'; // call your content

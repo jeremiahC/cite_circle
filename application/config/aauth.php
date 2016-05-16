@@ -88,6 +88,7 @@ $config_aauth["default"] = array(
 	'pms'                            => 'aauth_pms',
 	'system_variables'               => 'aauth_system_variables',
 	'user_variables'                 => 'aauth_user_variables',
+	'user_profile'                 	 => 'aauth_user_profile',
 
 	'remember'                       => ' +3 days',
 
