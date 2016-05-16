@@ -1,5 +1,11 @@
 <br>
 <br>
+<style>
+.image-upload > input
+{
+	display: none;
+}
+</style>
 <?php foreach ($user_profile as $information){}?>
 <div class="ui grid">
 	<div class="row">
@@ -12,13 +18,28 @@
 							<div class="four wide column">
 								<div id="edit_profile_picture"></div>
 								Welcome <?php echo $information->firstname?>
-									<?php echo form_open_multipart('ProfileController/do_upload');?>
-										
-											<h3 class="sub header"></h3>
-													<img class="ui small circular image" src="<?php echo base_url();?>assets/images/avatar/nan.jpg">
-														<?php echo '<input type="file" name="userfile" id="profile_picture"/>'?>
-														<?php echo '<input type="submit" name="upload" id="upload" value="Update Details"/>'?>
-									<?php echo "</form>"?>
+								
+								<?php foreach ($upload_files as $image) {} ?>
+										<a href="#" data-toggle="tooltip" data-placement="top" title="upload picture">
+																<?php if($image->user_picture == ""){?>
+																	<img src="<?php echo ''.base_url().'assets/images/new-user-image-default.png';?>" width='150' height="150" class="ui circular medium image">
+																<?php }else{?>
+																	<img src="<?php echo ''.base_url().'assets/uploads/'.$image->user_picture.'';?>" width='150' height="150" class="ui circular medium image">
+																<?php };?>
+										</a>
+										<br><br>
+								<?php echo form_open_multipart('ProfileController/');?>
+												<div class="image-uploads">
+												  	<label for="file-input">
+												        <i class="photo icon"></i>
+												    </label>
+														<input type="file" name="userfile" size="20" />
+														<input type="submit"  value="Upload Picture" name="upload" id="upload" disabled/>
+												</div>
+												<br><br>
+																	
+								<?php echo form_close(); ?>
+								
 										<div class="ui horizontal divider">-</div>
 										<?php echo $information->firstname?>
 										<?php echo $information->lastname?>
@@ -48,32 +69,15 @@
 <script>
 $(document).ready(function(){
 
-});
+	$(function(){
 
-$(function(){
-		$('#upload').click(function(){
-			  if (typeof FormData !== 'undefined') {
-				  var formData = new FormData( $("#formID")[0] );
+		$('input:file').change(function(){
 
-			        $.ajax({
-			            url : "<?php echo base_url();?>index.php/profile_controller/do_upload/",
-			            type : 'POST',
-			            data : formData,
-			            async : false,
-			            cache : false,
-			            contentType : false,
-			            processData : false,
-			            success : function(data) {
-			            	$("#edit_profile_picture").html(data);
-			            	$("#edit_profile_picture").fadeIn(slow);
-			            }
-			        });
-
-			    } else {
-			       message("Your Browser Don't support FormData API! Use IE 10 or Above!");
-			    }   
-				return false;
+					if($(this).val()){
+							$('input:submit').attr('disabled', false);
+						}
 			});
-	
+	});
 });
+
 </script>

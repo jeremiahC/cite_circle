@@ -40,4 +40,43 @@ class Profile_Model extends CI_Model
 	
 		return true;
 	}
+	
+	
+	public function do_upload()
+	{
+		$user_id = $this->session->userdata('id');
+	
+		$config = array(
+				'upload_path'   => './assets/uploads/',
+				'allowed_types' => 'gif|jpg|png',
+				'max_size'      => '5000',
+				'max_width'     => '1280',
+		);
+	
+	
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		$this->upload->do_upload();
+	
+		$upload_data = $this->upload->data();
+		$data['user_picture']=  $upload_data['file_name'] ;
+	
+		$this->db->where('user_id',$user_id);
+		$this->db->update('aauth_user_profile',$data);
+	}
+	
+	
+	public function get_upload()
+	{
+		$user_id = $this->session->userdata('id');
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get('aauth_user_profile');
+	
+	
+		return $query->result();
+	
+	}
+	
+	
+	
 }

@@ -5,7 +5,6 @@ class Status extends CI_Controller {
 	    parent::__construct();
 		// Your own constructor code
 		$this->load->library("Aauth");
-	    $this->load->database();
 	    $this->load->model('status_model');
 	}
 	
@@ -29,6 +28,14 @@ class Status extends CI_Controller {
 	{
 		$this->status_model->insert_status();
 		$this->display_status();
+	}
+	
+	public function delete_status(){
+		$this->status_model->delete_status();
+	}
+	
+	public function update_status(){
+		$this->status_model->update_status();
 	}
     
 }

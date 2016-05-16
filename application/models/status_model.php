@@ -28,10 +28,24 @@ class Status_model extends CI_Model
 		$this->db->insert('status',array('user_id'=>$user_id ,'status'=>$status,'time'=> $date));
 	}
 	
+	//delete comment
+	public function delete_status(){
+		$status_id = $this->input->post('status_id');
+		$this->db->where('status_id', $status_id);
+		$this->db->delete('status');
+	}
+	
+	public function update_status(){
+		$status_id = $this->input->post('status_id');
+		$status = $this->input->post('status');
+		$this->db->where('status_id', $status_id);
+		$this->db->update('status',array('status'=>$status));
+	}
 	
 	
 	
 	
+	//wa pa gamita 
 	//get comments
 	public function get_comments(){
 		$this->db->select('*');

@@ -7,19 +7,27 @@ class ProfileController extends CI_Controller {
 		parent::__construct();
 		$this->load->model('profile_model');
 		$this->load->library("Aauth");
+		$this->load->helper('file');
 	}
-	
 	
 	public function index()
 	{
-		if($this->aauth->is_loggedin()){
-				$data['user_profile'] = $this->profile_model->getUserInfo();
-				$data['body'] = 'profile/profile_view'; // call your content
-				$this->load->view('template/template', $data);
-		}else{
-			redirect('/');
-		}	
+	
+		if($this->input->post('upload'))
+		{
+			$this->profile_model->do_upload();
+		}
+		else{
+				
+			//error butanganan pa..
+		}
+		$data['user_profile'] = $this->profile_model->getUserInfo();
+		$data['upload_files'] = $this->profile_model->get_upload();
+		$data['body'] = 'profile/profile_view'; // call your content
+		$this->load->view('template/template', $data);
 	}
+	
+	
 	
 	public function editUpdateProfile(){
 			$data['user_profile'] = $this->profile_model->getUserInfo();
@@ -30,10 +38,11 @@ class ProfileController extends CI_Controller {
 	
 	public function update_account()
 	{
-		$this->form_validation->set_rules('username' ,'User name', 'required|min_length[4]');
-		$this->form_validation->set_rules('password','Password', 'required|min_length[6]');
-		$this->form_validation->set_rules('email','Email','required|valid_email');
-	
+		$this->form_validation->set_rules('username' ,'User name', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('password','Password', 'trim|required|min_length[6]');
+		$this->form_validation->set_rules('conf_password', 'Confirm Password', 'trim|required|min_length[6]|matches[password]');
+		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
+		
 		if($this->form_validation->run() == FALSE){
 			echo "false";
 		}else{
@@ -42,7 +51,7 @@ class ProfileController extends CI_Controller {
 			$user_email= $this->input->post('email'); 
 			$user_password = $this->input->post('password');
 			
-			if($this->aauth->update_user($user_id, $user_email, $user_password, $user_name) == true){
+			if($this->aauth->update_user($user_id, $user_email, $user_password, $user_name)){
 				echo "true";
 			}else{
 				echo "false";
@@ -145,26 +154,7 @@ class ProfileController extends CI_Controller {
 		}
 		
 	}
-	public function do_upload(){
 	
-		$config = array(
-		'upload_path' => "./uploads/img",
-		'allowed_types' => "gif|jpg|png|jpeg|pdf",
-		'overwrite' => TRUE,
-		'max_height' => "768",
-		'max_width' => "1024"
-		);
-		
-		$this->upload->initialize($config);
-		$this->load->library('upload', $config);
-		
-		if($this->upload->do_upload()){
-			redirect();
-		}else{
-			$error = array('error' => $this->upload->display_errors());
-			$this->load->view('profile_view', $error);
-		}
-	}
 
 }
 	

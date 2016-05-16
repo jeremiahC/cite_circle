@@ -7,7 +7,7 @@
 		  <div class="field">
 		    <label>Whats on your mind?</label>
 		    <input type="hidden" id="user_id" name="user_id" value="<?php echo $this->aauth->get_user_id($email=false);?>"/> 
-		    <textarea rows="2" id="status" name="status"></textarea>
+		    <textarea rows="2" id="status" name="status" class="status-input"></textarea>
 		  </div>
 		</div>
 		 <div class="six wide column">

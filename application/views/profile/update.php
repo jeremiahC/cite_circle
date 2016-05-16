@@ -88,6 +88,10 @@
 								    <input type="password" id="password" name="password" placeholder="Enter your password..." required><span id="password_verify"></span>
 								  </div>
 								  <div class="field">
+								    <label>Confirm Password</label>
+								    <input type="password" id="conf_password" name="conf_password" placeholder="Confirm your password..." required><span id="conf_password_verify"></span>
+								  </div>
+								  <div class="field">
 								    <label>Email</label>
 								    <input type="email" name="email" id="email" value="<?php echo $information->email;?>" required><span id="email_verify"></span>
 								  </div>
@@ -240,6 +244,7 @@ $(function(){
 					var dataString = {
 					        username: $('#username').val(),
 					        password: $('#password').val(),
+					        conf_password : $('#conf_password').val(),
 					        email: $('#email').val()
 					    };
 					console.log(dataString);
@@ -261,4 +266,18 @@ $(function(){
 			});
 	
 	});
+		$(function(){
+
+			$('#conf_password').keyup(function(){
+
+					$password = $('#password').val();
+					$conf_password = $('#conf_password').val();
+
+					if($password == $conf_password){
+						$('#conf_password_verify').fadeIn(100).html('<i style="color: green">Password Match!</i>. <i class="big green checkmark icon"></i>');
+					}else{
+						$('#conf_password_verify').fadeIn(100).html('<i style="color: red">Password does not match!</i> <i class="big red remove icon"></i>');
+					}
+				});
+		});
 </script>

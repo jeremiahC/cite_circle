@@ -43,6 +43,39 @@ after line 98
   	location: view/profile
   	profile_view
   	update
-	
-	
+  	
+8.change navbar css
+
+v5
+9.added folder and file on assets
+	css/custom.css
+10	fix navbar (delete feed and profile link)
+11	fix delete status
+12	add edit status
+
+CONTROLLER
+
+function 
+1. index-- added upload picture
+2. update account -- update the form validation set rules conf_password
+
+
+MODEL
+
+added do_upload and get_upload function on profile_model.php
+
+
+VIEWS
+
+added style .image-upload > input{display: none;}
+added foreach to get the uploaded image
+added form_open_multipart
+added script to enable the input file button.
+
+FOLDERSS
+directory -- assets/uploads
+
+DB
+
+added user_profile(fields) on aauth_user_profile row
 	
