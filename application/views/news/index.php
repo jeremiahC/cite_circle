@@ -1,3 +1,4 @@
+
 <div class="ui container">
     <div class="ui centered grid">
         <div class="eight wide column">
@@ -14,22 +15,22 @@
             <div class="ui green segment">
                 <div class="column">
                     <img src="assets/images/avatar/nan.jpg" class="ui avatar image">
-                    <label>Name</label>
-                    <span>date and time</span>
+                    <label><?=$post_user?></label>
+                    <span><?=$post_dt?></span>
                     <i class="sidebar icon"></i>
                     <div class="ui divider"></div>
                     <p>
-                        the quick brown fox jumps over the lazy dog.</br>
-                        the quick brown fox jumps over the lazy dog.</br>
-                        the quick brown fox jumps over the lazy dog.</br>
-                        the quick brown fox jumps over the lazy dog.</br>
-                        the quick brown fox jumps over the lazy dog.
-                        
+                        <?php echo $post_content;?>
                     </p>
                     <div class="ui divider"></div>
+<<<<<<< HEAD
                     <i class="thumbs up icon"></i>
                     <span>Comments</span>
                     <button class ="ui button" id ="vote"> Vote</button>
+=======
+                    <a href="#"><i class="thumbs up icon"></i></a>
+                    <a href="#"><span>Comments</span></a>
+>>>>>>> dbd5069613737764caa1f0201f8d0accb004a9c3
                     
                 </div>
             </div>

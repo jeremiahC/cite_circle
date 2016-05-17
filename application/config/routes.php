@@ -53,4 +53,12 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+<<<<<<< HEAD
 $route[''] = "news/";
+=======
+
+/* format $route['foo'] = '<class>/<method>/parameter'; */
+/* sample $route['blogs'] = 'blog_class/post_method */
+
+$route['post_news'] = 'news';
+>>>>>>> dbd5069613737764caa1f0201f8d0accb004a9c3
