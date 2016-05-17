@@ -72,6 +72,6 @@ class Status_model extends CI_Model
 		$this->db->delete('status_comments');
 	}
 	
-	
+
 }
 ?>
