@@ -24,8 +24,6 @@
                     </p>
                     <div class="ui divider"></div>
 
-                    <i class="thumbs up icon"></i>
-                    <span>Comments</span>
                     <button class ="ui button" id ="vote"> Vote</button>
 
                     <a href="#"><i class="thumbs up icon"></i></a>
@@ -47,37 +45,37 @@
 <script>
      
 
-        $(document).ready(function() {
-            $("#vote").click(function(){
+        // $(document).ready(function() {
+        //     $("#vote").click(function(){
                 
-                    $.ajax({
-                        type: "POST",
-                        url: "<?php echo base_url();?>News/vote/",
-                        data:{
-                            'news_id':'1',
-                            'user_id':'1'
+        //             $.ajax({
+        //                 type: "POST",
+        //                 url: "<?php echo base_url();?>News/vote/",
+        //                 data:{
+        //                     'news_id':'1',
+        //                     'user_id':'1'
 
-                        },
+        //                 },
 
-                        cache: false,
-                        success: function()
-                            {
-                            alert('ok');
-                            },
-                        error: function()
-                            {
-                            alert('fail');
-                            }
-                        });
-            });
+        //                 cache: false,
+        //                 success: function()
+        //                     {
+        //                     alert('ok');
+        //                     },
+        //                 error: function()
+        //                     {
+        //                     alert('fail');
+        //                     }
+        //                 });
+        //     });
 
-            $("#vote1").click(function(){
+        //     $("#vote1").click(function(){
                 
-                $(this).addClass('active');
+        //         $(this).addClass('active');
                         
 
-            });
-        });
+        //     });
+        // });
 
 
 
