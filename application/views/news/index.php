@@ -23,15 +23,14 @@
                         <?php echo $post_content;?>
                     </p>
                     <div class="ui divider"></div>
-<<<<<<< HEAD
+
                     <i class="thumbs up icon"></i>
                     <span>Comments</span>
                     <button class ="ui button" id ="vote"> Vote</button>
-=======
+
                     <a href="#"><i class="thumbs up icon"></i></a>
                     <a href="#"><span>Comments</span></a>
->>>>>>> dbd5069613737764caa1f0201f8d0accb004a9c3
-                    
+               
                 </div>
             </div>
         </div>
