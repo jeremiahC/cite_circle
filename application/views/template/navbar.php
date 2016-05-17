@@ -8,6 +8,7 @@
 	  	<?php echo anchor('home','<i class="home icon"></i>Home','class="active item"')?>
 		<?php echo anchor('status','Feed','class="item"')?>
 		<?php echo anchor('ProfileController','Profile','class="item"')?>
+                <?php echo anchor('post_news','News','class="item"')?>
 	</div>
 	<div class="right menu">
   		<?php echo anchor('login/logout','Log out','class="item"')?>

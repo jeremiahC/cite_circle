@@ -52,3 +52,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+/* format $route['foo'] = '<class>/<method>/parameter'; */
+/* sample $route['blogs'] = 'blog_class/post_method */
+
+$route['post_news'] = 'news';
