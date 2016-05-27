@@ -8,7 +8,13 @@ class Newsmodel	extends CI_Model
     }
     
     public function post(){
-		
+        $format = "Y-m-d";
+	$data = array(
+            'content' => 'ako la;asdfad',
+            'date'  => date($format)
+        );
+        
+        $this->db->insert('news', $data);
     }
     
     public function show(){
