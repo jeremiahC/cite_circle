@@ -1,18 +1,20 @@
 <?php
-
-use views\Form;
+/*************************************
+ **** Author : Jeremiah Caballero ****
+ **** Date : May 02, 2016         ****
+ *************************************/
 
 class News extends CI_Controller{
-        
-	//ROle:School Admin
+        /* Role Access : School Admin*/
+    
 	public function __construct(){
 	    parent::__construct();
-		// Your own constructor code
-                $this->load->library("Aauth");
-                $this->load->model('newsmodel');
-                $this->load->library('parser');
+            $this->load->library("Aauth");
+            $this->load->library("parser");
+            $this->load->model('newsmodel');
 	}
         
+        //default page
 	public function index(){
             
             if ( $this->aauth->is_loggedin() ){    
@@ -22,13 +24,21 @@ class News extends CI_Controller{
                 redirect('/');
             }
 	}
+        //goes to create page
+        public function post_create(){ 
+            $data['body']= 'news/create'; 
+            $this->parser->parse('template/template',$data);             
+        }
         
+        //post your entry
 	public function post_data(){
+            $title =  $this->input->post('header');
             $content = $this->input->post('postnews');
-            $this->newsmodel->post($content);
-            $this->post_show();
+            $this->newsmodel->post($content,$title);
+            redirect('post_news');
 	}
         
+        //show your entry at the news page
         public function post_show(){
             $row =  $this->newsmodel->show();
             foreach($row as $rows){
@@ -36,17 +46,30 @@ class News extends CI_Controller{
                     'post_content' => $rows->content,
                     'post_user'    => 'School Admin',
                     'post_date'    => $rows->date,
+                    'post_title'   => $rows->title,
                 );
                 $this->parser->parse('news/post',$data);
-            } 
+            }
         }
+        
+        //view page for an individual entry
+        public function post_view(){
+            $row =  $this->newsmodel->show();
+            foreach($row as $rows){
+                $data = array(
+                    'post_content' => $rows->content,
+                    'post_user'    => 'School Admin',
+                    'post_date'    => $rows->date,
+                    'post_title'   => $rows->title,
+                );
+                
+            }$data['body']= 'news/view'; 
+            $this->parser->parse('template/template',$data);
+        }
+        
 	public function vote(){
 		$this->newsmodel->vote();
 	}
 
-// 	public function delete(){
-// 		//create a function were a school_admin can delet news or normal post
-// 	}
-// 
 }
 ?>

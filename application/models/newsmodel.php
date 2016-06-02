@@ -7,13 +7,13 @@ class Newsmodel	extends CI_Model
         parent::__construct();
     }
     
-    public function post($content){
+    public function post($content,$title){
         $format = "Y-m-d";
 	$data = array(
             'content' => $content,
-            'date'  => date($format)
+            'date'    => date($format),
+            'title'   => $title
         );
-        
         $this->db->insert('news', $data);
     }
     
