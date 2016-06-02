@@ -7,10 +7,10 @@ class Newsmodel	extends CI_Model
         parent::__construct();
     }
     
-    public function post(){
+    public function post($content){
         $format = "Y-m-d";
 	$data = array(
-            'content' => 'ako la;asdfad',
+            'content' => $content,
             'date'  => date($format)
         );
         

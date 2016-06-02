@@ -35,8 +35,6 @@ CREATE TABLE IF NOT EXISTS `votes` (
 -- Dumping data for table `votes`
 --
 
-INSERT INTO `votes` (`news_id`, `user_id`) VALUES
-(1, 2);
 
 --
 -- Indexes for dumped tables

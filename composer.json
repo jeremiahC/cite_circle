@@ -11,13 +11,17 @@
 		"source": "https://github.com/bcit-ci/CodeIgniter"
 	},
 	"require": {
-		"php": ">=5.2.4",
-		"semantic/ui": "^2.1"
+		"php": ">=5.6.8",
+		"semantic/ui": "^2.1",
+		"monolog/monolog": "^1.19"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*"
+	},
+	"autoload": {
+		"psr-4": {"": "src/"}
 	}
 }

@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `news` (
   `news_id` int(11) NOT NULL,
   `content` int(11) DEFAULT NULL,
-  `comment_id` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
