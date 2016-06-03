@@ -4,6 +4,7 @@
 class Profile_Model extends CI_Model
 {
 	
+	
 	public function getUserInfo()
 	{
 		$this->db->select('*');
@@ -47,16 +48,18 @@ class Profile_Model extends CI_Model
 		$user_id = $this->session->userdata('id');
 	
 		$config = array(
-				'upload_path'   => './assets/uploads/',
+				'upload_path'   => './uploads/',
 				'allowed_types' => 'gif|jpg|png',
 				'max_size'      => '5000',
-				'max_width'     => '1280',
+				'max_width'     => '4000',
 		);
 	
 	
 		$this->load->library('upload', $config);
 		$this->upload->initialize($config);
-		$this->upload->do_upload();
+		if(!$this->upload->do_upload()){
+			return $this->upload->display_errors();
+		}
 	
 		$upload_data = $this->upload->data();
 		$data['user_picture']=  $upload_data['file_name'] ;

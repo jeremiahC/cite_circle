@@ -7,20 +7,16 @@ class ProfileController extends CI_Controller {
 		parent::__construct();
 		$this->load->model('profile_model');
 		$this->load->library("Aauth");
-		$this->load->helper('file');
+		$this->load->helper(array('url','form','html','file'));
+		if ( !$this->aauth->is_loggedin() ){
+			redirect('/');
+		}
 	}
 	
 	public function index()
 	{
-	
-		if($this->input->post('upload'))
-		{
-			$this->profile_model->do_upload();
-		}
-		else{
-				
-			//error butanganan pa..
-		}
+
+		$data['error'] = $this->profile_model->do_upload();
 		$data['user_profile'] = $this->profile_model->getUserInfo();
 		$data['upload_files'] = $this->profile_model->get_upload();
 		$data['body'] = 'profile/profile_view'; // call your content

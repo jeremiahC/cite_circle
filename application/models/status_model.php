@@ -4,37 +4,39 @@ class Status_model extends CI_Model
 	public function __construct()
 	{//Core controller constructor
 	parent::__construct();
-	$this->load->helper('date');
 	date_default_timezone_set('Asia/Manila');
 	
 	}
-	//get status
+	
+	//get all status
 	public function get_status(){
- 		$this->db->select('*');
-		$this->db->from('aauth_users');
-		$this->db->join('status', 'aauth_users.id = status.user_id');
+		$this->db->select ( '*' );
+		//$this->db->limit(5,0);
+		$this->db->from ( 'status' );
+		$this->db->join ( 'aauth_user_profile', 'aauth_user_profile.user_id = status.user_id' , 'left' );
+		$this->db->join ( 'aauth_users', 'aauth_users.id = aauth_user_profile.user_id' , 'left' );
 		$this->db->order_by("status_id","desc");
-		$query = $this->db->get();
-		return $query->result();
+		$query = $this->db->get ();
+		return $query->result ();
 	}
 	
 	//insert status
-	public function insert_status(){
-		$user_id=$this->input->post('user_id');
-		$status=$this->input->post('status');
-		$time = time();
-		$datestring = "%Y-%m-%d - %h:%i %a";
-		$date= mdate($datestring, $time);
-		$this->db->insert('status',array('user_id'=>$user_id ,'status'=>$status,'time'=> $date));
+	public function insert_status($datas){
+		$this->db->insert('status',$datas);
+		$inserted_id = $this->db->insert_id();
+		return $inserted_id;
 	}
 	
-	//delete comment
+	//delete status
 	public function delete_status(){
 		$status_id = $this->input->post('status_id');
 		$this->db->where('status_id', $status_id);
 		$this->db->delete('status');
+		$this->db->where('cmt_status_id', $status_id);
+		$this->db->delete('status_comments');
 	}
 	
+	//update/edit status
 	public function update_status(){
 		$status_id = $this->input->post('status_id');
 		$status = $this->input->post('status');
@@ -42,36 +44,23 @@ class Status_model extends CI_Model
 		$this->db->update('status',array('status'=>$status));
 	}
 	
-	
-	
-	
-	//wa pa gamita 
 	//get comments
 	public function get_comments(){
 		$this->db->select('*');
-		$query = $this->db->get('status_comments');
-		return $query->result();
+		$this->db->from ( 'aauth_user_profile' );
+		$this->db->join ( 'aauth_users', 'aauth_users.id = aauth_user_profile.user_id' , 'left' );
+		$this->db->join ( 'status_comments', 'status_comments.user_id = aauth_users.id' , 'left' );
+		$this->db->order_by("comment_id","desc");
+		$query = $this->db->get ();
+		return $query->result ();
 	}
 	
 	//insert comments
-	public function insert_comment(){
-		$name=$this->input->post('name');
-		$cmt_status_id=$this->input->post('cmt_status_id');
-		$comment=$this->input->post('comment');
-		$time = time();
-		$datestring = "%Y-%m-%d - %h:%i %a";
-		$date= mdate($datestring, $time);
-		$this->db->insert('status_comments',array('name'=>$name ,'comment'=>$comment,'time'=> $date,'cmt_status_id'=>$cmt_status_id));
-		return $this->db->insert_id();
+	public function insert_comment($data){
+		$this->db->insert('status_comments',$data);
+		$inserted_id = $this->db->insert_id();
+		return $inserted_id;
 	}
 	
-	//delete comment
-	public function delete_comment(){
-		$id = $this->input->post('id');
-		$this->db->where('comment_id', $id);
-		$this->db->delete('status_comments');
-	}
-	
-
 }
 ?>
