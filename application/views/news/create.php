@@ -7,11 +7,11 @@
                     <form class="fields">
                             <div class="thirteen wide field">
                                 <label>Header:</label>
-                                <input type="text" placeholder="your header ..." id="header" name="header">
+                                <input type="text" placeholder="your header ..." id="header" name="header" required="required">
                             </div>
                             <div class="thirteen wide field">
                                 <label>Content:</label>
-                                <textarea name='postnews' id="postnews" class= 'form-control' rows= '2' placeholder='Write a post ...'></textarea>
+                                <textarea name='postnews' id="postnews" class= 'form-control' rows= '2' placeholder='Write a post ...' required="true"></textarea>
                             </div>
                             <div class="two wide field">
                                 <input type="submit" class='ui positive button' value="Post">
@@ -21,15 +21,3 @@
             </div>
         </div>
 </div>
-
-<!--<script>
-$(document).ready(function(){
-
-    $("#submitNews").submit(function(){
-        var postnews = $('textarea#postnews').val();
-        $.post('news/post_data',data: {postnews : postnews});
-        });
-   });
-});
-
-</script>-->

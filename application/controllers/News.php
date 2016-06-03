@@ -40,21 +40,15 @@ class News extends CI_Controller{
         
         //show your entry at the news page
         public function post_show(){
-            $row =  $this->newsmodel->show();
-            foreach($row as $rows){
-                $data = array(
-                    'post_content' => $rows->content,
-                    'post_user'    => 'School Admin',
-                    'post_date'    => $rows->date,
-                    'post_title'   => $rows->title,
-                );
-                $this->parser->parse('news/post',$data);
-            }
+            $row =  $this->newsmodel->show_all();
+            $data['show'] = $row;
+            $this->parser->parse('news/post',$data);
         }
         
         //view page for an individual entry
-        public function post_view(){
-            $row =  $this->newsmodel->show();
+        public function post_view($id){
+
+            $row =  $this->newsmodel->show($id);
             foreach($row as $rows){
                 $data = array(
                     'post_content' => $rows->content,
@@ -70,6 +64,10 @@ class News extends CI_Controller{
 	public function vote(){
 		$this->newsmodel->vote();
 	}
+        
+        public function delete($id){
+            $this->newsmodel->delete($id);
+        }
 
 }
 ?>
