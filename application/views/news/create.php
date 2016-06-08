@@ -11,7 +11,7 @@
                             </div>
                             <div class="thirteen wide field">
                                 <label>Content:</label>
-                                <textarea name='postnews' id="postnews" class= 'form-control' rows= '2' placeholder='Write a post ...' required="true"></textarea>
+                                <textarea name='postnews' id="postnews" class= 'form-control' placeholder='Write a post ...' required="true"></textarea>
                             </div>
                             <div class="two wide field">
                                 <input type="submit" class='ui positive button' value="Post">

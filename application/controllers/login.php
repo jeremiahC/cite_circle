@@ -6,15 +6,12 @@ class Login extends CI_Controller {
 		parent::__construct();
 		// Your own constructor code
 		$this->load->library("Aauth");
-		// load form helper and validation library
-		$this->load->helper('form');
-		$this->load->library('form_validation');
 	}
 	
 	public function index(){
 		if ( $this->aauth->is_loggedin() ){
 			redirect('/');
-		} else {
+		}else{
 			$this->load->view('login_view');
 		}
 		
@@ -43,7 +40,7 @@ class Login extends CI_Controller {
 			
 			if ($this->aauth->login($username, $password, true)) {
 				// user login ok
-				$data['body'] = 'pages/login_success'; // call your content
+				$data['body'] = 'home_view'; // call your content
 				$this->load->view('template/template', $data);
 			
 			} else {

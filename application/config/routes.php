@@ -60,3 +60,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['post_news'] = 'news';
 $route['post_view/(:num)'] = 'news/post_view/$1';
 $route['post_delete/(:num)'] = 'news/delete/$1';
+$route['post_create'] = 'news/post_create';

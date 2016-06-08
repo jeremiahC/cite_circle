@@ -62,7 +62,9 @@ class News extends CI_Controller{
         }
         
 	public function vote(){
-		$this->newsmodel->vote();
+//              $data['query'] = $this->newsmodel->get_news_id();
+                $this->newsmodel->vote();   
+		$this->load->view('news/index');
 	}
         
         public function delete($id){

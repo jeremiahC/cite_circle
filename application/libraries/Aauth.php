@@ -292,8 +292,15 @@ class Aauth {
 		// Database stores pasword hashed password
 		$query = $this->aauth_db->where('pass', $this->hash_password($pass, $user_id));
 		$query = $this->aauth_db->where('banned', 0);
+		$query = $this->aauth_db->select ( '*' );
+		$query = $this->aauth_db->from ( $this->config_vars['user_profile'] );
+		$query = $this->aauth_db->where($db_identifier, $identifier);
+		$query = $this->aauth_db->join ( $this->config_vars['users'], 'aauth_users.id = aauth_user_profile.user_id' , 'left' );
+		$query = $this->aauth_db->get();
+		$row = $query->row();
 
-		$query = $this->aauth_db->get($this->config_vars['users']);
+// commented out by chevy
+// 		$query = $this->aauth_db->get($this->config_vars['users']);
 
 		$row = $query->row();
 
@@ -306,7 +313,11 @@ class Aauth {
 				'id' => $row->id,
 				'name' => $row->name,
 				'email' => $row->email,
-				'loggedin' => TRUE
+				'loggedin' => TRUE,
+				//added by chevy for session
+				'user_picture'=> $row->user_picture,
+				'firstname' => $row->firstname,
+				'lastname' => $row->lastname,
 			);
 
 			$this->CI->session->set_userdata($data);

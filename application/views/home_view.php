@@ -1,4 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+<div id="home" class="nav_identifier">
+
 <br><br>
  <div class="ui text container">
  	<div class="ui text container">

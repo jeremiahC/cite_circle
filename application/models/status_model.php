@@ -5,13 +5,18 @@ class Status_model extends CI_Model
 	{//Core controller constructor
 	parent::__construct();
 	date_default_timezone_set('Asia/Manila');
+	$this->postTable = 'status';
+	}
 	
+	function count_status(){
+		$query = $this->db->count_all_results('status');
+		return $query;
 	}
 	
 	//get all status
-	public function get_status(){
+	public function get_status($start, $limit=0){
 		$this->db->select ( '*' );
-		//$this->db->limit(5,0);
+		$this->db->limit($start, $limit);
 		$this->db->from ( 'status' );
 		$this->db->join ( 'aauth_user_profile', 'aauth_user_profile.user_id = status.user_id' , 'left' );
 		$this->db->join ( 'aauth_users', 'aauth_users.id = aauth_user_profile.user_id' , 'left' );
@@ -45,11 +50,11 @@ class Status_model extends CI_Model
 	}
 	
 	//get comments
-	public function get_comments(){
+	public function get_comments($id){
 		$this->db->select('*');
-		$this->db->from ( 'aauth_user_profile' );
+		$this->db->from ( 'status_comments' );
+		$this->db->join ( 'aauth_user_profile', 'aauth_user_profile.user_id = status_comments.user_id' , 'left' );
 		$this->db->join ( 'aauth_users', 'aauth_users.id = aauth_user_profile.user_id' , 'left' );
-		$this->db->join ( 'status_comments', 'status_comments.user_id = aauth_users.id' , 'left' );
 		$this->db->order_by("comment_id","desc");
 		$query = $this->db->get ();
 		return $query->result ();

@@ -31,7 +31,17 @@ class Newsmodel	extends CI_Model
         $this->db->where('news_id', $id);
         $this->db->delete('news');
     }
-
+    
+    public function vote(){
+        $user_id = $this->input->post('user_id');
+        $news_id = $this->input->post('news_id');
+        
+     $data = array(
+         'news_id'=>$news_id,
+         'user_id'=>$user_id
+     );
+        $this->db->insert('votes',$data);
+    }
 }
 
 ?>

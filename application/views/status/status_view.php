@@ -1,24 +1,25 @@
  <div id="feed" class="nav_identifier">
+<script src="<?php echo base_url()?>assets/js/status_view.js"></script>
  
 <div class="ui grid container">
   <div class="four wide column"></div>
-  <div class="ten wide column">
+  <div class="eight wide column">
   
 	  <div class="ui grid">
-	  	<div class="ten wide column ui form">
+	  	<div class="twelve wide column ui form">
 		  <div class="field">
 		    <label>Whats on your mind?</label>
 		    <textarea rows="2" id="status_input"></textarea>
 		  </div>
 		</div>
-		 <div class="six wide column">
+		 <div class="four wide column">
 		 	<br><br>
-		 	<button id="submitBtn" class="ui small circular inverted green disabled button"><i class="send icon"></i></button>
+		 	<button id="<?php echo  $this->session->userdata('id');?>" class="submitBtn ui small circular inverted green disabled button"><i class="send icon"></i></button>
 		 </div>
 	  </div>
 	<br>
 	
-	<!-- LOADER START -->
+	<!-- LOADER STATUS PAGE START -->
 	<div id="loader" class="ui grid">
 	<div class="twelve wide column">
 	      <div class="ui active inverted dimmer">
@@ -33,62 +34,19 @@
 	</div>
 	<!-- LOADER END -->
 	
-  <div id="displaystatus"></div>
+  <div id="displaystatus" class=""></div>
+  
+  	<!-- LOADER MORE STATUS START -->
+  	<div id="statusloader"  class="ui center aligned grid">
+		<div class="one twelve wide column segment">
+			<div class="">
+		    <i class="huge spinner teal loading icon"></i>
   </div>
+		</div>
+	</div>
+  	<!-- LOADER END -->
   
   <div class="four wide column"></div>
   
 </div>
-
-<script>
-         
-        $(document).ready(function () {
-        	$.post('<?php echo base_url();?>status/display_status/',function(data){
-            	$("#loader").hide();
-				$("#displaystatus").html(data).hide().fadeIn('slow');
-			});
-			
-        	//post submit button disabler
-        	$("#status_input").keyup(function(){
-            	$status = $(this).val().trim();
-            	if ($status === '' || $status === null){
-        			$("#submitBtn").addClass('disabled');
-            	}else{
-            		$("#submitBtn").removeClass('disabled');
-                }
-            	});
-
-        	
-        });
-
-      	//when the post submit button is clicked
-        $(function() {
-    		$("#submitBtn").click(function(){
-        			$('#submitBtn').addClass('loading');
-    				var user_id =<?php echo  $this->session->userdata('id');?>;
-    				var status = $("#status_input").val().trim();
-    				var dataString = 'user_id='+ user_id + '&status=' + status;
-    				var clientData = { name: "Rey Bango", id: 1 };
-    					$.ajax({
-    					type: "POST",
-    					url: "<?php echo base_url();?>status/insert_status/",
-    					data: dataString,
-    					cache: false,
-    					success: function(data)
-    						{
-    						$("#status_input").val('');
-    						$('#submitBtn').removeClass('loading');
-    						$("#submitBtn").addClass('disabled');
-    						$("#displaystatus").html(data).hide().fadeIn('slow');
-    						},
-    					error: function(){
-    						alert('Network Error.');
-    						}
-    					});
-    		});
-    		
-    	});
-
-</script>
-
 

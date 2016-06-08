@@ -6,13 +6,14 @@ class Register extends CI_Controller {
 		parent::__construct();
 		// Your own constructor code
 		$this->load->library("Aauth");
-		// load form helper and validation library
-		$this->load->helper('form');
-		$this->load->library('form_validation');
 	}
 	
 	public function index(){
+		if ( $this->aauth->is_loggedin() ){
+			redirect('/');
+		}else{
 		$this->load->view('register_view');
+	}
 	}
 	
 	/**

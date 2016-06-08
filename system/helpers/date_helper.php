@@ -257,7 +257,13 @@ if ( ! function_exists('timespan'))
 
 		if (count($str) === 0)
 		{
-			$str[] = $seconds.' '.$CI->lang->line($seconds > 1 ? 'date_seconds' : 'date_second');
+			//$str[] = $seconds.' '.$CI->lang->line($seconds > 1 ? 'date_seconds' : 'date_second');.
+			//added by chevy
+			if ($seconds == 1){
+				$str[] = $CI->lang->line('date_second');
+			}else{
+				$str[] = $seconds.' '.$CI->lang->line('date_seconds');
+		}
 		}
 
 		return implode(', ', $str);
