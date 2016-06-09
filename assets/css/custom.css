@@ -19,6 +19,7 @@
     height: auto;
 }
 
+
 .btn-float {
     position: fixed;
     padding: 14px;
@@ -30,6 +31,17 @@
     -moz-border-radius: 50px; 
     -webkit-border-radius: 50px; 
     border-radius: 50px; 
+    box-shadow: 1px 1px 10px #9E9E9E;
+}
+
+.btn-options{
+    position:fixed;
+    top: 160px;
+    left: 16px;
+}
+
+
+#shadow {
     box-shadow: 1px 1px 10px #9E9E9E;
 }
 

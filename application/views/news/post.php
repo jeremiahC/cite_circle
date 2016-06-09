@@ -1,11 +1,9 @@
+<?php foreach ($show as $query):?>
 <div class="ui centered grid">
-    <div class="three column row ">
-
-        <?php foreach ($show as $query):?>
-                <div class="six wide column">
-                  <div id="news_<?=$query->news_id;?>" class="ui piled segment">
-                    <div class="ui grid">
-                        
+    <div class="column row news">
+        <div class="eight wide column">
+            <div class="ui teal segment" id="news_<?=$query->news_id;?>">
+                <div class="ui grid">
                         <input type="text" hidden="true" value="<?=$query->news_id;?>" id="id">
                         <input type="text" hidden="true" value="<?php echo $this->aauth->get_user_id($email=false);?>" id="id">
                         <div class="three column row">
@@ -35,14 +33,13 @@
                                 <i><small>Posted at</small> <?=$query->date?></i>
                             </div>
                         </div>
-                        </div>
-                  </div>
                 </div>
-        <?php endforeach;?>
+            </div>    
+        </div>
     </div>
+  </div>
 </div>
-
-
+<?php endforeach;?>
 <!-- 	DELETE STATUS MODAL START -->
 	<div class="ui basic modal">
             <i class="close icon"></i>
