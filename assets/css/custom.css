@@ -1,10 +1,6 @@
 .pointer{
 	cursor:pointer
 }
-.hidden{
-	visibility:hidden
-}
-
 .hide{
 	display:none
 }
@@ -22,22 +18,22 @@
 
 .btn-float {
     position: fixed;
-    padding: 14px;
+    padding: 18px;
     top: 100px;
     left: 10px;
-    width: 50px; 
-    height: 50px; 
+    width: 60px; 
+    height: 60px; 
     background: #66BB6A; 
-    -moz-border-radius: 50px; 
-    -webkit-border-radius: 50px; 
-    border-radius: 50px; 
+    -moz-border-radius: 600px; 
+    -webkit-border-radius: 60px; 
+    border-radius: 60px; 
     box-shadow: 1px 1px 10px #9E9E9E;
 }
 
 .btn-options{
     position:fixed;
-    top: 160px;
-    left: 16px;
+    top: 170px;
+    left: 22px;
 }
 
 

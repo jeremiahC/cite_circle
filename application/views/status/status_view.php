@@ -1,6 +1,5 @@
  <div id="feed" class="nav_identifier">
 <script src="<?php echo base_url()?>assets/js/status_view.js"></script>
- 
 <div class="ui grid container">
   <div class="four wide column"></div>
   <div class="eight wide column">
@@ -14,7 +13,13 @@
 		</div>
 		 <div class="four wide column">
 		 	<br><br>
-		 	<button id="<?php echo  $this->session->userdata('id');?>" class="submitBtn ui small circular inverted green disabled button"><i class="send icon"></i></button>
+		 	<div id="<?php echo  $this->session->userdata('id');?>" class="submitBtn disabled ui circular small green inverted vertical animated button" tabindex="0">
+		    <div class="hidden content closemodal">POST</div>
+		    <div class="visible content closemodal">
+	        <i class="send icon"></i>
+		 </div>
+	  </div>
+					
 		 </div>
 	  </div>
 	<br>
@@ -40,7 +45,7 @@
   	<div id="statusloader"  class="ui center aligned grid">
 		<div class="one twelve wide column segment">
 			<div class="">
-		    <i class="huge spinner teal loading icon"></i>
+		    <i class="big spinner loading icon"></i>
   </div>
 		</div>
 	</div>
