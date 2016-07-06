@@ -59,8 +59,19 @@ if(count($query) > 0){?>
 					<textarea row="2" id="edit_textarea_<?php echo $status->status_id;?>"><?php echo $status->status;?></textarea>
 					</div>
 				<div class="actions">
-					<div class="cancel_update_status ui cancel red button">Cancel</div>
-					<div id="" class="update_status ui positive right labeled icon button">Update<i class="checkmark icon"></i></div>
+					<div class="cancel_update_status ui circular small red inverted vertical animated button" tabindex="0">
+		            	<div class="hidden content closemodal">Cancel</div>
+		                <div class="visible content closemodal">
+	                    	<i class="large remove icon"></i>
+				</div>
+					</div>
+					
+					<div class="update_status ui circular small green inverted vertical animated button" tabindex="0">
+		            	<div class="hidden content closemodal">Update</div>
+		                <div class="visible content closemodal">
+	                    	<i class="large checkmark icon"></i>
+                     	</div> 
+					</div>
 				</div>
 				<!-- display EDIT status content END -->
 				
@@ -115,13 +126,13 @@ if(count($query) > 0){?>
 	    </a>
 		<button id="<?php echo $status->status_id;?>" class="ui mini basic circular right floated icon button comment_box_toggler_<?php echo $batchNo?>">
 		<i class="grey caret left icon icon_toggler_<?php echo $status->status_id; ?>"></i>
-		<i class="grey caret down icon toggle_icon icon_toggler_<?php echo $status->status_id; ?>"></i>
+		<i class="grey caret down icon toggle_icon_<?php echo $batchNo?> icon_toggler_<?php echo $status->status_id; ?>"></i>
 		</button>
 	</div>
 	<br/>
 	
 	<!-- 	START comment_body -->
-	<div class="comment_body comment_body_<?php echo $status->status_id; ?>">
+	<div class="comment_body_<?php echo $batchNo?> comment_body_<?php echo $status->status_id; ?>">
 	<!-- location to append comments -->
 	<div id="displaycomment_<?php echo $status->status_id;?>"></div>
 		<div class="ui feed">
@@ -189,8 +200,8 @@ if(count($query) > 0){?>
 <script>
 $(document).ready(function(){
 	//START comment body toggler
-	$('.comment_body').hide();
-	$('.down.toggle_icon').hide();
+	$('.comment_body_<?php echo $batchNo?>').hide();
+	$('.down.toggle_icon_<?php echo $batchNo?>').hide();
 	$( ".comment_box_toggler_<?php echo $batchNo?>" ).click(function() {
 		$id = $(this).attr('id');
 		$(".comment_body_"+$id ).toggle("slow");
