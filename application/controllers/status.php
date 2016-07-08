@@ -5,6 +5,7 @@ class Status extends CI_Controller {
 	    parent::__construct();
 		// Your own constructor code
 		$this->load->library("Aauth");
+		$this->load->model('profile_model');
 	    $this->load->model('status_model');
 	    $this->load->library('pagination');
 	    date_default_timezone_set('Asia/Manila');
@@ -24,6 +25,7 @@ class Status extends CI_Controller {
 		$config['total_rows'] = $this->status_model->count_status();
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
+		$data['upload_files'] = $this->profile_model->get_upload();
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$this->uri->segment(3));
 		foreach ($data['query'] as $query){
 		$data['query2']=$this->status_model->get_comments($query->status_id);
@@ -40,6 +42,7 @@ class Status extends CI_Controller {
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
 		$config["use_page_numbers"] = TRUE;
+		$data['upload_files'] = $this->profile_model->get_upload();
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$start);
 		foreach ($data['query'] as $query){
 		$data['query2']=$this->status_model->get_comments($query->status_id);

@@ -48,7 +48,7 @@ class Profile_Model extends CI_Model
 		$user_id = $this->session->userdata('id');
 	
 		$config = array(
-				'upload_path'   => './uploads/',
+				'upload_path'   => './assets/uploads/',
 				'allowed_types' => 'gif|jpg|png',
 				'max_size'      => '5000',
 				'max_width'     => '4000',

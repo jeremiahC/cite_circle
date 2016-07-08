@@ -23,9 +23,9 @@
 										<?php foreach ($upload_files as $image) {} ?>
 										<a class="wew" href="#" data-toggle="tooltip" data-placement="top" title="upload picture">
 										<?php if($image->user_picture == ""){?>
-											<img src="<?php echo base_url().'assets/images/userlogo.png';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
+											<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
 										<?php }else{?>
-											<img src="<?php echo base_url().'uploads/'.$image->user_picture.'';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
+											<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
 										<?php }?>
 										</a>
 										<br><br>
@@ -33,15 +33,15 @@
 										
 										<div class="ui basic modal shupaolark">
 											<div class="ui centered grid">
-											<i class="large right floated gray close icon pointer closemodal"></i>
+ 											<i class="large right floated gray close icon pointer closemodal"></i>
 												<div class="eight wide column">
 													<div class="ui fluid card">
 														<div class="blurring dimmable image">
 															<a class="ui fluid image" href="#">
 																<?php if($image->user_picture == ""){?>
-																<img src="<?php echo base_url().'assets/images/userlogo.png';?>" id="blah">
+																<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" id="blah">
 																<?php }else{?>
-																<img src="<?php echo base_url().'uploads/'.$image->user_picture.'';?>" id="blah">
+																<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" id="blah">
 																<?php }?>
 															</a>
 															<div class="ui dimmer">

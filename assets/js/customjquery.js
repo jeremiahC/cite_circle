@@ -15,17 +15,50 @@
 		  };
 		  img.onerror = function() {
 		    // doesn't exist or error loading
-		    document.getElementById("curentImg").src="http://localhost/cite_circle/assets/img/userlogo.png";
+		    document.getElementById("curentImg").src="http://localhost/cite_circle/assets/images/new-user-image-default.png";
 		  };
 
 		  img.src = src; // fires off loading of image
 		}
+
+	function addListenerMulti(el, s, fn) {
+ 		var evts = s.split(' ');
+ 		for (var i=0, iLen=evts.length; i<iLen; i++) {
+  			el.addEventListener(evts[i], fn, false);
+  		}
+	}
 	
 	
 	
 	
 
 $(document).ready(function(){
+
+
+var imageNgaUsbon = document.getElementById('blah');
+
+	addListenerMulti(imageNgaUsbon, 'onload onchange', function() {
+		$width = this.naturalWidth;
+		$height = this.naturalHeight;
+
+		if($height > 550){
+		
+			$Hdiff = $height - 550;
+			$keep = $height / $Hdiff;
+
+			$newKeep = Math.round($keep);
+
+			$newWidth = $width / $newKeep;	
+
+	    		this.style.height = 550;
+	    		this.style.width = $newWidth;
+
+		}else{
+
+		}
+
+
+	});
 	
 	checkImage($('#curentImg').attr('src'));
 	
