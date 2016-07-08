@@ -1,3 +1,5 @@
+<div id="news" class="nav_identifier">
+    
 <div class="ui container">
     <h1>Add News</h1>
     <div class="column row">
@@ -20,4 +22,5 @@
                 </div>
             </div>
         </div>
+</div>
 </div>

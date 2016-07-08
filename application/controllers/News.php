@@ -12,8 +12,12 @@ class News extends CI_Controller{
             $this->load->library("Aauth");
             $this->load->library("parser");
             $this->load->model('newsmodel');
+            $this->aauth->create_perm('school_admin');
 	}
-        
+
+    // public function school_admin(){
+    //     $this->aauth->deny_user(2,'school_admin');
+    // }
         //default page
 	public function index(){
             
@@ -25,10 +29,10 @@ class News extends CI_Controller{
             }
 	}
         //goes to create page
-        public function post_create(){ 
+    public function post_create(){ 
             $data['body']= 'news/create'; 
             $this->parser->parse('template/template',$data);             
-        }
+    }
         
         //post your entry
 	public function post_data(){
@@ -39,14 +43,14 @@ class News extends CI_Controller{
 	}
         
         //show your entry at the news page
-        public function post_show(){
+    public function post_show(){
             $row =  $this->newsmodel->show_all();
             $data['show'] = $row;
             $this->parser->parse('news/post',$data);
-        }
+    }
         
         //view page for an individual entry
-        public function post_view($id){
+    public function post_view($id){
 
             $row =  $this->newsmodel->show($id);
             foreach($row as $rows){
@@ -59,7 +63,7 @@ class News extends CI_Controller{
                 
             }$data['body']= 'news/view'; 
             $this->parser->parse('template/template',$data);
-        }
+    }
         
 	public function vote(){
 //              $data['query'] = $this->newsmodel->get_news_id();
@@ -67,9 +71,10 @@ class News extends CI_Controller{
 		$this->load->view('news/index');
 	}
         
-        public function delete($id){
-            $this->newsmodel->delete($id);
-        }
+    public function delete(){
+            $news_id = $this->input->post('news_id');
+            $this->newsmodel->delete($news_id);
+    }
 
 }
 ?>
