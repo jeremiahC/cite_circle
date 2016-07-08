@@ -1,3 +1,4 @@
+<div id="news" class="nav_identifier">
 <div class="ui container">
     <div class="three column row">
         <div class="column">
@@ -10,13 +11,13 @@
     </div>
     <hr>
     <div class="column">
-        <img src="<?php echo base_url();?>assets/images/avatar/tom.jpg" height="50px" width="50px" >
+        <img src="<?php echo base_url();?>assets/images/avatar/tom.jpg" class="ui centered huge image" >
     </div>
     <div class="column">
         <p>
             <?php 
-                $content = str_replace(["\r\n", "\r", "\n"], "<br/>", $post_content); 
-		echo $content;
+                    $content = str_replace(["\r\n", "\r", "\n"], "<br/>", $post_content); 
+		              echo $content;
             ?>  
         </p>
     </div>
@@ -46,4 +47,5 @@
         <blockquote></blockquote>
     </div>
     
+</div>
 </div>
