@@ -4,10 +4,10 @@
         <div class="eight wide column">
             <div class="ui teal segment" id="news_<?=$query->news_id;?>">
                 <div class="ui grid">
-                        <input type="text"  class="news_id" value="<?=$query->news_id;?>" id="news<?=$query->news_id;?>" name="news_id">
+                        <input type="text"  class="news_id" value="<?=$query->news_id;?>" id="news_id" name="news_id">
                         <input type="text" hidden="true" value="<?php echo $this->aauth->get_user_id($email=false);?>" id="id">
                         <div class="right floated column">
-                            <button class="ui circular red button btn-delete" name="delete" ><i class="remove icon"></i></button>
+                            <button class="btn-delete ui circular red button btn-delete_<?=$query->news_id;?>" id="<?=$query->news_id;?>" name="delete" value="<?php echo $query->news_id;?>" ><i class="remove icon"></i></button>
                         </div>
                         <div class="three column row">
                             <div class="hover">
@@ -71,6 +71,7 @@
 	</div>
 <!-- 	DELETE STATUS MODAL END  -->
 
+
 <script>
 
 $(document).ready(function(){
@@ -86,34 +87,37 @@ $(document).ready(function(){
         $('.btn-delete').transition('set looping')
                          .transition('shake');
         $('.btn-delete').click(function(){
+                    $news_id = $(this).attr("id");
+                    console.log($news_id);
             $('.ui.basic.modal').modal('show'); 
-            
-            $('.delete_news').click(function(){
-                // var news_id =  $(".news_id").val();
-                var map = {};
-                $(".news_id").each(function() {
-                    map[$(this).attr("id")] = $(this).val();
-                });
-                $.ajax({
-                    url: 'post_delete',
-                    type: 'POST',
-                    data: {
-                        news_id: map.news34
-                    },
-                    success: function() {
+            $('.delete_news').click(deleteclick);
 
-                        $('.ui.basic.modal').modal('hide');
-                        $("#news_" + map.news34).slideUp('slow');
-                    },
-                    error: function() {
-                         //Ajax not successful: show an error
-                        alert('An error occured while deleting the status!');
-                    }
-                 });
 
+            function deleteclick(){
+                delete_news($news_id);
+            }
+            function delete_news(news_id){
+                    
+                    $.ajax({
+                        url: 'post_delete',
+                        type: 'POST',
+                        data: {
+                            news_id: news_id
+                        },
+                        success: function() {
+                        
+                            $('.ui.basic.modal').modal('hide');
+                            $("#news_" + news_id).slideUp('slow');                            
+                        },
+                        error: function() {
+                             //Ajax not successful: show an error
+                            alert('An error occured while deleting the status!');
+                        }
+                     });
+                }
             });
         });                 
                 
     });
-});
+
 </script>
