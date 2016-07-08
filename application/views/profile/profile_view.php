@@ -20,7 +20,7 @@
 								<div id="edit_profile_picture"></div>
 										<h3 class="sub header">Welcome <?php echo $information->firstname?></h3>
 										
-										<?php foreach ($upload_files as $image) {} ?>
+										<?php foreach ($upload_files as $image) { ?>
 										<a class="wew" href="#" data-toggle="tooltip" data-placement="top" title="upload picture">
 										<?php if($image->user_picture == ""){?>
 											<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
@@ -29,7 +29,6 @@
 										<?php }?>
 										</a>
 										<br><br>
-										
 										
 										<div class="ui basic modal shupaolark">
 											<div class="ui centered grid">
@@ -44,6 +43,7 @@
 																<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" id="blah">
 																<?php }?>
 															</a>
+
 															<div class="ui dimmer">
 															
 																<div class="content">
@@ -62,8 +62,39 @@
 														<div class="content">
 														
 															<a class="header" href="#"><?php echo $information->firstname?>'s Profile Picture</a>
-																<div class="ui transparent fluid input" id="commit">
-																	<input placeholder="Insert Caption" type="text" id="caption" >
+															
+															<!-- ------------------------------------------------------------------------------------------------------------------- -->
+															<!-- ------------------------------------------------------------------------------------------------------------------- -->
+															<!-- caption mawala kung ig load sa image -->
+															<!-- buhatan ug way nga dili mausa ang pagsubmit ani nga form sa form nga original-->
+															<div class="two column centered row editCaption">
+															    <div class="column">
+															    	<div class="ui transparent icon input">
+																		<input value="<?php echo $image->picture_caption ?>" type="text" name="picture_caption" id="caption">
+																		<i class="edit icon"></i>
+																	</div>
+															    </div>
+															</div>
+
+															<div class="right floated" id="hidden">
+																		<div class="ui circular small red inverted vertical animated button" tabindex="0">
+																			<div class="hidden content closemodal">Cancel</div>
+																			<div class="visible content closemodal">
+																				<i class="large remove icon"></i>
+	 											 							</div>	
+																		</div>
+																		<button class="ui circular small green inverted vertical animated button" tabindex="0" id="submit">
+																			<div class="hidden content">Save</div>
+																			<div class="visible content">
+																				  <i class="large upload icon"></i>
+	 											 							</div>	
+																		</button> 
+																	</div>
+															<?php }?>
+															<!-- ------------------------------------------------------------------------------------------------------------------- -->
+															<!-- ------------------------------------------------------------------------------------------------------------------- -->
+																<div class="ui transparent input" id="commit">
+																	<input placeholder="Insert Caption" type="text" id="picture_caption" name="picture_caption" >
 																</div>
 																
 																	<div class="right floated" id="commit">

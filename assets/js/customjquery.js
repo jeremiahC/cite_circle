@@ -21,45 +21,19 @@
 		  img.src = src; // fires off loading of image
 		}
 
-	function addListenerMulti(el, s, fn) {
- 		var evts = s.split(' ');
- 		for (var i=0, iLen=evts.length; i<iLen; i++) {
-  			el.addEventListener(evts[i], fn, false);
-  		}
-	}
-	
-	
-	
+
+    
+
 	
 
 $(document).ready(function(){
 
-
 var imageNgaUsbon = document.getElementById('blah');
 
-	addListenerMulti(imageNgaUsbon, 'onload onchange', function() {
-		$width = this.naturalWidth;
-		$height = this.naturalHeight;
+	imageNgaUsbon.addEventListener('load', function(){
+		$('.ui.basic.modal').modal('refresh');
+	})
 
-		if($height > 550){
-		
-			$Hdiff = $height - 550;
-			$keep = $height / $Hdiff;
-
-			$newKeep = Math.round($keep);
-
-			$newWidth = $width / $newKeep;	
-
-	    		this.style.height = 550;
-	    		this.style.width = $newWidth;
-
-		}else{
-
-		}
-
-
-	});
-	
 	checkImage($('#curentImg').attr('src'));
 	
 	$( "input:file" ).change(function() {
@@ -72,21 +46,24 @@ var imageNgaUsbon = document.getElementById('blah');
 		$("#uploadBtn").attr("onchange");
 		timer = setTimeout(function(){
 			$('.ui.basic.modal').modal({
+				autofocus: false,
 				onHide: function(){
 					var la = $('#curentImg').attr('src');
 		            //remove the preview image
 		            $("#uploadBtn").removeAttr("onchange");
 		            //use the previous image source
 			    	$('#blah').attr('src', la);
+
 			        
 			    },
 		    onShow: function(){
 		    	
 //		    	 for future use
-
+				
 			    }
 			}).modal('show');
 			$("div#commit").hide();
+			$("div#hidden").hide();
 			}, 1000);
 			}).mouseleave(function() {
 				clearTimeout(timer);
@@ -100,8 +77,34 @@ var imageNgaUsbon = document.getElementById('blah');
 	$(".closemodal").click(function(){
 		  $('.ui.basic.modal').modal('hide');
 		});
+	$("input#caption").click(function(){
+		$oldVal = document.getElementById("caption").value;
 
+		$("input#caption").on("change keyup paste", function(){
+			if(this.value != $oldVal){
+		 		$('div#hidden').show();
+			}else{
+				$('div#hidden').hide();	
+			}
+		})
+	});
 
+	$('#blah').on('load', function () {
+		console.log('Image source changed');
+   		$("div.editCaption").hide();
+	});
+
+	// $('#blah').load(function() {
+ //    var imageObj = $(this);
+ //    if (!(imageObj.width() == 1 && imageObj.height() == 1)) {
+ //        console.log('Image source changed');
+ //        	$("div.editCaption").hide();
+ //    }
+// });
+
+	// $("#blah").change(function(){
+	// 	$("div.editCaption").hide();
+	// });
 
 
 

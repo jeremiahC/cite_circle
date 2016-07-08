@@ -3,6 +3,12 @@
 
 class Profile_Model extends CI_Model
 {
+
+		public function __construct(){
+		parent::__construct();
+		$this->load->library("Aauth");
+		$this->load->helper(array('url','form','html','file'));
+	}
 	
 	
 	public function getUserInfo()
@@ -63,6 +69,7 @@ class Profile_Model extends CI_Model
 	
 		$upload_data = $this->upload->data();
 		$data['user_picture']=  $upload_data['file_name'] ;
+		$data['picture_caption'] = $this->input->post('picture_caption');
 	
 		$this->db->where('user_id',$user_id);
 		$this->db->update('aauth_user_profile',$data);

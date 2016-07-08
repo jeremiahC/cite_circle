@@ -15,7 +15,6 @@ class Status extends CI_Controller {
 	}
 	
 	function index(){
-			$data['active_nav'] = 'feed';
 			$data['body'] = 'status/status_view'; // call your content
 			$this->load->view('template/template', $data);
 	}
