@@ -3,6 +3,10 @@
 	cursor:pointer
 }
 
+.hide{
+  display:none
+}
+
 .bottomleft {
     position: absolute;
     bottom: 14px;
