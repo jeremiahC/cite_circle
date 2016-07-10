@@ -10,10 +10,10 @@
 	
 	<script src="<?php echo base_url()?>assets/js/jquery-2.1.1.min.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>vendor/semantic/ui/dist/semantic.min.css">
-	<script src="<?php echo base_url()?>vendor/semantic/ui/dist/semantic.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/vendor/semantic/ui/dist/semantic.min.css">
+	<script src="<?php echo base_url()?>assets/vendor/semantic/ui/dist/semantic.min.js"></script>
 	<!-- online script -->
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>                
 	
 	</head>
 <body>
