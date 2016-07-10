@@ -23,6 +23,7 @@ class Newsmodel	extends CI_Model
     }
     
     public function show_all(){
+        $this->db->order_by('news_id','DESC');
         $query = $this->db->get('news');
         return $query->result();
     }
