@@ -1,7 +1,7 @@
 <div id="news" class="nav_identifier">
 <div id="displaynews" ></div>
 <?php if($this->aauth->is_allowed('school_admin',$this->aauth->get_user_id($email=false))){?>
-    <a class="btn-float" id="options">
+    <a class="btn-float pointer" id="options">
         <i class="inverted large plus icon"></i>
     </a>
 
