@@ -24,7 +24,8 @@ class Status extends CI_Controller {
 		$config['total_rows'] = $this->status_model->count_status();
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
-		$data['upload_files'] = $this->profile_model->get_upload();
+		$user_id = $this->session->userdata('id');
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$this->uri->segment(3));
 		foreach ($data['query'] as $query){
 		$data['query2']=$this->status_model->get_comments($query->status_id);
@@ -125,20 +126,18 @@ class Status extends CI_Controller {
 	$status_id=  $this->input->post('status_id');
 	$voted_user = $this->status_model->get_voted_user($status_id);
 	foreach ($voted_user as $row) {
-	 	// $arr_user_id = $this->status_model->get_who_votes($row['vote_user_id']);
-	 	// foreach ($arr_user_id as $users) {
-
-	 	// }
+	 	
 	 		$data = $this->status_model->get_who_votes($row['vote_user_id']);
-	 		 //$this->load->view('status/display_status',$data);
+	 		 
 	 		foreach ($data as  $datas) {
-	 			/*echo $datas['firstname'];*/
+	 			
 	 			echo "<li> {$datas['firstname']} {$datas['lastname']}\n </li>";
 	 		}
 	}
 
-
 	}
+
+	
 }
 
 /* End of file status.php */

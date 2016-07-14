@@ -90,19 +90,8 @@ class Status_model extends CI_Model
 	}
 	
 	public function get_voted_user($status_id){
-		// $this->db->select("*");
-		// $this->db->from('vote');
-		// $this->db->where('voted_status_id',$status_id);
-		// $query = $this->db->get();
-		// return $query->result();
-
 		$query = $this->db->get_where('vote', array('voted_status_id' => $status_id));
-		return $query->result_array();
-		// foreach ($query->result_array() as $row)
-		// {
- 	// 		echo $row['vote_user_id'];
-		// }
-		
+		return $query->result_array();	
 	}
 	
 	public function get_who_votes($voted_user){
@@ -132,6 +121,5 @@ class Status_model extends CI_Model
 		$result= $this->db->get();
 		return $result->row_array();
 	}
-	
 }
 ?>

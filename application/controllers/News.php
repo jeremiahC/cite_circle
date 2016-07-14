@@ -12,7 +12,6 @@ class News extends CI_Controller{
             $this->load->library("Aauth");
             $this->load->library("parser");
             $this->load->model('newsmodel');
-            $this->aauth->create_perm('school_admin');
 	}
 
     // public function school_admin(){

@@ -16,7 +16,7 @@
 		    <i class="options brown icon"></i>
 		    <i class="dropdown brown icon"></i>
 		    <div class="menu">
-		      <div class="item"><?php echo anchor('ProfileController','<i class="user olive icon"></i>Profile','id="profile"')?></div>
+		      <div class="item"><?php echo anchor('myprofile','<i class="user olive icon"></i>Profile','id="profile"')?></div>
 		      <div class="item"><?php echo anchor('login/logout','<i class="power red icon"></i>Log out')?></div>
 		    </div>
 		 </div>
