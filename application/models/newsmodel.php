@@ -23,6 +23,7 @@ class Newsmodel	extends CI_Model
     }
     
     public function show_all(){
+        $this->db->order_by('news_id','DESC');
         $query = $this->db->get('news');
         return $query->result();
     }
@@ -36,10 +37,10 @@ class Newsmodel	extends CI_Model
         $user_id = $this->input->post('user_id');
         $news_id = $this->input->post('news_id');
         
-     $data = array(
-         'news_id'=>$news_id,
-         'user_id'=>$user_id
-     );
+         $data = array(
+             'news_id'=>$news_id,
+             'user_id'=>$user_id
+         );
         $this->db->insert('votes',$data);
     }
 }

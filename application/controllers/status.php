@@ -85,6 +85,60 @@ class Status extends CI_Controller {
 		echo $this->load->view('status/comment_tempate',$data,TRUE);
 	}
     
+	public function vote_status(){
+		$status_id=  $this->input->post('status_id');
+		$status_user_id = $this->input->post('status_user_id');
+		$upOrDown=  $this->input->post('upOrDown');
+	
+	
+		if($upOrDown=='upvote'){
+			$this->status_model->insertUpVote($status_id, $status_user_id);
+			echo "true";
+		}else{
+			$this->status_model->deleteDownVote($status_id, $status_user_id);
+			echo "false";
+}
+
+	}
+	
+	public function check_if_vote_controller(){
+		$user_id = $this->input->post('user_id');
+		$status_user_id = $this->input->post('status_user_id');
+		$status_id=  $this->input->post('status_id');
+		$result = $this->status_model->check_if_vote_model($user_id, $status_user_id, $status_id);
+	
+		if($result){
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
+	
+	public function count_vote(){
+	
+		$status_id=  $this->input->post("status_id");
+		$result=  $this->status_model->count_likes($status_id);
+		echo $result['likes_count'];
+	}
+	
+	public function see_who_likes(){
+	$status_id=  $this->input->post('status_id');
+	$voted_user = $this->status_model->get_voted_user($status_id);
+	foreach ($voted_user as $row) {
+	 	// $arr_user_id = $this->status_model->get_who_votes($row['vote_user_id']);
+	 	// foreach ($arr_user_id as $users) {
+
+	 	// }
+	 		$data = $this->status_model->get_who_votes($row['vote_user_id']);
+	 		 //$this->load->view('status/display_status',$data);
+	 		foreach ($data as  $datas) {
+	 			/*echo $datas['firstname'];*/
+	 			echo "<li> {$datas['firstname']} {$datas['lastname']}\n </li>";
+	 		}
+	}
+
+
+	}
 }
 
 /* End of file status.php */
