@@ -44,9 +44,8 @@
   	<!-- LOADER MORE STATUS START -->
   	<div id="statusloader"  class="ui center aligned grid">
 		<div class="one twelve wide column segment">
-			<div class="">
-		    <i class="big spinner loading icon"></i>
-  </div>
+			<div class="statusloader">
+  			</div>
 		</div>
 	</div>
   	<!-- LOADER END -->

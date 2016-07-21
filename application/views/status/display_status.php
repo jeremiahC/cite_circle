@@ -97,29 +97,25 @@ if(count($query) > 0){?>
 	        
 	      </div>
 	        
-    <!-- Ajax display on voting -->
-    <div id="<?php echo $status->status_id;?>_voteThis" style="color: blue"></div>
-    <!-- Ajax display if the user already LIKE/VOTE -->
-	<div class="if-already-like"></div>
-		<input type="hidden" id="user_status_id" name="user_status_id" value="<?php echo $this->session->userdata('id');?>_<?php echo $status->user_id;?>_<?php echo $status->status_id;?>_<?php echo $status->up_vote;?>">
-	
-	<!-- Display of count_like -->
-	<span style="text-decoration:underline" class="people-who-likes" id="<?php echo $status->status_id;?>">
-	  <!--<i class="thumbs up blue icon"></i><?php echo $status->up_vote;?>-->
-	  		<span class="like-count" id="like_<?php echo $status->status_id;?>"></span>
-	    	<input type="hidden" id="user_id" name="user_id" value="<?php echo $status->user_id;?>"/>
-	      	<input type="hidden" id="status_id" name="status_id" value="<?php echo $status->status_id;?>"/></span>
-	      		
-	<!-- VOTE/LIKE BUTTON START -->
-	<button class="mini ui green circular inverted button upvote vote" data-inverted="" data-tooltip="Vote" data-position="bottom center" value="<?php echo $status->up_vote;?>" id="<?php echo $status->status_id;?>_<?php echo $status->user_id;?>_upvote"><i class= "tiny arrow up white icon"></i></button>
-	<button class="mini ui green circular animated button hide vote" value="<?php echo $status->up_vote;?>" id="<?php echo $status->status_id;?>_<?php echo $status->user_id;?>_downvote"><span class="hidden content">Unvote</span><span class="visible content"><i class= "tiny arrow down white icon"></i></span></button>
-	      </div>
+		</div>
 	    <!-- display status content END -->
 	  	</div>
     </div>
 
-<!-- display status content END -->
+    <!-- LIKE DISPLAY START -->
+    <div id="<?php echo $status->status_id;?>" class="like_append"></div>
+	<!-- START MODAL (SEE PEOPLE WHO LIKES) -->
+	<div class="ui small modal" id="modal_seewholikes_<?php echo $status->status_id;?>">
+		<div class="header">Likers</div>
+	   	<div id="likers_<?php echo $status->status_id;?>"></div>
+	    <div class="actions">   		
+	    </div> 
+	</div>
+	<!-- END MODAL (SEE PEOPLE WHO LIKES) -->
+	<!-- LIKE DISPLAY END -->
+
 	<!-- END STATUS CONTENT -->
+
 	<!-- COMMENT BOX START -->
 	<div class="ui divider"></div>
 		 
@@ -159,22 +155,7 @@ if(count($query) > 0){?>
 	</div>
         
 	<br/>
-		
-        <div id="modal_see_likes_<?php echo $status->status_id;?>"></div>
-<!-- START MODAL (SEE PEOPLE WHO LIKES) -->
-<div class="ui small modal" id="modal_seewholikes_<?php echo $status->status_id;?>">
 
-	
-	<div class="header">People who likes this.</div>  
- 		<div class="modalcontent_<?php echo $status->status_id;?>">  
- 	
-   			<div id="likers"></div>
-   			
-    	</div> 
-      	<div class="actions">    
-       		
-         </div> 
-</div> 
 	<!-- 	START comment_body -->
 	<div class="comment_body comment_body_<?php echo $status->status_id; ?>">
 	<!-- location to append comments -->
@@ -229,18 +210,6 @@ if(count($query) > 0){?>
 
 	</div>
 	<!-- 	END comment_body -->
-	<div id="modal_see_likes_<?php echo $status->status_id;?>"></div>
- 
-<div class="ui modal" id="modal_seewholikes_<?php echo $status->status_id;?>">
-
-	<div class="header">People who likes this.</div>  
- 		<div class="modalcontent_<?php echo $status->status_id;?>">  
- 	
-   			 <p>
-   			<?php echo $voted_user->user_id;?>
-   			 </p>
-    	</div> 
-    </div>
     </div>
    
 	<?php }}else{?>
@@ -281,6 +250,15 @@ if(count($query) > 0){?>
 <!-- 	DELETE STATUS MODAL END  -->
  </div>
 </div>
+
+	<!-- START MODAL (SEE PEOPLE WHO LIKES) -->
+	<div class="ui  small modal" id="no_likes_modal">
+		<div class="header">No likes found.</div>
+	   	<div></div>
+	    <div class="actions">   		
+	    </div> 
+	</div>
+	<!-- END MODAL (SEE PEOPLE WHO LIKES) -->
 <script>
 $.getScript("<?php echo base_url()?>assets/js/display_status.js", function(){
 	});
