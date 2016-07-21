@@ -30,17 +30,20 @@ if(count($query) > 0){?>
 			<?php }else{}?>
 	     </div>
 	      <div class="summary">
-	        <a>
-	        	<!-- first name condition START-->
-				<?php if($status->firstname == ''){
-					echo $status->name;
-				}else{
-					echo $status->firstname;
-				}?>
-				<!-- first name condition END -->
-	        </a>
-
-	        <div class="date">
+	      	<?if($this->aauth->get_user_id($email=false) === $status->user_id){?>
+	      		<a href="myprofile">
+	      	<?php }else{?>
+		        <a href="profile/<?php echo $status->user_id;?>">
+		    <?php };?>
+		        	<!-- first name condition START-->
+					<?php if($status->firstname == ''){
+						echo $status->name;
+					}else{
+						echo $status->firstname;
+					}?>
+					<!-- first name condition END -->
+		        </a>
+		    	        <div class="date">
 	        <!--  YOU CAN PUT SOMETHING IN HERE  -->
 	        </div>
 	        
@@ -263,4 +266,4 @@ if(count($query) > 0){?>
 $.getScript("<?php echo base_url()?>assets/js/display_status.js", function(){
 	});
 
-</script> 
+</script>

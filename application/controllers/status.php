@@ -24,7 +24,8 @@ class Status extends CI_Controller {
 		$config['total_rows'] = $this->status_model->count_status();
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
-		$data['upload_files'] = $this->profile_model->get_upload();
+		$user_id = $this->session->userdata('id');
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$this->uri->segment(3));
 		foreach ($data['query'] as $query){
 		$data['query2']=$this->status_model->get_comments($query->status_id);
@@ -120,6 +121,7 @@ class Status extends CI_Controller {
 	
 	public function see_who_likes(){
 	$status_id=  $this->input->post('status_id');
+<<<<<<< HEAD
 	$user_liked = $this->status_model->user_who_likes($status_id);
 	foreach ($user_liked as $row) {
 	 		$data = $this->status_model->get_who_votes($row['vote_user_id']);
@@ -134,7 +136,22 @@ class Status extends CI_Controller {
 	 				}
 	 			}
 		}
+=======
+	$voted_user = $this->status_model->get_voted_user($status_id);
+	foreach ($voted_user as $row) {
+	 	
+	 		$data = $this->status_model->get_who_votes($row['vote_user_id']);
+	 		 
+	 		foreach ($data as  $datas) {
+	 			
+	 			echo "<li> {$datas['firstname']} {$datas['lastname']}\n </li>";
+	 		}
 	}
+
+>>>>>>> cite_circle-0.0.x
+	}
+
+	
 }
 
 /* End of file status.php */

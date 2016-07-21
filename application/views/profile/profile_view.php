@@ -36,6 +36,7 @@
 												<div class="eight wide column">
 													<div class="ui fluid card">
 														<div class="blurring dimmable image">
+
 															<a class="ui fluid image" href="#">
 																<?php if($image->user_picture == ""){?>
 																<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" id="blah">
@@ -43,7 +44,7 @@
 																<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" id="blah">
 																<?php }?>
 															</a>
-
+															<?if($this->aauth->get_user_id($email=false) === $information->user_id):?>
 															<div class="ui dimmer">
 															
 																<div class="content">
@@ -57,6 +58,7 @@
 																	</div>
 																</div>
 															</div>
+															<?endif;?>
 														</div>
 														
 														<div class="content">
@@ -70,7 +72,7 @@
 															<div class="two column centered row editCaption">
 															    <div class="column">
 															    	<div class="ui transparent icon input">
-																		<input value="<?php echo $image->picture_caption ?>" type="text" name="picture_caption" id="caption">
+																		<!-- <input value="<?php echo $image->picture_caption ?>" type="text" name="picture_caption" id="caption"> -->
 																		<i class="edit icon"></i>
 																	</div>
 															    </div>
@@ -126,7 +128,11 @@
 								<?php echo $information->firstname?>
 								<?php echo $information->lastname?>
 								
-	<?php echo anchor('ProfileController/editUpdateProfile','<div class="ui labeled icon button" ><i class="edit icon"></i>Update Profile</div>')?>
+								<?php 
+								if($this->aauth->get_user_id($email=false) === $information->user_id){
+									echo anchor('ProfileController/editUpdateProfile','<div class="ui labeled icon button" ><i class="edit icon"></i>Update Profile</div>');
+								}
+								?>
 	
 							</div>					
 							<div class="ui vertical divider">|</div>

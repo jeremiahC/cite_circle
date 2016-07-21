@@ -69,24 +69,26 @@ class Profile_Model extends CI_Model
 	
 		$upload_data = $this->upload->data();
 		$data['user_picture']=  $upload_data['file_name'] ;
-		$data['picture_caption'] = $this->input->post('picture_caption');
+		// $data['picture_caption'] = $this->input->post('picture_caption');
 	
 		$this->db->where('user_id',$user_id);
 		$this->db->update('aauth_user_profile',$data);
 	}
 	
 	
-	public function get_upload()
+	public function get_upload($user_id)
 	{
-		$user_id = $this->session->userdata('id');
 		$this->db->where('user_id', $user_id);
 		$query = $this->db->get('aauth_user_profile');
-	
-	
 		return $query->result();
-	
 	}
 	
-	
-	
+	public function view_profile($id){
+		$this->db->select('*');
+		$this->db->from('aauth_users');
+		$this->db->join('aauth_user_profile', 'aauth_user_profile.user_id = aauth_users.id');
+		$this->db->where('user_id', $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
