@@ -93,6 +93,19 @@ if(count($query) > 0){?>
 	    <!-- display status content END -->
 	  	</div>
     </div>
+
+    <!-- LIKE DISPLAY START -->
+    <div id="<?php echo $status->status_id;?>" class="like_append_<?php echo $batchNo?>"></div>
+	<!-- START MODAL (SEE PEOPLE WHO LIKES) -->
+	<div class="ui  small modal" id="modal_seewholikes_<?php echo $status->status_id;?>">
+		<div class="header">Likers</div>
+	   	<div id="likers_<?php echo $status->status_id;?>"></div>
+	    <div class="actions">   		
+	    </div> 
+	</div>
+	<!-- END MODAL (SEE PEOPLE WHO LIKES) -->
+	<!-- LIKE DISPLAY END -->
+
 	<!-- END STATUS CONTENT -->
 	<!-- COMMENT BOX START -->
 	<div class="ui divider"></div>
@@ -105,8 +118,8 @@ if(count($query) > 0){?>
 		<?php }else {?>
 		<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" class="ui small rounded image">
 		<?php }?>
-		<input id=<?php echo $status->status_id;?> class="cmt_input_id_<?php echo $status->status_id;?> commentinput" placeholder="Add a comment..." type="text">
-		<div id="<?php echo $status->status_id;?>" class="cmt_btn_id_<?php echo $status->status_id;?> commentbutton ui mini teal disabled button"><i id="<?php echo  $this->session->userdata('id');?>" class="comment_btn_icon send icon"></i></div>
+		<input id="<?php echo $status->status_id;?>" class="cmt_input_id_<?php echo $status->status_id;?> commentinput" placeholder="Add a comment..." type="text">
+		<div id="<?php echo $status->status_id;?>" class="cmt_btn_id_<?php echo $status->status_id;?> commentbutton_<?php echo $batchNo?> ui mini teal disabled button"><i id="<?php echo  $this->session->userdata('id');?>" class="comment_btn_icon send icon"></i></div>
 	</div>
 	<?php } ?>
 	<!-- Comment input box END-->
@@ -325,11 +338,11 @@ $(function(){
 		var cmt_status_id = $(this).attr('id');
 		var content = $(".cmt_input_id_"+cmt_status_id).val().trim();
 		send_comment (user_id,cmt_status_id,content);
+		console.log('test');
 			
 	});
-});
 
-function send_comment(user_id,cmt_status_id,content) {
+	function send_comment(user_id,cmt_status_id,content) {
 	var dataString = 'user_id='+ user_id + '&content=' + content + '&cmt_status_id='+cmt_status_id;
 	$comment_val = $('#counter_'+cmt_status_id).text();
 	$comment_added = parseInt($comment_val)+1;
@@ -352,5 +365,177 @@ function send_comment(user_id,cmt_status_id,content) {
 			alert('Network Failure.');
 			}
 		});
+	}
+});
+
+
+//LIKE FUNCTION BELOW --- START//////////////////////////////////////////////////////////////////////////
+
+//like_html append
+$(function(){
+	$('.like_append_<?php echo $batchNo?>').each(function(){
+
+		$id = $(this).attr('id');
+		var like_html = '<div id="'+$id+'" class="like_infos_<?php echo $batchNo?> ui labeled button" tabindex="0">'
+		  +'<div id="'+$id+'" class="like_toggle_<?php echo $batchNo?> unlike_icon_'+$id+' ui basic blue button">'
+		  +'<i id="unlike" class="empty red heart icon"></i> Like'
+		  +'</div>'
+		  +'<div id="'+$id+'" class="like_toggle_<?php echo $batchNo?> like_icon_'+$id+' ui basic blue button">'
+		    +'<i id="like" class="red heart icon"></i> Like'
+		  +'</div>'
+		  +'<a id="'+$id+'" class="like_count likes_count_'+$id+' ui basic blue left pointing label">'
+		  +'</a>'
+		+'</div>';
+		$(this).html(like_html);
+	});
+});
+
+//query if nka like naba ang user
+$(function(){
+	$('.like_append_<?php echo $batchNo?>').each(function(){
+			var id=$(this).attr('id');
+			$.ajax({
+					method:"POST",
+				    url: base_url+"status/like_check/",
+				    data:"&status_id="+id,
+				    success:function(data){
+						if(data == "true"){
+							$('.unlike_icon_'+id).hide();
+						 	$('.like_icon_'+id).show();
+
+					 		like_counter(id);
+							like_unlike();
+							see_likers();
+					 	}else{
+
+					 		$('.unlike_icon_'+id).show();
+					 		$('.like_icon_'+id).hide();
+
+					 		like_counter(id);
+							like_unlike();
+							see_likers();
+						}
+				   }
+			});
+	});
+});
+
+
+// //query if nka like naba ang user
+// $(function(){
+// 	$('.like_append_<?php echo $batchNo?>').each(function(){
+// 			$id = $(this).attr('id');
+// 			var this_location = $(this);
+// 			var like_html = '<div id="'+$id+'" class="like_infos_<?php echo $batchNo?> ui labeled button" tabindex="0">'
+// 			  +'<div id="'+$id+'" class="like_toggle_<?php echo $batchNo?> unlike_icon_'+$id+' ui basic blue button">'
+// 			  +'<i id="unlike" class="empty red heart icon"></i> Like'
+// 			  +'</div>'
+// 			  +'<div id="'+$id+'" class="like_toggle_<?php echo $batchNo?> like_icon_'+$id+' ui basic blue button">'
+// 			    +'<i id="like" class="red heart icon"></i> Like'
+// 			  +'</div>'
+// 			  +'<a id="'+$id+'" class="like_count likes_count_'+$id+' ui basic blue left pointing label">'
+// 			  +'</a>'
+// 			+'</div>';
+// 			this_location.html(like_html);
+// 			$.ajax({
+// 					method:"POST",
+// 				    url: base_url+"status/like_check/",
+// 				    data:"&status_id="+$id,
+// 				    success:function(data){
+// 						if(data == "true"){
+// 							$('.unlike_icon_'+$id).hide();
+// 						 	$('.like_icon_'+$id).show();
+// 						 	like_counter();
+// 							like_unlike();
+// 							see_likers();
+// 					 	}else{
+// 					 		$('.unlike_icon_'+$id).show();
+// 					 		$('.like_icon_'+$id).hide();
+// 					 		like_counter();
+// 							like_unlike();
+// 							see_likers();
+// 						}
+// 				   }
+// 			});
+// 	});
+
+
+	
+// });
+
+function like_counter(status_id){
+		//$(".like_append_<?php echo $batchNo?>").each(function(){
+			//var status_id= $(this).attr('id');
+				$.ajax({
+	            	method:"POST",
+	           		url: base_url+"status/count_vote/",
+	          		data:"status_id="+status_id,
+	           		success:function(data){
+	           			//ako ok
+	           			$('.likes_count_'+status_id).html(data);
+	           		}
+	       		});
+	   		//});
+	}
+
+
+
+//if click like button (like/unlike)
+function like_unlike(){
+	$('.like_toggle_<?php echo $batchNo?>').click(function(){
+	var status_id = $(this).attr('id');
+	var likeOrUnlike = $(this).children().attr('id');
+	var like_value = parseInt($('.likes_count_'+status_id).html());
+	if(likeOrUnlike == 'like'){
+		$.ajax({
+			type: "post",
+			url: base_url+"status/likeToUnlike/",
+			cache: false,				
+			data: 'status_id='+status_id,
+			success: function(response){
+				var newLike_value = like_value - 1;
+				$('.likes_count_'+status_id).html(newLike_value);		
+				$('.unlike_icon_'+status_id).show();
+				$('.like_icon_'+status_id).hide();
+			}
+		});	
+	}else{
+		$.ajax({
+			type: "post",
+			url: base_url+"status/unlikeToLike/",
+			cache: false,				
+			data: 'status_id='+status_id,
+			success: function(response){
+				var newLike_value = like_value + 1;
+				$('.likes_count_'+status_id).html(newLike_value);			
+				$('.unlike_icon_'+status_id).hide();
+				$('.like_icon_'+status_id).show();
+			}
+		});	
+	}
+});
+}
+
+
+//see who likes
+function see_likers(){
+	$('.like_count').click(function(){
+		var status_id = $(this).attr('id');
+		var like_value = parseInt($('.likes_count_'+status_id).html());
+		if(like_value == 0){
+				$('#no_likes_modal').modal('show');
+		}else{
+			$.ajax({
+			method:"POST",
+			url: base_url+"status/see_who_likes/",
+			data:"status_id="+status_id,
+			success:function(datas){
+				console.log(datas);
+				$('#modal_seewholikes_'+ status_id).modal('show');
+				$('#likers_' +status_id).html(datas);		
+			}	
+			});
+		}
+	});
 }
 </script>
