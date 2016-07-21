@@ -12,9 +12,11 @@
 	<div class="right menu">
 		<?php echo anchor('chat','<i class="large mail outline icon"></i>','id="messaging" class="item"')?>
 
-		 <div class="ui inline dropdown item">
-		    <i class="options brown icon"></i>
-		    <i class="dropdown brown icon"></i>
+		 <div class="ui inline dropdown item" id="select">
+		 	<i class="big icons">
+			  <i class="settings purple icon"></i>
+			  <i class="corner grey dropdown icon"></i>
+			</i>
 		    <div class="menu">
 <<<<<<< HEAD
 		      <?php echo anchor('ProfileController','<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
@@ -44,6 +46,9 @@
 	</div>
 <?php }?>
 
-
-
-
+<script type="text/javascript">
+//js for dropdown the settings
+$('#select')
+  .dropdown()
+;
+</script>
