@@ -4,7 +4,7 @@
 <br><br>
  <div class="ui text container">
  	<div class="ui text container">
-      <?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="mini image"');?>
+      <?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="ui medium image"');?>
 	</div>
     <h2 class="ui teal image header">
         Welcome to Cite Circle Alpha
