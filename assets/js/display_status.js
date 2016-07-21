@@ -19,6 +19,7 @@ $(document).ready(function(){
 	    on    : 'click',
 	});
 
+	//mouse hover the status template to see option icon for delete/edit
 	$('.status_head').mouseenter(function(){
 		$id = $(this).attr('id');
 		$('.popup_button_'+$id).show();
@@ -28,8 +29,6 @@ $(document).ready(function(){
 		});
 	});
 
-	
-	
 	//comment submit button disabler
 	$(".commentinput").keyup(function(){
     	$comment = $(this).val().trim();
@@ -129,115 +128,7 @@ $(function(){
 		send_comment (user_id,cmt_status_id,content);
 			
 	});
-});
-
-//like
-$(function(){
-		$('.hide').hide();
-		$('.like-count').click(function(){
-				var status_id= $(this).siblings("#status_id").val();
-				var test = "status_id="+status_id;
-				console.log(test);
-					$.ajax({
-						method:"POST",
-						url: base_url+"status/see_who_likes/",
-		          		data:"status_id="+status_id,
-		           		success:function(datas){
-			           		$("#likers").append("<div>"+datas+"</div><br/>");	
-		           			$('#modal_seewholikes_'+ status_id).modal('show');
-		           			$('.modalcontent_' +status_id).html('&nbsp&nbsp&nbsp&nbsp'+datas + '<br/>');
-		           			
-		           		}	
-						});
-		});
-	});
-
-	$(function(){
-		$(".like-count").each(function(){
-			var status_id= $(this).siblings("#status_id").val(); 
-		    var self = $(this);
-				$.ajax({
-	            	method:"POST",
-	           		url: base_url+"status/count_vote/",
-	          		data:"status_id="+status_id,
-	           		success:function(data){
-		           		if(data == 0){
-		        	   		$(self).hide();
-			           	}else{
-	        	   			$(self).html('<i class="thumbs up blue icon"></i><i style="color: blue">'+ data+' </i>') //updating total counts
-	          			}
-	           		}
-	       		});
-	   		});
-	 });
-
-$(function(){
-		$('.if-already-like').each(function(){
-			var user_status_id=$(this).siblings("#user_status_id").val();
-			var attributes = user_status_id.split('_');
-			var self = $(this);
-			var upvote = "#"+attributes[2]+'_'+attributes[1]+'_upvote';
-			var downvote = "#"+attributes[2]+'_'+attributes[1]+'_downvote';
-				$.ajax({
-					method:"POST",
-				    url: base_url+"status/check_if_vote_controller/",
-				    data: "user_id="+attributes[0] + "&status_user_id="+attributes[1] + "&status_id="+attributes[2],
-				    success:function(data){
-						if(data == "true"){
-							$(upvote).hide();
-						 	$(downvote).show();
-					 		$(upvote).attr("value", (attributes[3]-1)) ;
-					 		$(downvote).attr("value", (attributes[3]-1)) ;
-					 	}else{
-					 		$(upvote).show();
-					 		$(downvote).hide();
-						}
-				   }
-			});
-	});
-		
-});
-$(function(){
-		$('.vote').click(function(){
-			var status_id = this.id;
-			var upOrDown = status_id.split('_'); 
-			var vote_count = parseInt($(this).val());
-			var votedDiv = "#"+ upOrDown[0]+'_voteThis';
-			var countVoteHide = '#like_'+upOrDown[0];
-				$("#"+ upOrDown[0]+ '_'+upOrDown[1]+'_downvote').toggle();
-				$("#"+ upOrDown[0]+ '_'+upOrDown[1]+'_upvote').toggle();
-					$.ajax({
-						type: "post",
-						url: base_url+"status/vote_status/",
-						cache: false,				
-						data: 'status_id='+upOrDown[0] + '&status_user_id='+ upOrDown[1]+ '&upOrDown=' +upOrDown[2],
-						success: function(response){				
-							if(response=='true'){
-								if(vote_count == 0){
-									$(votedDiv).fadeIn(100).html('<i class="thumbs up blue icon"></i><i style="color: blue">You like this. </i> ');
-									$(countVoteHide).hide();
-							 	}else{
-									$(votedDiv).fadeIn(100).html('<i class="thumbs up blue icon"></i><i style="color: blue">You and '+ vote_count + ' others like this. </i> ');
-									$(countVoteHide).hide();
-								}
-							}else{
-								if(vote_count == 0){
-									$(votedDiv).hide();
-									$(countVoteHide).hide();
-								}else if(vote_count == 1){
-									$(votedDiv).fadeIn(100).html('<i class="thumbs up blue icon"></i><i style="color: blue">Liza Soberano likes this.</i>.');
-									$(countVoteHide).hide();
-								}else{
-									$(votedDiv).fadeIn(100).html('<i class="thumbs up blue icon"></i><i style="color: blue">Liza Soberano and '+ vote_count +' likes this.</i>.');
-									$(countVoteHide).hide();
-								}
-							}
-						}
-				});	
-			});
-	});
-
-function send_comment(user_id,cmt_status_id,content) {
+	function send_comment(user_id,cmt_status_id,content) {
 	var dataString = 'user_id='+ user_id + '&content=' + content + '&cmt_status_id='+cmt_status_id;
 	$comment_val = $('#counter_'+cmt_status_id).text();
 	$comment_added = parseInt($comment_val)+1;
@@ -261,8 +152,168 @@ function send_comment(user_id,cmt_status_id,content) {
 			alert('Network Failure.');
 			}
 		});
+	}
+});
+
+//LIKE FUNCTION BELOW --- START/////////////////////////////////////////////////////////////////////////
+
+// //like_html append
+// $(function(){
+// 	$('.like_append').each(function(){
+
+// 		$id = $(this).attr('id');
+// 		var like_html = '<div id="'+$id+'" class="like_infos ui labeled button" tabindex="0">'
+// 		  +'<div id="'+$id+'" class="like_toggle unlike_icon_'+$id+' ui basic blue button">'
+// 		  +'<i id="unlike" class="empty red heart icon"></i> Like'
+// 		  +'</div>'
+// 		  +'<div id="'+$id+'" class="like_toggle like_icon_'+$id+' ui basic blue button">'
+// 		    +'<i id="like" class="red heart icon"></i> Like'
+// 		  +'</div>'
+// 		  +'<a id="'+$id+'" class="like_count likes_count_'+$id+' ui basic blue left pointing label">'
+// 		  +'</a>'
+// 		+'</div>';
+// 		$(this).html(like_html);
+// 	});
+// });
+
+// //query if nka like naba ang user
+// $(function(){
+// 	$('.like_append').each(function(){
+// 			var id=$(this).attr('id');
+// 			$.ajax({
+// 					method:"POST",
+// 				    url: base_url+"status/like_check/",
+// 				    data:"&status_id="+id,
+// 				    success:function(data){
+// 						if(data == "true"){
+// 							$('.unlike_icon_'+id).hide();
+// 						 	$('.like_icon_'+id).show();
+// 						 	like_counter();
+// 							like_unlike();
+// 							see_likers();
+// 					 	}else{
+// 					 		$('.unlike_icon_'+id).show();
+// 					 		$('.like_icon_'+id).hide();
+// 						 	like_counter();
+// 							like_unlike();
+// 							see_likers();
+// 						}
+// 				   }
+// 			});
+// 	});
+// });
 
 
+//query if nka like naba ang user
+$(function(){
+	$('.like_append').each(function(){
+			var this_location = $(this);
+			var $id=$(this).attr('id');
+			var like_html = '<div id="'+$id+'" class="like_infos ui labeled button" tabindex="0">'
+			  +'<div id="'+$id+'" class="like_toggle unlike_icon_'+$id+' ui basic blue button">'
+			  +'<i id="unlike" class="empty red heart icon"></i> Like'
+			  +'</div>'
+			  +'<div id="'+$id+'" class="like_toggle like_icon_'+$id+' ui basic blue button">'
+			    +'<i id="like" class="red heart icon"></i> Like'
+			  +'</div>'
+			  +'<a id="'+$id+'" class="like_count likes_count_'+$id+' ui basic blue left pointing label">'
+			  +'</a>'
+			+'</div>';
+			
+			$.ajax({
+					method:"POST",
+				    url: base_url+"status/like_check/",
+				    data:"&status_id="+$id,
+				    success:function(data){
+						if(data == "true"){
+							this_location.html(like_html);
+							$('.unlike_icon_'+$id).hide();
+						 	$('.like_icon_'+$id).show();
+						 	like_counter();
+							like_unlike();
+							see_likers();
+					 	}else{
+							this_location.html(like_html);
+					 		$('.unlike_icon_'+$id).show();
+					 		$('.like_icon_'+$id).hide();
+					 		like_counter();
+							like_unlike();
+							see_likers();
+						}
+				   }
+			});
+	});
+
+});
+
+//like counter
+function like_counter(){
+	$(".like_append").each(function(){
+		var status_id= $(this).attr('id');
+		$.ajax({
+         	method:"POST",
+     		url: base_url+"status/count_vote/",
+      		data:"status_id="+status_id,
+		success:function(data){
+   			$('.likes_count_'+status_id).html(data);
+         }
+    	});
+   	});
 }
 
+//if click like button (like/unlike)
+function like_unlike(){
+	$('.like_toggle').click(function(){
+	var status_id = $(this).attr('id');
+	var likeOrUnlike = $(this).children().attr('id');
+	var like_value = parseInt($('.likes_count_'+status_id).html());
+	if(likeOrUnlike == 'like'){
+		$.ajax({
+			type: "post",
+			url: base_url+"status/likeToUnlike/",		
+			data: 'status_id='+status_id,
+			success: function(response){
+				var newLike_value = like_value - 1;
+				$('.likes_count_'+status_id).html(newLike_value);		
+				$('.unlike_icon_'+status_id).show();
+				$('.like_icon_'+status_id).hide();
+			}
+		});	
+	}else{
+		$.ajax({
+			type: "post",
+			url: base_url+"status/unlikeToLike/",
+			data: 'status_id='+status_id,
+			success: function(response){
+				var newLike_value = like_value + 1;
+				$('.likes_count_'+status_id).html(newLike_value);			
+				$('.unlike_icon_'+status_id).hide();
+				$('.like_icon_'+status_id).show();
+			}
+		});	
+	}
+});
+}
 
+//see who likes
+function see_likers(){
+	$('.like_count').click(function(){
+		var status_id = $(this).attr('id');
+		var like_value = parseInt($('.likes_count_'+status_id).html());
+		if(like_value == 0){
+			$('#no_likes_modal').modal('show');
+		}else{
+			$.ajax({
+			method:"POST",
+			url: base_url+"status/see_who_likes/",
+			data:"status_id="+status_id,
+			success:function(datas){
+				console.log(datas);
+				$('#modal_seewholikes_'+ status_id).modal('show');
+				$('#likers_' +status_id).html(datas);		
+			}
+			});
+		}	
+		
+	});
+}

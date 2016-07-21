@@ -10,14 +10,19 @@
 		<?php echo anchor('post_news','<i class="large newspaper icon"></i>','id="news" class="item"')?>
         </div>
 	<div class="right menu">
-		<?php echo anchor('messaging','<i class="large mail outline icon"></i>','id="messaging" class="item"')?>
+		<?php echo anchor('chat','<i class="large mail outline icon"></i>','id="messaging" class="item"')?>
 
-		 <div class="ui simple dropdown item">
+		 <div class="ui inline dropdown item">
 		    <i class="options brown icon"></i>
 		    <i class="dropdown brown icon"></i>
 		    <div class="menu">
+<<<<<<< HEAD
+		      <?php echo anchor('ProfileController','<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
+		      <?php echo anchor('login/logout','<div class="item"><i class="power red icon"></i>Log out</div>')?>
+=======
 		      <div class="item"><?php echo anchor('myprofile','<i class="user olive icon"></i>Profile','id="profile"')?></div>
 		      <div class="item"><?php echo anchor('login/logout','<i class="power red icon"></i>Log out')?></div>
+>>>>>>> cite_circle-0.0.x
 		    </div>
 		 </div>
 

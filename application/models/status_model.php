@@ -66,46 +66,25 @@ class Status_model extends CI_Model
 		$inserted_id = $this->db->insert_id();
 		return $inserted_id;
 	}
-	
-	
-	public function insertUpVote($status_id, $status_user_id){
-		$user_id = $this->session->userdata('id');
-		$vote_count = 1;
-		$this->db->insert('vote', array('voted_status_id' => $status_id, 'status_user_id' =>$status_user_id ,'vote_user_id' => $user_id, 'vote_count' => $vote_count));
-		$this->db->set('up_vote', 'up_vote+1', FALSE);
-		$this->db->where('status_id', $status_id);
-		$this->db->update('status');
-		return $this->db->affected_rows(); //true
-}
-	
-	public function deleteDownVote($status_id,$status_user_id){
-		$user_id = $this->session->userdata('id');
-		$this->db->where('vote_user_id', $user_id);
-		$this->db->where('voted_status_id', $status_id);
-		$this->db->delete('vote');
-		$this->db->set('up_vote', 'up_vote-1', FALSE);
-		$this->db->where('status_id', $status_id);
-		$this->db->update('status');
-		return $this->db->affected_rows(); // true
-	}
-	
-	public function get_voted_user($status_id){
-		$query = $this->db->get_where('vote', array('voted_status_id' => $status_id));
-		return $query->result_array();	
-	}
-	
-	public function get_who_votes($voted_user){
 
-		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $voted_user));
-		return $query->result_array();
-	 }
-	
-	public function check_if_vote_model($user_id , $status_user_id, $status_id){
+	public function delete_like($status_id, $user_id){
+		$this->db->where('voted_status_id', $status_id);
+		$this->db->where('vote_user_id', $user_id);
+		$this->db->delete('vote');
+		return true;
+	}
+
+	public function insert_like($status_id, $user_id){
+		$this->db->insert('vote', array('voted_status_id' => $status_id,'vote_user_id' => $user_id));
+		return true;
+
+	}
+
+	public function like_check($status_id,$user_id){
 		$this->db->select("*");
 		$this->db->from("vote");
-		$this->db->where('vote_user_id', $user_id);
-		$this->db->where('status_user_id', $status_user_id);
 		$this->db->where("voted_status_id", $status_id);
+		$this->db->where('vote_user_id', $user_id);
 		$result= $this->db->get();
 		if($result->row_array() > 0 ){
 			return true;
@@ -121,5 +100,22 @@ class Status_model extends CI_Model
 		$result= $this->db->get();
 		return $result->row_array();
 	}
+
+	public function user_who_likes($status_id){
+		$query = $this->db->get_where('vote', array('voted_status_id' => $status_id));
+		return $query->result_array();
+	}
+	
+	public function get_who_votes($voted_user){
+		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $voted_user));
+		return $query->result_array();
+	 }
+
+	 public function get_userdata($id){
+	 	$query = $this->db->get_where('aauth_users', array('id' => $id));
+		return $query->result_array();
+	 }
+
+
 }
 ?>

@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	var base_url = "http://localhost/cite_circle/";
-	$("#statusloader").hide();
 	
 	//get the posts
 	$.post(base_url+'status/display_status/',function(data){
@@ -19,7 +18,7 @@ $(document).ready(function(){
 
      function loadStatus
      (pageNumber){
-    	 	$("#statusloader").show();
+    	 $(".statusloader").html('<i class="statusloader_icon big spinner loading icon"></i>');
              $.ajax({
                  url: base_url+'status/display_more_status/',
                  type:'POST',
@@ -27,7 +26,8 @@ $(document).ready(function(){
                  success: function(data){
                 	 $(data).appendTo("#displaystatus").hide().slideDown('slow');
                 	 $(".ui.basic.modal").hide();
-                	 $("#statusloader").hide();
+                	 // $("#statusloader").hide();
+                	 $(".statusloader_icon").hide();
                  }
              });
          return false;

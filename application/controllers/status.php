@@ -85,28 +85,25 @@ class Status extends CI_Controller {
 		$data['inserted_id'] = $this->status_model->insert_comment($datas);
 		echo $this->load->view('status/comment_tempate',$data,TRUE);
 	}
-    
-	public function vote_status(){
-		$status_id=  $this->input->post('status_id');
-		$status_user_id = $this->input->post('status_user_id');
-		$upOrDown=  $this->input->post('upOrDown');
-	
-	
-		if($upOrDown=='upvote'){
-			$this->status_model->insertUpVote($status_id, $status_user_id);
-			echo "true";
-		}else{
-			$this->status_model->deleteDownVote($status_id, $status_user_id);
-			echo "false";
-}
 
-	}
-	
-	public function check_if_vote_controller(){
-		$user_id = $this->input->post('user_id');
-		$status_user_id = $this->input->post('status_user_id');
+	public function likeToUnlike(){
 		$status_id=  $this->input->post('status_id');
-		$result = $this->status_model->check_if_vote_model($user_id, $status_user_id, $status_id);
+		$user_id = $this->session->userdata('id');
+		$result = $this->status_model->delete_like($status_id, $user_id);
+		return $result;
+	}
+
+	public function unlikeToLike(){
+		$status_id=  $this->input->post('status_id');
+		$user_id = $this->session->userdata('id');
+		$result = $this->status_model->insert_like($status_id, $user_id);
+		return $result;
+	}
+    
+	public function like_check(){
+		$status_id=  $this->input->post('status_id');
+		$user_id = $this->session->userdata('id');
+		$result = $this->status_model->like_check($status_id,$user_id);
 	
 		if($result){
 			echo "true";
@@ -124,16 +121,20 @@ class Status extends CI_Controller {
 	
 	public function see_who_likes(){
 	$status_id=  $this->input->post('status_id');
-	$voted_user = $this->status_model->get_voted_user($status_id);
-	foreach ($voted_user as $row) {
-	 	
+	$user_liked = $this->status_model->user_who_likes($status_id);
+	foreach ($user_liked as $row) {
 	 		$data = $this->status_model->get_who_votes($row['vote_user_id']);
-	 		 
 	 		foreach ($data as  $datas) {
-	 			
-	 			echo "<li> {$datas['firstname']} {$datas['lastname']}\n </li>";
-	 		}
-	}
+	 			if($datas['firstname'] == null || $datas['firstname'] == ''){
+	 					$user_data=$this->status_model->get_userdata($row['vote_user_id']);
+	 					foreach ($user_data as $user_datas ) {
+	 						echo $user_datas['name']."<br/>";
+	 					}
+	 				}else{
+	 						echo $datas['firstname']." ".$datas['lastname']."<br/>";
+	 				}
+	 			}
+		}
 
 	}
 
