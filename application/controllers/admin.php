@@ -17,6 +17,7 @@ class Admin extends CI_Controller{
 
 	public function index(){
 		$data['query'] = $this->admin_model->show_all_users();
+		$data['perm'] = 
 		$this->load->view('template/header');
 		$this->load->view('admin/index',$data);
 	}
@@ -27,16 +28,20 @@ class Admin extends CI_Controller{
 		$this->load->view('admin/show',$data);
 	}
 
-	public function role_access(){
-		$userid = 4;
-		$roles = array('admin', 'sh_admin','reg_user');
-		if($bool === true){
-			for($x=0;$x<=2;$x++){
-				$this->aauth->allow_user($userid, $roles[$x]);
-			}
+	public function allow_role(){
+		$userid = $this->input->post('user_id');
+		$role = $this->input->post('role');
+		if($role === 'school_admin'){
+				$this->aauth->allow_user($userid, $role);
 		}else{
 			echo 'no success';
 		}
+	}
+
+	public function delete_role(){
+		$userid = $this->input->post('user_id');
+		$role = $this->input->post('role');
+		$this->aauth->deny_user($userid, $role);
 	}
 }
 ?>

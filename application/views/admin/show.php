@@ -1,92 +1,73 @@
 <?foreach($query as $row):?>
-	<input type="text" value="<?php echo $row->user_id;?>" id="user_id">
-	<input type="text" value="true" id="role">
-	<div class="ui form">
-		<div class="two wide field">
-			<label>Firstname</label>
-			<input type="text" value="<?=$row->firstname?>" readonly>
-		</div>
-		<div class="two wide field">
-			<label>Lastname</label>
-			<input type="text" value="<?=$row->lastname?>" readonly>
-		</div>
-		<div class="two wide field">
-			<label>Birthday</label>
-			<input type="text" value="<?=$row->birthday?>" readonly>
-		</div>
-		<div class="two wide field">
-			<label>Age</label>
-			<input type="text" value="<?=$row->age?>" readonly>
-		</div>
-		<div class="two wide field">
-			<label>Contact No.</label>
-			<input type="text" value="<?=$row->contact_number?>" readonly>
-		</div>
-		<div class="two wide field">
-			<label>Address</label>
-			<input type="text" value="<?=$row->address?>" readonly>
-		</div>
-		<div class="two wide field">
-			<label>Gender</label>
-			<input type="text" value="<?=$row->gender?>" readonly>
-		</div>
+	<input type="text" hidden="hidden" value="<?php echo $row->user_id;?>" id="user_id">
+	<form class="ui form">
+		
 		<div class="inline field">
 			<label>Role Access</label>
-		    <div class="ui slider checkbox">
-		    	<label>Admin</label>
-		      	<input type="checkbox" value="admin" name="check[]" class="hidden role">
-		    </div>
+
 		    <div class="ui slider checkbox">
 		    	<label>School Admin</label>
-		      	<input type="checkbox" value="school_admin" name="check[]"  class="hidden role">
+		    	<?if($this->aauth->is_allowed('school_admin', $row->user_id)){?>
+		      		<input type="checkbox" value="school_admin" name="check"  class="hidden role" checked="checked">
+		      	<?php }else{?>
+		      		<input type="checkbox" value="school_admin" name="check"  class="hidden role" >
+		      	<?php };?>
 		    </div>
-		    <div class="ui slider checkbox">
-		    	<label>Regular User</label>
-		      	<input type="checkbox" value="reg_user" name="check[]" class="hidden role">
-		    </div>
-		    	<input type="submit" class="ui button" id="submit" name="submit">
-		  </div>
+		   	<input type="submit" class="ui button" id="submit" name="submit">
+		   	<a href="<?php echo base_url();?>admin_dashboard" class="ui teal button">Back To List</a>
+		 </div>
 		  <div class="result"></div>
-	</div>
+	</form>
 <?endforeach?>
+
+
 <script>
-var base_url = "http://localhost/cite_circle/";
 $(document).ready(function(){
-	$('.ui.checkbox').checkbox();
+$('.ui.checkbox').checkbox();
+			$('#submit').click(function(){	
+				$('.role').change(function(){
+				var attrib = $(this);
+				if(attrib.prop("checked")){	
+					var role= $(this).val();
+					var user_id = $('#user_id').val();
 
-	$('#submit').click(function(){
+					$.ajax({
+						url: "<?php echo base_url();?>role",
+						type: 'POST',
+						data: {
+							'role': role,
+							'user_id' : user_id
+						},
+						success: function(){
+							$('.result').html('success');
+						},
+						error: function() {
+	                             //Ajax not successful: show an error
+	                            alert('An error occured while deleting the status!');
+	                   	}
+					});		
+				}else{
+					var role= $(this).val();
+					var user_id = $('#user_id').val();
 
-			var role_access_perm = new Array();
-
-			$('.role:checked').each(function(){
-				var role = role_access_perm.push($(this).val());
-				console.log(role);
-			});
-
-	});
-  //   $("#check").change(function() {
-	 //    var input = $( this );	
-	 //    var role = $("#check").prop("checked");
-	 //    var user_id = $('#user_id').val();
-	 //    $("#submit").click(function(){
-	 //    	$.ajax({
-		// 			method:"POST",
-		// 			url: "<?php echo base_url();?>role_access",	
-		// 	        data: "user_id=" + user_id ,
-		// 	        success: function(data){      		
-		// 	         	$('.result').html("success");
-		// 	        }
-	 //    	});
-	    	
-	 //    });
-  // 	})
-  // .change();
+					$.ajax({
+						url: "<?php echo base_url();?>delete_role",
+						type: 'POST',
+						data: {
+							'role': role,
+							'user_id' : user_id
+						},
+						success: function(){
+							$('.result').html('success');
+						},
+						error: function() {
+	                             //Ajax not successful: show an error
+	                            alert('An error occured while deleting the status!');
+	                   	}
+					});		
+				}
+			}).change();
+		});
 });
-
-var admin = function(){
-
-};
-var school_admin = function(){};
-var reg_user = function(){};
 
 </script>
