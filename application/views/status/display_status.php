@@ -107,13 +107,24 @@ if(count($query) > 0){?>
 		<input type="hidden" id="user_status_id" name="user_status_id" value="<?php echo $this->session->userdata('id');?>_<?php echo $status->user_id;?>_<?php echo $status->status_id;?>_<?php echo $status->up_vote;?>">
 	
 	<!-- Display of count_like -->
-	<span style="text-decoration:underline" class="people-who-likes" id="<?php echo $status->status_id;?>">
+	<div style="text-decoration:underline" class="people-who-likes" id="<?php echo $status->status_id;?>">
 	  <!--<i class="thumbs up blue icon"></i><?php echo $status->up_vote;?>-->
 	  		<span class="like-count" id="like_<?php echo $status->status_id;?>"></span>
 	    	<input type="hidden" id="user_id" name="user_id" value="<?php echo $status->user_id;?>"/>
-	      	<input type="hidden" id="status_id" name="status_id" value="<?php echo $status->status_id;?>"/></span>
+	      	<input type="hidden" id="status_id" name="status_id" value="<?php echo $status->status_id;?>"/></div>
 	      		
 	<!-- VOTE/LIKE BUTTON START -->
+	<!-- TO BE WORKED IN REPLACE OF THE BUTTON BELLOW -->
+	<!-- <div class="ui labeled button upvote vote" tabindex="0">
+  <div class="ui basic blue button">
+    <i class="fork icon"></i> Forks
+  </div>
+  <a class="ui basic left pointing blue label">
+    1,048
+  </a>
+</div> -->
+	
+	<!-- UI will be replace -->
 	<button class="mini ui green circular inverted button upvote vote" data-inverted="" data-tooltip="Vote" data-position="bottom center" value="<?php echo $status->up_vote;?>" id="<?php echo $status->status_id;?>_<?php echo $status->user_id;?>_upvote"><i class= "tiny arrow up white icon"></i></button>
 	<button class="mini ui green circular animated button hide vote" value="<?php echo $status->up_vote;?>" id="<?php echo $status->status_id;?>_<?php echo $status->user_id;?>_downvote"><span class="hidden content">Unvote</span><span class="visible content"><i class= "tiny arrow down white icon"></i></span></button>
 	      </div>
