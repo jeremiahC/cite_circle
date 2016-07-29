@@ -3,6 +3,31 @@
 	cursor:pointer
 }
 
+.dsbackground{
+  background-color: #f2f2f2;
+}
+/*.card-teal{
+  background-color: #00cc99;
+  border-radius: 2px; 
+  box-shadow: 1px 1px 1px #9E9E9E;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  color: #fff;
+}
+
+.card-blue{
+  background-color: 
+}
+
+.card-red{
+
+}
+
+.card-green{
+
+}*/
+
 .hide{
   display:none
 }

@@ -9,7 +9,7 @@ class Newsmodel	extends CI_Model
     
     public function post($content,$title){
         $format = "Y-m-d";
-	$data = array(
+	    $data = array(
             'content' => $content,
             'date'    => date($format),
             'title'   => $title
