@@ -1,46 +1,61 @@
 
-	<table class="ui celled table">
-		  <thead>
-		    <tr><th>Name</th>
-		    <th>Email</th>
-		    <th>Header</th>
-		  </tr></thead>
-		  <tbody>
-		  	<?foreach($query as $row):?>
-		    <tr>
-		      <td>
-		        <div class="cell">
-		        	<a href="<?php echo site_url('user/' . $row->id );?>">
-		        		<?=$row->name;?>
-		        	</a>
-		        </div>
-		      </td>
-		      <td><?=$row->email;?></td>
-		      <td>Cell</td>
-		    </tr>
-		    <?endforeach;?>
-		  </tbody>
-		  <tfoot>
-		    <tr><th colspan="3">
-		      <div class="ui right floated pagination menu">
-		        <a class="icon item">
-		          <i class="left chevron icon"></i>
-		        </a>
-		        <a class="item">1</a>
-		        <a class="item">2</a>
-		        <a class="item">3</a>
-		        <a class="item">4</a>
-		        <a class="icon item">
-		          <i class="right chevron icon"></i>
-		        </a>
-		      </div>
-		    </th>
-		  </tr></tfoot>
-	</table>
+
+<div class="ui top attached menu">
+  <a class="item">
+    <i class="sidebar icon"></i>
+    Menu
+  </a>
+</div>
+
+<div class="ui bottom attached segment pushable">
+  <div class="ui inverted vertical fixed sidebar menu">
+  	<div class="item">
+  		Admin
+  	</div>
+    <a class="item" data-tab="first">
+      <i class="home icon"></i>
+      Dashboard
+    </a>
+    <a class="item" data-tab="second">
+      <i class="users icon"></i>
+      Users
+    </a>
+    <a class="item" data-tab="third">
+      <i class="settings icon"></i>
+      Configuration
+    </a>
+  </div>
+  	<div class="pusher">
+  		<div class="ui icon message">
+		  <i class="wizard icon"></i>
+		  <div class="content">
+		    <div class="header">
+		      Welcome to Admin Dashboard
+		    </div>
+		    <p>Get the best news in your e-mail every day.</p>
+		  </div>
+		</div>
+	    <div class="ui bottom attached active tab" data-tab="first">
+	    	<?$this->load->view('admin/dashboard');?>
+		</div>
+		<div class="ui bottom attached tab" data-tab="second">
+	  		Second
+		</div>
+		<div class="ui bottom attached tab" data-tab="third">
+	  		Third
+		</div>
+	</div>
+</div>
 <script>
 $(document).ready(function(){
-	$('.cell').hover(function(){
-		$(this).toggleClass('ui green ribbon label');
-	});
+	// $('.ui.sidebar').sidebar('toggle');
+	$('.ui.sidebar')
+  .sidebar({
+    context: $('.bottom.segment')
+  })
+  .sidebar('attach events', '.menu .item')
+;
+	$('.menu .item').tab();
+
 });
 </script>

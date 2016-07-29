@@ -10,6 +10,7 @@ class Admin extends CI_Controller{
 		parent::__construct();
 		$this->load->model('admin_model');
 		$this->load->library("Aauth");
+		$this->load->library("parser");
 		$this->aauth->create_perm('school_admin');
 		$this->aauth->create_perm('admin');
 		$this->aauth->create_perm('reg_user');
@@ -17,11 +18,15 @@ class Admin extends CI_Controller{
 
 	public function index(){
 		$data['query'] = $this->admin_model->show_all_users();
-		$data['perm'] = 
+		$data['users'] = "admin/userlist";
 		$this->load->view('template/header');
 		$this->load->view('admin/index',$data);
 	}
 
+	public function userlist(){
+
+	}
+	
 	public function show($id){
 		$data['query'] = $this->admin_model->show_user($id);
 		$this->load->view('template/header');
