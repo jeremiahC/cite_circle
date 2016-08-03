@@ -67,3 +67,4 @@ $route['profile/(:num)'] = 'ProfileController/view_profile/$1';
 $route['myprofile'] = 'ProfileController';
 $route['role'] = 'admin/allow_role';
 $route['delete_role'] = 'admin/delete_role';
+$route['userlist'] = 'admin/userlist';
