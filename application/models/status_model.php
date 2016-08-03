@@ -77,6 +77,7 @@ class Status_model extends CI_Model
 	public function insert_like($status_id, $user_id){
 		$this->db->insert('vote', array('voted_status_id' => $status_id,'vote_user_id' => $user_id));
 		return true;
+
 	}
 
 	public function like_check($status_id,$user_id){
@@ -115,7 +116,6 @@ class Status_model extends CI_Model
 		return $query->result_array();
 	 }
 
-	 
 
 }
 ?>

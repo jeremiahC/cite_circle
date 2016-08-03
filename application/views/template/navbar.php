@@ -21,6 +21,7 @@
 		    <div class="menu">
 		      <?php echo anchor('ProfileController','<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
 		      <?php echo anchor('login/logout','<div class="item"><i class="power red icon"></i>Log out</div>')?>
+
 		    </div>
 		 </div>
 

@@ -24,7 +24,8 @@ class Status extends CI_Controller {
 		$config['total_rows'] = $this->status_model->count_status();
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
-		$data['upload_files'] = $this->profile_model->get_upload();
+		$user_id = $this->session->userdata('id');
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$this->uri->segment(3));
 		foreach ($data['query'] as $query){
 		$data['query2']=$this->status_model->get_comments($query->status_id);
@@ -142,7 +143,10 @@ class Status extends CI_Controller {
 	 				}
 	 			}
 		}
+
 	}
+
+	
 }
 
 /* End of file status.php */

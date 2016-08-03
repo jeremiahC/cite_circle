@@ -5,7 +5,7 @@
             <div class="ui teal segment" id="news_<?=$query->news_id;?>">
                 <div class="ui grid">
                         <input type="text"  class="news_id" value="<?=$query->news_id;?>" id="news_id" name="news_id">
-                        <input type="text" hidden="true" value="<?php echo $this->aauth->get_user_id($email=false);?>" id="id">
+                        <input type="text"  value="<?php echo $this->aauth->get_user_id($email=false);?>" id="id">
                         <div class="right floated column">
                             <button class="btn-delete ui circular red button btn-delete_<?=$query->news_id;?>" id="<?=$query->news_id;?>" name="delete" value="<?php echo $query->news_id;?>" ><i class="remove icon"></i></button>
                         </div>
