@@ -106,9 +106,18 @@ if(count($query) > 0){?>
     <div id="<?php echo $status->status_id;?>" class="like_append"></div>
 	<!-- START MODAL (SEE PEOPLE WHO LIKES) -->
 	<div class="ui small modal" id="modal_seewholikes_<?php echo $status->status_id;?>">
-		<div class="header">Likers</div>
-	   	<div id="likers_<?php echo $status->status_id;?>"></div>
-	    <div class="actions">   		
+		<div class="header">People who likes this post:</div>
+			<br/>
+		   	<div class="image content" id="likers_<?php echo $status->status_id;?>">
+			</div>
+			<br/>
+	    <div class="actions">
+	    	<div class="ui cancel circular small red inverted vertical animated button" tabindex="0">
+		    	<div class="hidden content closemodal">Close</div>
+		    	<div class="visible content closemodal">
+	        	<i class="large remove icon"></i>
+				</div>
+			</div>
 	    </div> 
 	</div>
 	<!-- END MODAL (SEE PEOPLE WHO LIKES) -->
@@ -127,7 +136,7 @@ if(count($query) > 0){?>
 		<?php }else {?>
 		<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" class="ui small rounded image">
 		<?php }?>
-		<input id=<?php echo $status->status_id;?> class="cmt_input_id_<?php echo $status->status_id;?> commentinput" placeholder="Add a comment..." type="text">
+		<input id="<?php echo $status->status_id;?>" class="cmt_input_id_<?php echo $status->status_id;?> commentinput" placeholder="Add a comment..." type="text">
 		<div id="<?php echo $status->status_id;?>" class="cmt_btn_id_<?php echo $status->status_id;?> commentbutton ui mini teal disabled button"><i id="<?php echo  $this->session->userdata('id');?>" class="comment_btn_icon send icon"></i></div>
 	</div>
 	<?php } ?>
@@ -253,9 +262,15 @@ if(count($query) > 0){?>
 
 	<!-- START MODAL (SEE PEOPLE WHO LIKES) -->
 	<div class="ui  small modal" id="no_likes_modal">
-		<div class="header">No likes found.</div>
+		<div class="header">No likes yet.</div>
 	   	<div></div>
-	    <div class="actions">   		
+	    <div class="actions">
+	    	<div class="ui cancel circular small red inverted vertical animated button" tabindex="0">
+		    	<div class="hidden content closemodal">Close</div>
+		    	<div class="visible content closemodal">
+	        	<i class="small remove icon"></i>
+				</div>
+			</div>   		
 	    </div> 
 	</div>
 	<!-- END MODAL (SEE PEOPLE WHO LIKES) -->

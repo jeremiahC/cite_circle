@@ -19,8 +19,8 @@ $lang['aauth_email_reset_success_new_password'] = 'Your password has successfull
 /* Error Messages */
 
 // Account creation errors
-$lang['aauth_error_email_exists'] = 'Email address already exists on the system. If you forgot your password, you can click the link below.';
-$lang['aauth_error_username_exists'] = "Account already exists on the system with that username.  Please enter a different username, or if you forgot your password, please click the link below.";
+$lang['aauth_error_email_exists'] = 'Email address already exists on the system. Please enter a different email.';
+$lang['aauth_error_username_exists'] = "Account already exists on the system with that username.  Please enter a different username.";
 $lang['aauth_error_email_invalid'] = 'Invalid e-mail address';
 $lang['aauth_error_password_invalid'] = 'Invalid password';
 $lang['aauth_error_username_invalid'] = 'Invalid Username';
@@ -38,7 +38,8 @@ $lang['aauth_error_update_username_exists'] = "Username already exists on the sy
 $lang['aauth_error_no_access'] = 'Sorry, you do not have access to the resource you requested.';
 $lang['aauth_error_login_failed_email'] = 'E-mail Address and Password do not match.';
 $lang['aauth_error_login_failed_name'] = 'Username and Password do not match.';
-$lang['aauth_error_login_failed_all'] = 'E-mail, Username or Password do not match.';
+// edited $lang['aauth_error_login_failed_all'] = 'Email, Username or Password do not match.';
+$lang['aauth_error_login_failed_all'] = 'Username or Password do not match.';
 $lang['aauth_error_login_attempts_exceeded'] = 'You have exceeded your login attempts, your account has now been locked.';
 $lang['aauth_error_recaptcha_not_correct'] = 'Sorry, the reCAPTCHA text entered was incorrect.';
 

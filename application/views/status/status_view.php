@@ -7,7 +7,7 @@
 	  <div class="ui grid">
 	  	<div class="twelve wide column ui form">
 		  <div class="field">
-		    <label>Whats on your mind?</label>
+		    <label>Share your thoughts!</label>
 		    <textarea rows="2" id="status_input"></textarea>
 		  </div>
 		</div>

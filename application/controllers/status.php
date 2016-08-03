@@ -122,15 +122,23 @@ class Status extends CI_Controller {
 	$status_id=  $this->input->post('status_id');
 	$user_liked = $this->status_model->user_who_likes($status_id);
 	foreach ($user_liked as $row) {
-	 		$data = $this->status_model->get_who_votes($row['vote_user_id']);
+	 		$data = $this->status_model->get_who_likes($row['vote_user_id']);
 	 		foreach ($data as  $datas) {
 	 			if($datas['firstname'] == null || $datas['firstname'] == ''){
 	 					$user_data=$this->status_model->get_userdata($row['vote_user_id']);
 	 					foreach ($user_data as $user_datas ) {
-	 						echo $user_datas['name']."<br/>";
+	 						if($datas['user_picture'] == null || $datas['user_picture'] == ''){
+	 							echo '<a class="ui image label"><img src="http://localhost/cite_circle/assets/images/new-user-image-default.png">'.$user_datas['name'].'</a>';
+	 						}else{
+	 							echo '<a class="ui image label"><img src="http://localhost/cite_circle/assets/uploads/'.$datas['user_picture'].'">'.$user_datas['name'].'</a>';
+	 						};
 	 					}
 	 				}else{
-	 						echo $datas['firstname']." ".$datas['lastname']."<br/>";
+	 						if($datas['user_picture'] == null || $datas['user_picture'] == ''){
+	 							echo '<a class="ui image label"><img src="http://localhost/cite_circle/assets/images/new-user-image-default.png">'.$datas['firstname']." ".$datas['lastname'].'</a>';
+	 						}else{
+	 							echo '<a class="ui image label"><img src="http://localhost/cite_circle/assets/uploads/'.$datas['user_picture'].'">'.$datas['firstname']." ".$datas['lastname'].'</a>';
+	 						};
 	 				}
 	 			}
 		}
