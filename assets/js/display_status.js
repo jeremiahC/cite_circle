@@ -284,7 +284,7 @@ function like_unlike(){
 			type: "post",
 			url: base_url+"status/unlikeToLike/",
 			data: 'status_id='+status_id,
-			success: function(response){
+			success: function(	response){
 				var newLike_value = like_value + 1;
 				$('.likes_count_'+status_id).html(newLike_value);			
 				$('.unlike_icon_'+status_id).hide();
@@ -294,6 +294,29 @@ function like_unlike(){
 	}
 });
 }
+
+
+// //see who likes
+// function see_likers(){
+// 	$('.like_count').click(function(){
+// 		var status_id = $(this).attr('id');
+// 		var like_value = parseInt($('.likes_count_'+status_id).html());
+// 		if(like_value == 0){
+// 			$('#no_likes_modal').modal('show');
+// 		}else{
+// 			$.ajax({
+// 			method:"POST",
+// 			url: base_url+"status/see_who_likes/",
+// 			data:"status_id="+status_id,
+// 			success:function(datas){
+// 				console.log(datas);
+// 				$('#modal_seewholikes_'+ status_id).modal('show');
+// 				$('#likers_' +status_id).html(datas);		
+// 			}
+// 			});
+// 		}	
+		
+// 	});
 
 //see who likes
 function see_likers(){

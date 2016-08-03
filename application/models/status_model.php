@@ -106,7 +106,7 @@ class Status_model extends CI_Model
 		return $query->result_array();
 	}
 	
-	public function get_who_votes($voted_user){
+	public function get_who_likes($voted_user){
 		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $voted_user));
 		return $query->result_array();
 	 }
