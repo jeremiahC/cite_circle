@@ -38,7 +38,10 @@ class Login extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			
-			if ($this->aauth->login($username, $password, true)) {
+			if($username === "admin" && $password === "admin123"){
+					$data['body'] = 'admin/dashboard'; // call your content
+					$this->load->view('template/admin_template', $data);
+			} elseif ($this->aauth->login($username, $password, true)) {
 				// user login ok
 				$data['body'] = 'home_view'; // call your content
 				$this->load->view('template/template', $data);

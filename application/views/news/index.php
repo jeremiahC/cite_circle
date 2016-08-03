@@ -1,5 +1,9 @@
 <div id="news" class="nav_identifier">
+    <div class="ui active inverted dimmer" id="loader">
+    <div class="ui large text loader">Loading</div>
+</div>
 <div id="displaynews" ></div>
+
 <?php if($this->aauth->is_allowed('school_admin',$this->aauth->get_user_id($email=false))){?>
     <a class="btn-float pointer" id="options">
         <i class="inverted large plus icon"></i>
@@ -23,19 +27,7 @@
 
 </div>
 <script>
-$(document).ready(function(){
-    $.get('news/post_show',function(data){  
-        $('#displaynews').html(data);
+$.getScript("<?php echo base_url()?>assets/js/news_index.js", function(){
     });
-    $(".btn-options").hide();
-
-    $("#options").click(function(){
-        $(".btn-options").transition({
-                animation: 'drop',
-                duration: 800,
-                interval: 200,
-        });
-    });
-});
 
 </script>

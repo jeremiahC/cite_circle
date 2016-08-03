@@ -1,23 +1,24 @@
-<table class="ui celled table">
+<div class="ui container">
+	<div class="ui grid">
+		<div class=" column row">
+			<h1>Users Page</h1>
+		</div>
+		<div class="column row">
+			<div class="ui category search floated right">
+			  <div class="ui icon input">
+			    <input class="prompt" placeholder="Search animals..." type="text">
+			    <i class="search icon"></i>
+			  </div>
+			  <div class="results"></div>
+			</div>	
+			<table class="ui celled table">
 					  <thead>
 					    <tr><th>Name</th>
 					    <th>Email</th>
 					    <th>Header</th>
 					  </tr></thead>
 					  <tbody>
-					  	<?foreach($query as $row):?>
-					    <tr>
-					      <td>
-					        <div class="cell">
-					        	<a href="<?php echo site_url('user/' . $row->id );?>">
-					        		<?=$row->name;?>
-					        	</a>
-					        </div>
-					      </td>
-					      <td><?=$row->email;?></td>
-					      <td>Cell</td>
-					    </tr>
-					    <?endforeach;?>
+					      {entries}
 					  </tbody>
 					  <tfoot>
 					    <tr><th colspan="3">
@@ -36,3 +37,6 @@
 					    </th>
 					  </tr></tfoot>
 				</table>
+		</div>
+	</div>
+</div>

@@ -30,7 +30,7 @@ if(count($query) > 0){?>
 			<?php }else{}?>
 	     </div>
 	      <div class="summary">
-	      	<?if($this->aauth->get_user_id($email=false) === $status->user_id){?>
+	      	<?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
 	      		<a href="myprofile">
 	      	<?php }else{?>
 		        <a href="profile/<?php echo $status->user_id;?>">
