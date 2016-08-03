@@ -9,6 +9,7 @@
 	
 	<script src="<?php echo base_url()?>assets/js/jquery-2.1.1.min.js"></script>
 	<script src="<?php echo base_url()?>assets/vendor/semantic/ui/dist/semantic.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url()?>assets/js/canvasjs.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/vendor/semantic/ui/dist/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/custom.css">
@@ -17,4 +18,4 @@
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 	</head>
-<body>
+<body style="background-color:#FAFAFA;">

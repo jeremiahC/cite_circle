@@ -42,7 +42,8 @@ class Status extends CI_Controller {
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
 		$config["use_page_numbers"] = TRUE;
-		$data['upload_files'] = $this->profile_model->get_upload();
+		// $user_id = $this->session->userdata('id');
+		// $data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$start);
 		foreach ($data['query'] as $query){
 		$data['query2']=$this->status_model->get_comments($query->status_id);

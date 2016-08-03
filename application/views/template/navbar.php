@@ -1,6 +1,6 @@
 <?php if  ( $this->aauth->is_loggedin() ){?>
 	<!-- Following Menu -->
-    <div class="ui secondary pointing menu">
+    <div class="ui  menu">
 	<div class="left menu navbar">
 		<div class="header item">
 	  	<?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="ui mini image"');?>
@@ -16,6 +16,7 @@
 
 		 <div class="ui inline dropdown item" id="select">
 		 	<i class="big icons">
+
 			  <i class="settings black icon"></i>
 			</i>
 		    <div class="menu">
