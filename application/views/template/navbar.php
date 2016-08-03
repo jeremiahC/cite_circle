@@ -16,8 +16,7 @@
 
 		 <div class="ui inline dropdown item" id="select">
 		 	<i class="big icons">
-			  <i class="settings purple icon"></i>
-			  <i class="corner grey dropdown icon"></i>
+			  <i class="settings black icon"></i>
 			</i>
 		    <div class="menu">
 		      <?php echo anchor('ProfileController','<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
