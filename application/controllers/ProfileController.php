@@ -8,6 +8,7 @@ class ProfileController extends CI_Controller {
 		$this->load->model('profile_model');
 		$this->load->library("Aauth");
 		$this->load->helper(array('url','form','html','file'));
+		$this->load->library('../controllers/status');
 		if ( !$this->aauth->is_loggedin() ){
 			redirect('/');
 		}
@@ -15,12 +16,13 @@ class ProfileController extends CI_Controller {
 	
 	public function index()
 	{
-		$user_id = $this->session->userdata('id');
-		$data['error'] = $this->profile_model->do_upload();
-		$data['user_profile'] = $this->profile_model->getUserInfo();
-		$data['upload_files'] = $this->profile_model->get_upload($user_id);
-		$data['body'] = 'profile/profile_view'; // call your content
-		$this->load->view('template/template', $data);
+		// $user_id = $this->session->userdata('id');
+		// $data['error'] = $this->profile_model->do_upload();
+		// $data['user_profile'] = $this->profile_model->getUserInfo();
+		// $data['upload_files'] = $this->profile_model->get_upload($user_id);
+		// $data['body'] = 'profile/profile_view'; // call your content
+		// $this->load->view('template/template', $data);
+		$this->status->index();
 	}
 	
 	
@@ -157,6 +159,14 @@ class ProfileController extends CI_Controller {
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}	
+
+	public function user_info(){
+		$user_id = $this->input->post('user_id');
+
+		$data['information']= $this->profile_model->user_info_model($user_id);
+		echo $this->load->view('profile/user_infos', $data, true);
+		
+	}
 }
 	
 

@@ -340,3 +340,12 @@ function see_likers(){
 		
 	});
 }
+
+$('#user_hover').each(function(){
+	var status_id = $(this).val();
+	console.log(status_id);
+});
+$('#view_profile').popup({
+    popup : $('.profile'),
+    on    : 'hover',
+});

@@ -27,14 +27,17 @@ if(count($query) > 0){?>
 			<i id="<?php echo $status->status_id;?>" class="edit_icon pointer ui circular inverted edit teal icon"></i>
 			<i id="<?php echo $status->status_id;?>" class="remove_icon pointer ui circular inverted trash red icon"></i>
 			</div>
-			<?php }else{}?>
+		<?php }else{}?>
 	     </div>
+
 	      <div class="summary">
+	      	<input type="text" id="user_hover" value="<?php echo $status->user_id ?>"/>
 	      	<?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
-	      		<a href="myprofile">
+	      		<a id="view_profile" href="myprofile/<?php echo $_SESSION["name"]?> ">
 	      	<?php }else{?>
-		        <a href="profile/<?php echo $status->user_id;?>">
-		    <?php };?>
+		        <a id="view_profile" href="profile/<?php  echo $status->user_id;?>">
+		    <?php };?> 
+		    	
 		        	<!-- first name condition START-->
 					<?php if($status->firstname == ''){
 						echo $status->name;
@@ -42,8 +45,26 @@ if(count($query) > 0){?>
 						echo $status->firstname;
 					}?>
 					<!-- first name condition END -->
+					<div class="ui flowing popup top left transition visible animating scale out profile">
+					  <div class="ui column divided center aligned grid">
+					    <div class="column">
+					      <h4 class="ui header"><u><?php echo $status->firstname?> <?php echo $status->lastname?></u></h4>
+					      <?php if($status->user_picture == ""){?>
+							<img src="<?php echo ''.base_url().'assets/images/new-user-image-default.png';?>" class="ui mini avatar circular image">
+							<?php }else{?>
+							<img src="<?php echo ''.base_url().'assets/uploads/'.$status->user_picture.'';?>" class="ui mini avatar circular image">
+							<?php }?>
+							<br><br>
+					      	<div class="ui buttons">
+					      		<button class="green ui button">View Profile</button>
+					      	</div>
+					    </div>
+					  </div>
+					</div>
 		        </a>
 		    	        <div class="date">
+
+
 	        <!--  YOU CAN PUT SOMETHING IN HERE  -->
 	        </div>
 	        

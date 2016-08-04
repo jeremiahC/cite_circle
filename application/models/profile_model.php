@@ -91,4 +91,9 @@ class Profile_Model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function user_info_model($user_id){
+		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $user_id));
+		return $query->result_array();
+	}
 }

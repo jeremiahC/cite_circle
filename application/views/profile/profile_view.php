@@ -133,28 +133,38 @@
 									echo anchor('ProfileController/editUpdateProfile','<div class="ui labeled icon button" ><i class="edit icon"></i>Update Profile</div>');
 								}
 								?>
-	
-							</div>					
-							<div class="ui vertical divider">|</div>
-							<div class="twelve wide column">
-								<div class="ui top attached tabular menu">
-								<a class="active item">Personal Information</a>
-								<a class="item">Account Settings</a>
-								<a class="item">Others</a>
 							</div>
-							<div class="ui bottom attached loading tab segment">
-							  <p></p>
-							  <p></p>
-							</div>
-							</div>
-							
+													<input type="hidden" id="user_id" value="<?php echo $_SESSION['id']?>"/>
+						<div class="ui fluid three item menu">
+						  <a  class="item" id="timeline" href="<?php echo $information->user_id?>">Timeline</a>
+						  <a class="item" id="about">About</a>
+						  <a class="item" id="test">Others</a>
+						</div>
 						</div>
 					</div>
 			</div>
+			<div id="aboutinfo"></div>
 		</div>
 		<div class="three wide column"></div>
 	</div>
 </div>
 <?php };?>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$(function(){
+		$('#about').click(function(){
+			var user_id = $('#user_id').val();
+			
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url()?>ProfileController/user_info/",
+				data: "user_id="+ user_id,
+				success: function(data){
+					$('#aboutinfo').html(data);
+				}
+			});
+		});
+	});
+});
+</script>
 
