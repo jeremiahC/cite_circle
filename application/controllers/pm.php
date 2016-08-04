@@ -8,9 +8,12 @@ class Pm extends CI_Controller {
 	    if ( !$this->aauth->is_loggedin() ){
 	    	redirect('/');
 	    }
+	    $this->load->model('profile_model');
 	}
 	
 	function index(){
+
+		$data['users'] = $this->profile_model->getAllUsersInfo();
 		$data['body'] = 'pm/pm'; // call your content
 		$this->load->view('template/template', $data);
 	}

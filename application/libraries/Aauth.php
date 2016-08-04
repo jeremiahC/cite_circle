@@ -96,6 +96,7 @@ class Aauth {
 		}
 		//add on by chevy
 		$this->CI->load->database();
+	    date_default_timezone_set('Asia/Manila');
 		$this->CI->load->helper('date');
 		$this->CI->load->helper('form');
 		$this->CI->load->library('upload');
@@ -495,6 +496,14 @@ class Aauth {
 			);
 			$this->CI->input->set_cookie($cookie);
 		}
+
+		//START added by chevy
+		$user_id = $this->CI->session->userdata('id');
+		$data['last_login'] = time();
+		$data['online'] = 0;
+		$this->aauth_db->where('id', $user_id);
+		$this->aauth_db->update($this->config_vars['users'], $data);
+		//END added by chevy 
 		
 		return $this->CI->session->sess_destroy();
 	}
@@ -631,7 +640,6 @@ class Aauth {
 
 		if ($user_id == FALSE)
 			$user_id = $this->CI->session->userdata('id');
-
 		$data['last_login'] = date("Y-m-d H:i:s");
 		$data['ip_address'] = $this->CI->input->ip_address();
 
@@ -1157,7 +1165,10 @@ class Aauth {
 			$user_id = $this->CI->session->userdata('id');
 
 		if($user_id==FALSE){return FALSE;}
-
+		
+		//START added by chevy
+		$data['online'] = 1;
+		//END added by chevy
 		$data['last_activity'] = date("Y-m-d H:i:s");
 
 		$query = $this->aauth_db->where('id',$user_id);
@@ -2335,8 +2346,13 @@ class Aauth {
 	
 	// 	chevy function added
 	public function add_profile($user_id){
+	$now = date('m');
+	$dateObj = DateTime::createFromFormat('!m',$now);
+	$now = $dateObj->format('F');
+	$created = $now.' '.date('Y');
 		$data = array(
-				'user_id' => $user_id
+				'user_id' => $user_id,
+				'created' => $created
 		);
 		$this->aauth_db->insert($this->config_vars['user_profile'], $data );
 	}

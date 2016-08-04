@@ -26,7 +26,6 @@ $(document).ready(function(){
                  success: function(data){
                 	 $(data).appendTo("#displaystatus").hide().slideDown('slow');
                 	 $(".ui.basic.modal").hide();
-                	 // $("#statusloader").hide();
                 	 $(".statusloader_icon").hide();
                  }
              });
