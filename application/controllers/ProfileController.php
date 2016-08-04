@@ -16,21 +16,22 @@ class ProfileController extends CI_Controller {
 	
 	public function index()
 	{
-		// $user_id = $this->session->userdata('id');
-		// $data['error'] = $this->profile_model->do_upload();
-		// $data['user_profile'] = $this->profile_model->getUserInfo();
-		// $data['upload_files'] = $this->profile_model->get_upload($user_id);
-		// $data['body'] = 'profile/profile_view'; // call your content
-		// $this->load->view('template/template', $data);
-		$this->status->index();
+		$user_id = $this->session->userdata('id');
+		$data['error'] = $this->profile_model->do_upload();
+		$user_id = $this->session->userdata('id');
+		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
+		$data['body'] = 'profile/profile_view'; // call your content
+		$this->load->view('template/template', $data);
 	}
 	
 	
 	
 	public function editUpdateProfile(){
-			$data['user_profile'] = $this->profile_model->getUserInfo();
-			$data['body'] = 'profile/update'; // call your content
-			$this->load->view('template/template', $data);
+		$user_id = $this->session->userdata('id');
+		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
+		$data['body'] = 'profile/update'; // call your content
+		$this->load->view('template/template', $data);
 	}
 	
 	
