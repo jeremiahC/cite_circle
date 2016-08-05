@@ -15,8 +15,9 @@ class Status extends CI_Controller {
 	}
 	
 	function index(){
-			$data['body'] = 'status/status_view'; // call your content
-			$this->load->view('template/template', $data);
+			 $data['body'] = 'status/status_view'; // call your content
+			 $this->load->view('template/template', $data);
+			
 	}
 	
 	public function display_status(){

@@ -6,6 +6,7 @@ class ProfileController extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('profile_model');
+		$this->load->model('status_model');
 		$this->load->library("Aauth");
 		$this->load->helper(array('url','form','html','file'));
 		if ( !$this->aauth->is_loggedin() ){
@@ -17,18 +18,19 @@ class ProfileController extends CI_Controller {
 	{
 		$user_id = $this->session->userdata('id');
 		$data['error'] = $this->profile_model->do_upload();
-		$data['user_profile'] = $this->profile_model->getUserInfo();
+		$user_id = $this->session->userdata('id');
+		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
 		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}
 	
 	
-	
 	public function editUpdateProfile(){
-			$data['user_profile'] = $this->profile_model->getUserInfo();
-			$data['body'] = 'profile/update'; // call your content
-			$this->load->view('template/template', $data);
+		$user_id = $this->session->userdata('id');
+		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
+		$data['body'] = 'profile/update'; // call your content
+		$this->load->view('template/template', $data);
 	}
 	
 	
@@ -157,6 +159,14 @@ class ProfileController extends CI_Controller {
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}	
+
+	public function user_info(){
+		$user_id = $this->input->post('user_id');
+
+		$data['information']= $this->profile_model->user_info_model($user_id);
+		echo $this->load->view('profile/user_infos', $data, true);
+		
+	}
 }
 	
 

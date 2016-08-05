@@ -64,6 +64,7 @@ $route['post_create'] = 'news/post_create';
 $route['admin_dashboard'] = 'admin';
 $route['user/(:num)'] = 'admin/show/$1';
 $route['profile/(:num)'] = 'ProfileController/view_profile/$1';
+$route['myprofile/(:any)'] = 'ProfileController/index/';
 $route['myprofile'] = 'ProfileController';
 $route['role'] = 'admin/allow_role';
 $route['delete_role'] = 'admin/delete_role';

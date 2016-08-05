@@ -22,8 +22,8 @@
 .btn-float {
     position: fixed;
     padding: 14px;
-    top: 100px;
-    left: 10px;
+    top: 560px;
+    right: 30px;
     width: 50px; 
     height: 50px; 
     background: #66BB6A; 
@@ -35,8 +35,8 @@
 
 .btn-options{
     position:fixed;
-    top: 160px;
-    left: 20px;
+    top: 490px;
+    right: 20px;
 }
 
 

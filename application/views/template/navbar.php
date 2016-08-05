@@ -16,11 +16,11 @@
 
 		 <div class="ui inline dropdown item" id="select">
 		 	<i class="big icons">
-
-			  <i class="settings black icon"></i>
+			  <i class="settings purple icon"></i>
+			  <i class="corner grey dropdown icon"></i>
 			</i>
 		    <div class="menu">
-		      <?php echo anchor('ProfileController','<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
+		      <?php echo anchor('myprofile/'.$_SESSION['name'],'<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
 		      <?php echo anchor('login/logout','<div class="item"><i class="power red icon"></i>Log out</div>')?>
 
 		    </div>

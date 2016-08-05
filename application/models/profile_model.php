@@ -7,16 +7,24 @@ class Profile_Model extends CI_Model
 		public function __construct(){
 		parent::__construct();
 		$this->load->library("Aauth");
-		$this->load->helper(array('url','form','html','file'));
+		$this->load->helper(array('html','file'));
 	}
-	
-	
-	public function getUserInfo()
+
+	public function getAllUsersInfo()
 	{
 		$this->db->select('*');
 		$this->db->from('aauth_users');
 		$this->db->join('aauth_user_profile', 'aauth_user_profile.user_id = aauth_users.id');
-		$user_id = $this->session->userdata('id');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	
+	public function getUserInfo($user_id)
+	{
+		$this->db->select('*');
+		$this->db->from('aauth_users');
+		$this->db->join('aauth_user_profile', 'aauth_user_profile.user_id = aauth_users.id');
 		$this->db->where('user_id', $user_id);
 		$query = $this->db->get();
 		return $query->result();
@@ -90,5 +98,10 @@ class Profile_Model extends CI_Model
 		$this->db->where('user_id', $id);
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	public function user_info_model($user_id){
+		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $user_id));
+		return $query->result_array();
 	}
 }
