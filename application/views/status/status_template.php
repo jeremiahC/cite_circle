@@ -111,17 +111,17 @@ if(count($query) > 0){?>
 	<div class="ui divider"></div>
 		 
 	<!-- Comment input box START-->
-	<?php //foreach ($upload_files as $image) {?>
+	<?php foreach ($upload_files as $image) {?>
 	<div class="ui fluid icon action input teal basic label ">
 		<?php if($status->user_picture == ""){?>
 		<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" class="ui small avatar rounded image">
 		<?php }else {?>
-		<img src="<?php echo base_url().'assets/uploads/'.$status->user_picture.'';?>" class="ui small rounded image">
+		<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" class="ui small rounded image">
 		<?php }?>
 		<input id="<?php echo $status->status_id;?>" class="cmt_input_id_<?php echo $status->status_id;?> commentinput" placeholder="Add a comment..." type="text">
 		<div id="<?php echo $status->status_id;?>" class="cmt_btn_id_<?php echo $status->status_id;?> commentbutton_<?php echo $batchNo?> ui mini teal disabled button"><i id="<?php echo  $this->session->userdata('id');?>" class="comment_btn_icon send icon"></i></div>
 	</div>
-	<?php //} ?>
+	<?php } ?>
 	<!-- Comment input box END-->
 	
 	<?php $counter = 0;

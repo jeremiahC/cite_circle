@@ -57,7 +57,6 @@ if(count($query) > 0){?>
 						      			sdafasdf
 						      	<?php }else{?>
 							        <a class="green ui button" href="profile/<?php  echo $status->user_id;?>">
-							        	<input type="text" value="<?php echo $status->user_id?>">
 							        	View Profile
 							    <?php };?> 
 						
