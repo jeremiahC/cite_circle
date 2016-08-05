@@ -345,7 +345,11 @@ $('#user_hover').each(function(){
 	var status_id = $(this).val();
 	console.log(status_id);
 });
-$('#view_profile').popup({
+$('.hover').popup({
     popup : $('.profile'),
     on    : 'hover',
+    delay:{
+    	show: 100,
+    	hide: 3000,
+    }
 });
