@@ -134,16 +134,19 @@
 								}
 								?>
 							</div>
-													<input type="hidden" id="user_id" value="<?php echo $_SESSION['id']?>"/>
+						<input type="hidden" id="user_id" value="<?php echo $_SESSION['id']?>"/>
 						<div class="ui fluid three item menu">
 						  <a  class="item" id="timeline" href="<?php echo $information->user_id?>">Timeline</a>
 						  <a class="item" id="about">About</a>
 						  <a class="item" id="test">Others</a>
 						</div>
+						<br>
+						
 						</div>
 					</div>
+					<div id="aboutinfo"></div>
 			</div>
-			<div id="aboutinfo"></div>
+
 		</div>
 		<div class="three wide column"></div>
 	</div>

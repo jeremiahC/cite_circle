@@ -6,9 +6,9 @@ class ProfileController extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('profile_model');
+		$this->load->model('status_model');
 		$this->load->library("Aauth");
 		$this->load->helper(array('url','form','html','file'));
-		$this->load->library('../controllers/status');
 		if ( !$this->aauth->is_loggedin() ){
 			redirect('/');
 		}
@@ -24,7 +24,6 @@ class ProfileController extends CI_Controller {
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}
-	
 	
 	
 	public function editUpdateProfile(){

@@ -31,12 +31,7 @@ if(count($query) > 0){?>
 	     </div>
 
 	      <div class="summary">
-	      	<input type="text" id="user_hover" value="<?php echo $status->user_id ?>"/>
-	      	<?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
-	      		<a id="view_profile" href="myprofile/<?php echo $_SESSION["name"]?> ">
-	      	<?php }else{?>
-		        <a id="view_profile" href="profile/<?php  echo $status->user_id;?>">
-		    <?php };?> 
+	      	<a class="hover">
 		    	
 		        	<!-- first name condition START-->
 					<?php if($status->firstname == ''){
@@ -44,24 +39,34 @@ if(count($query) > 0){?>
 					}else{
 						echo $status->firstname;
 					}?>
+			</a>
 					<!-- first name condition END -->
 					<div class="ui flowing popup top left transition visible animating scale out profile">
 					  <div class="ui column divided center aligned grid">
 					    <div class="column">
-					      <h4 class="ui header"><u><?php echo $status->firstname?> <?php echo $status->lastname?></u></h4>
+					      <h4 class="ui header"><?php echo $status->firstname?> <?php echo $status->lastname?></h4>
 					      <?php if($status->user_picture == ""){?>
 							<img src="<?php echo ''.base_url().'assets/images/new-user-image-default.png';?>" class="ui mini avatar circular image">
 							<?php }else{?>
 							<img src="<?php echo ''.base_url().'assets/uploads/'.$status->user_picture.'';?>" class="ui mini avatar circular image">
 							<?php }?>
 							<br><br>
-					      	<div class="ui buttons">
-					      		<button class="green ui button">View Profile</button>
-					      	</div>
+					   
+					      		<?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
+						      		<a class="green ui button" href="myprofile/<?php echo $_SESSION["name"]?> ">
+						      			sdafasdf
+						      	<?php }else{?>
+							        <a class="green ui button" href="profile/<?php  echo $status->user_id;?>">
+							        	<input type="text" value="<?php echo $status->user_id?>">
+							        	View Profile
+							    <?php };?> 
+						
+							    </a>
+					      	
 					    </div>
 					  </div>
 					</div>
-		        </a>
+		        
 		    	        <div class="date">
 
 
