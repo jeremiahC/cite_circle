@@ -1,12 +1,25 @@
 
 .pointer{
-	cursor:pointer
+	cursor:pointer;
+}
+
+.pointer_list{
+  cursor:pointer;
+}
+.pointer_list:hover{
+  background-color: #00e6b8;
+  border-radius: 5px;
+}
+
+.unread{
+  background-color: #cceeff;
+  border-radius: 5px;
 }
 
 .globalchat{
   position: fixed;
   border-radius: 3px;
-  padding: 5px;
+  padding: 2px;
   height: 30px;
   width: 125px;
   border-right: 3px solid #9E9E9E;
@@ -52,6 +65,10 @@ input#message{
   border-bottom: 2px solid #9E9E9E !important;
 }
 
+input#search_filter{
+  border-bottom: 2px solid #9E9E9E !important;
+}
+
 .text-center{
   text-align: center;
 }
@@ -62,12 +79,12 @@ ul{
 
 .scrollchat{
   overflow-y: auto;
-  height: 500px;
+  height: 530px;
 }
 
 .scrollusers{
   overflow-y: auto;
-  height: 690px;
+  height: 530px;
   border: 1px 1px 1px 1px;
 }
 
@@ -77,6 +94,11 @@ ul{
 
 .hide{
   display:none
+}
+
+.float280{
+  position: fixed;
+  top: 280px;
 }
 
 .bottomleft {

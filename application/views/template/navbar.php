@@ -11,7 +11,6 @@
         </div>
 	<div class="right menu">
 
-		<?php echo anchor('users','<i class="large users outline icon"></i>','id="users" class="item"')?>
 		<?php echo anchor('pm','<i class="large mail outline icon"></i>','id="pm" class="item"')?>
 
 		 <div class="ui inline dropdown item" id="select">
