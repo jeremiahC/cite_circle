@@ -9,14 +9,14 @@
 
 			    <div class="ui slider checkbox">
 			    	<label>School Admin</label>
-			    	<?if($this->aauth->is_allowed('school_admin', $row->user_id)){?>
+			    	<?php if($this->aauth->is_allowed('school_admin', $row->user_id)){?>
 			      		<input type="checkbox" value="school_admin" name="check"  class="hidden role" checked="checked">
 			      	<?php }else{?>
 			      		<input type="checkbox" value="school_admin" name="check"  class="hidden role" >
 			      	<?php };?>
 			    </div>
 			   	<input type="submit" class="ui button" id="submit" name="submit">
-			   	<a href="<?php echo base_url();?>admin_dashboard" class="ui teal button">Back To List</a>
+			   	<a href="<?php echo base_url();?>userlist" class="ui teal button">Back To List</a>
 			 </div>
 			  <div class="result"></div>
 		</form>

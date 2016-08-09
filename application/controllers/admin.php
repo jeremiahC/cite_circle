@@ -18,8 +18,8 @@ class Admin extends CI_Controller{
 
 	public function index(){
 		
-		$data['body']= 'admin/dashboard'; 
-        $this->parser->parse('template/admin_template',$data);
+			$data['body']= 'admin/dashboard'; 
+	        $this->parser->parse('template/admin_template',$data);
 	}
 
 	public function userlist(){

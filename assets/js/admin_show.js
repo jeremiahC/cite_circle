@@ -1,14 +1,17 @@
 $(document).ready(function(){
+var base_url = "http://localhost/cite_circle/";
+
 $('.ui.checkbox').checkbox();
 			$('#submit').click(function(){	
 				$('.role').change(function(){
 				var attrib = $(this);
-				if(attrib.prop("checked")){	
-					var role= $(this).val();
-					var user_id = $('#user_id').val();
+				var role= $(this).val();
+				var user_id = $('#user_id').val();
 
+				if(attrib.prop("checked")){	
+					
 					$.ajax({
-						url: "<?php echo base_url();?>role",
+						url: base_url + "role",
 						type: 'POST',
 						data: {
 							'role': role,
@@ -23,11 +26,9 @@ $('.ui.checkbox').checkbox();
 	                   	}
 					});		
 				}else{
-					var role= $(this).val();
-					var user_id = $('#user_id').val();
 
 					$.ajax({
-						url: "<?php echo base_url();?>delete_role",
+						url: base_url  + "delete_role",
 						type: 'POST',
 						data: {
 							'role': role,
