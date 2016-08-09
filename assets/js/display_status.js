@@ -341,15 +341,15 @@ function see_likers(){
 	});
 }
 
-$('#user_hover').each(function(){
-	var status_id = $(this).val();
-	console.log(status_id);
-});
+// $('#user_hover').each(function(){
+// 	var status_id = $(this).val();
+// 	console.log(status_id);
+// });
 $('.hover').popup({
     popup : $('.profile'),
     on    : 'hover',
     delay:{
     	show: 100,
-    	hide: 3000,
+    	hide: 2000,
     }
 });
