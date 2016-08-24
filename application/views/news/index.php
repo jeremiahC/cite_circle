@@ -11,7 +11,7 @@
 
     <div class="btn-options">
         <div class="column ">
-            <a href="post_create" class="circular ui teal icon button" id="shadow">
+            <a href="postcreate" class="circular ui teal icon button" id="shadow">
               <i class="icon write"></i>
             </a>
             <b>Create</b>
@@ -23,7 +23,7 @@
             <b>Delete</b>
         </div>
     </div>
-<?php }else{echo "hello";}?>
+<?php }?>
 
 </div>
 <script>

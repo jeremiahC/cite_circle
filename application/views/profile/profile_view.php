@@ -1,36 +1,29 @@
 
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/customjquery.js"></script>
-  <link href="<?php echo base_url();?>assets/css/uploadtrick.css" rel="stylesheet">
- 
-  
-
-<body>
 <div id="profile" class="nav_identifier">							
 
-<?php foreach ($user_profile as $information){?>
-<div class="ui grid">
-	<div class="row">
-		<div class="three wide column"></div>
-		<div class="ten wide column">
-			<div class="row">
-				<h1 class="header">My Profile</h1>
-					<div class="ui grid">
-						<div class="row">
-							<div class="four wide column">
-								<div id="edit_profile_picture"></div>
-										<h3 class="sub header">Welcome <?php echo $information->firstname?></h3>
-										
-										<?php foreach ($upload_files as $image) { ?>
-										<a class="wew" href="#" data-toggle="tooltip" data-placement="top" title="upload picture">
-										<?php if($image->user_picture == ""){?>
-											<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
-										<?php }else{?>
-											<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" width='150' height="150" class="ui rounded big image" id="curentImg">
-										<?php }?>
-										</a>
-										<br><br>
-										
-										<div class="ui basic modal shupaolark">
+
+	<div class="ui grid centered">
+	<?php foreach ($user_profile as $information):?>
+
+			<div class="column row">
+				<?php if($this->aauth->get_user_id($email=false) === $information->user_id){?>
+					<span>
+						<a href="ProfileController/editUpdateProfile" class="ui huge circular green icon button opt">
+						  <i class="write icon"></i>
+						</a>
+					</span>
+				<?php };?>
+				<?php foreach ($upload_files as $image) { ?>
+				<a class="" href="#" data-toggle="tooltip" data-placement="top" title="upload picture">
+					<?php if($image->user_picture == ""){?>
+					<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" width='200' height="200" class="ui circular image img" id="curentImg">
+					<?php }else{?>
+					<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" width='200' height="200" class="ui circular image img" id="curentImg">
+					<?php }?>
+				</a>
+
+
+				<div class="ui basic modal modal_pic">
 											<div class="ui centered grid">
  											<i class="large right floated gray close icon pointer closemodal"></i>
 												<div class="eight wide column">
@@ -46,12 +39,11 @@
 															</a>
 															<?if($this->aauth->get_user_id($email=false) === $information->user_id):?>
 															<div class="ui dimmer">
-															
 																<div class="content">
 																	<div class="center">
 																	<?php echo form_open_multipart('ProfileController/');?>
 																		<div class="ui inverted button fileUpload">
-																			<i class="photo icon">
+																			<i class="upload icon">
 																				<input id="uploadBtn" type="file" name="userfile" class="upload" onchange="readURL(this);"/>
 																			</i>
 																		</div>
@@ -64,11 +56,7 @@
 														<div class="content">
 														
 															<a class="header" href="#"><?php echo $information->firstname?>'s Profile Picture</a>
-															
-															<!-- ------------------------------------------------------------------------------------------------------------------- -->
-															<!-- ------------------------------------------------------------------------------------------------------------------- -->
-															<!-- caption mawala kung ig load sa image -->
-															<!-- buhatan ug way nga dili mausa ang pagsubmit ani nga form sa form nga original-->
+
 															<div class="two column centered row editCaption">
 															    <div class="column">
 															    	<div class="ui transparent icon input">
@@ -77,7 +65,6 @@
 																	</div>
 															    </div>
 															</div>
-
 															<div class="right floated" id="hidden">
 																		<div class="ui circular small red inverted vertical animated button" tabindex="0">
 																			<div class="hidden content closemodal">Cancel</div>
@@ -92,9 +79,7 @@
 	 											 							</div>	
 																		</button> 
 																	</div>
-															<?php }?>
-															<!-- ------------------------------------------------------------------------------------------------------------------- -->
-															<!-- ------------------------------------------------------------------------------------------------------------------- -->
+															
 																<div class="ui transparent input" id="commit">
 																	<input placeholder="Insert Caption" type="text" id="picture_caption" name="picture_caption" >
 																</div>
@@ -115,59 +100,89 @@
 																	</div>
 																
 																<?php form_close(); ?>
+																<?php };?>
 														</div>
-														
-														
-													</div>
 												</div>
 											</div>
-										</div>
-										
-												
-								<div class="ui fitted divider"></div>
-								<?php echo $information->firstname?>
-								<?php echo $information->lastname?>
-								
-								<?php 
-								if($this->aauth->get_user_id($email=false) === $information->user_id){
-									echo anchor('ProfileController/editUpdateProfile','<div class="ui labeled icon button" ><i class="edit icon"></i>Update Profile</div>');
-								}
-								?>
-							</div>
-						<input type="hidden" id="user_id" value="<?php echo $_SESSION['id']?>"/>
-						<div class="ui fluid three item menu">
-						  <a  class="item" id="timeline" href="<?php echo $information->user_id?>">Timeline</a>
-						  <a class="item" id="about">About</a>
-						  <a class="item" id="test">Others</a>
-						</div>
-						<br>
-						
-						</div>
-					</div>
-					<div id="aboutinfo"></div>
+										</div>	
+									</div>
+
+				<?php if($this->aauth->get_user_id($email=false) === $information->user_id){?>
+				<span>
+					<a class="ui huge circular blue icon button opt" id="upload">
+					  <i class="photo icon"></i>
+					</a>
+				</span>
+				<?php };?>
+
 			</div>
 
-		</div>
-		<div class="three wide column"></div>
-	</div>
-</div>
-<?php };?>
-<script type="text/javascript">
-$(document).ready(function(){
-	$(function(){
-		$('#about').click(function(){
-			var user_id = $('#user_id').val();
+			<div class="column row">
+				<h3><?php echo $information->firstname?> <?php echo $information->lastname?></h3>
+			</div>
+			<div class="column row">
+				<div class="ui pointing secondary menu">
+				  <a class="item " data-tab="first">Posts</a>
+				  <a class="item active" data-tab="second" id="about">About</a>
+				</div>
+
+			</div>
+			<div class="column row">
+				<div class="ui container">
+					<div class="ui tab grid " data-tab="first">
+					   	<div id="presult" class="eight wide column centered ">
+					   		
+					</div>
+					   	<div class="statusloader"></div>
+					</div>
+					<div class="ui tab  active" data-tab="second">
+						<div id="aboutloader"></div>
+
+					  	<div id="aresult"></div>
+					  	<input hidden class="view" value="<?php echo $information->user_id;?>">
+					</div>
+				</div>
+
+			</div>
 			
-			$.ajax({
-				type: "POST",
-				url: "<?php echo base_url()?>ProfileController/user_info/",
-				data: "user_id="+ user_id,
-				success: function(data){
-					$('#aboutinfo').html(data);
-				}
-			});
-		});
-	});
+	<?php endforeach;?>
+	</div>
+
+</div>
+<script type="text/javascript">
+    $.getScript("<?php echo base_url()?>assets/js/customjquery.js", function(){
+    });
+$(document).ready(function(){
+	//START window scroll load more status
+	 var count = 2;
+     $(window).scroll(function(){
+     if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+          loadStatus(count);
+                count++;
+     }
+     }); 
+
+	var user_id = $('.view').val();
+     function loadStatus
+     (pageNumber){
+    	 $(".statusloader").html('<i class="statusloader_icon big spinner loading icon"></i>');
+             $.ajax({
+                 url: base_url+'status/display_more_status_specific_user/',
+                 type:'POST',
+                 data: {"pagenumber" : pageNumber,
+                 		"user_id" : user_id
+             			}, 
+                 success: function(data){
+                	 $(data).appendTo("#presult").hide().slideDown('slow');
+                	 $(".ui.basic.modal").hide();
+                	 $(".statusloader_icon").hide();
+                 }
+             });
+         return false;
+     }
+   //END window scroll load more status
 });
 </script>
+
+
 

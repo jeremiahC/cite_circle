@@ -15,9 +15,43 @@ class Status extends CI_Controller {
 	}
 	
 	function index(){
-			 $data['body'] = 'status/status_view'; // call your content
-			 $this->load->view('template/template', $data);
-			
+			$data['body'] = 'status/status_view'; // call your content
+			$this->load->view('template/template', $data);
+	}
+
+	public function display_status_specific_user(){
+		$user_id = $this->input->post('user_id');
+		$config['base_url'] = base_url().'status/display_status_specific_user';
+		$config['total_rows'] = $this->status_model->count_status();
+		$config['per_page'] = 5;
+		$config["uri_segment"] = 3;
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
+		$data['query']=$this->status_model->get_status_user($config['per_page'], $this->uri->segment(3), $user_id);
+		foreach ($data['query'] as $query){
+		$data['query2']=$this->status_model->get_comments($query->status_id);
+		}
+		$this->pagination->initialize($config);
+		echo $this->load->view('status/display_status',$data,TRUE);
+	}
+
+	public function display_more_status_specific_user(){
+		$user_id = $this->input->post('user_id');
+		$page = $this->input->post('pagenumber');
+		$start = 5 * ($page-1);
+		$config['base_url'] = base_url().'status/display_more_status_specific_user';
+		$config['total_rows'] = $this->status_model->count_status();
+		$config['per_page'] = 5;
+		$config["uri_segment"] = 3;
+		$config["use_page_numbers"] = TRUE;
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
+		$data['query']=$this->status_model->get_status_user($config['per_page'],$start, $user_id);
+		foreach ($data['query'] as $query){
+		$data['query2']=$this->status_model->get_comments($query->status_id);
+		}
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+		$data['batchNo'] = $page;
+		echo $this->load->view('status/status_template',$data,TRUE);
 	}
 	
 	public function display_status(){
@@ -43,6 +77,7 @@ class Status extends CI_Controller {
 		$config['per_page'] = 5;
 		$config["uri_segment"] = 3;
 		$config["use_page_numbers"] = TRUE;
+		//dre dapit
 		$user_id = $this->session->userdata('id');
 		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['query']=$this->status_model->get_status($config['per_page'] ,$start);
@@ -85,6 +120,7 @@ class Status extends CI_Controller {
 				'time'=> $data['date'],
 				'cmt_status_id'=>$data['cmt_status_id']);
 		$data['inserted_id'] = $this->status_model->insert_comment($datas);
+		$data['user_info'] = $this->profile_model->get_upload($this->session->userdata('id'));
 		echo $this->load->view('status/comment_tempate',$data,TRUE);
 	}
 

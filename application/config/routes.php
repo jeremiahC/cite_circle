@@ -57,15 +57,27 @@ $route['translate_uri_dashes'] = FALSE;
 /* format $route['foo'] = '<class>/<method>/parameter'; */
 /* sample $route['blogs'] = 'blog_class/post_method */
 
-$route['post_news'] = 'news';
-$route['post_view/(:num)'] = 'news/post_view/$1';
-$route['post_delete'] = 'news/delete';
-$route['post_create'] = 'news/post_create';
-$route['admin_dashboard'] = 'admin';
+//News controller
+$route['postnews'] = 'news';
+$route['postview/(:num)'] = 'news/post_view/$1';
+$route['postdelete'] = 'news/delete';
+$route['postcreate'] = 'news/post_create';
+$route['postcomment'] = 'news/post_comment';
+
+//Admin controller
+$route['admindashboard'] = 'admin';
 $route['user/(:num)'] = 'admin/show/$1';
-$route['profile/(:num)'] = 'ProfileController/view_profile/$1';
-$route['myprofile/(:any)'] = 'ProfileController/index/';
-$route['myprofile'] = 'ProfileController';
 $route['role'] = 'admin/allow_role';
 $route['delete_role'] = 'admin/delete_role';
 $route['userlist'] = 'admin/userlist';
+
+//Profile Controller
+$route['profile/(:num)'] = 'ProfileController/view_profile/$1';
+$route['myprofile/(:any)'] = 'ProfileController/index/';
+$route['myprofile'] = 'ProfileController';
+
+//Status Contoller
+$route['statusfeed'] = 'status';
+
+//chat
+$route['chat/message/(:any)'] = 'chat/send_message';

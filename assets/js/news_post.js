@@ -1,9 +1,10 @@
 $(document).ready(function(){
-    $('.hover').dimmer({
-        on: 'hover'
-      });
-      
     //delete status
+    $('.segment').hide().transition({
+        animation : 'drop',
+        duration  : 100,
+        interval  : 200
+    });
     $('.btn-delete').hide();
     $(".delete").click(function(){
         
@@ -23,7 +24,7 @@ $(document).ready(function(){
             function delete_news(news_id){
                     
                     $.ajax({
-                        url: 'post_delete',
+                        url: 'postdelete',
                         type: 'POST',
                         data: {
                             news_id: news_id

@@ -1,16 +1,16 @@
 <?php
 
+
+
 class Admin extends CI_Controller{
 
 	private $sh_admin = 'school_admin';
 	private $admin = 'admin';
 	private $reg_user = 'reg_user';
 
+
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('admin_model');
-		$this->load->library("Aauth");
-		$this->load->library("parser");
 		$this->aauth->create_perm('school_admin');
 		$this->aauth->create_perm('admin');
 		$this->aauth->create_perm('reg_user');
@@ -28,14 +28,14 @@ class Admin extends CI_Controller{
 		$template ='<tr>
 					<td>
 					<div class="cell">
-					    <a href="' . base_url(). 'user/{id}">{name}</a>
+					    <a href="' . $base_url. 'user/{id}">{name}</a>
 					</div>
 					</td>
 					<td>{email}</td>
 					<td>Cell</td>
 					</tr>';
 
-		$query = $this->admin_model->show_all_users();
+		$query = $this->profile_model->getAllUsersInfo();
 
 		foreach($query as $row){
 			$temp .= $this->parser->parse_string($template,$row,TRUE);
@@ -53,10 +53,28 @@ class Admin extends CI_Controller{
 	}
 	
 	public function show($id){
-		$data['query'] = $this->admin_model->show_user($id);
-		$data['body'] = 'admin/show';
-		$this->load->view('template/admin_template',$data);
-		// $this->load->view('admin/show',$data);
+
+		$user_field = '<input type="text" hidden="hidden" value="{id}" id="user_id">';
+		$field_true = '<input type="checkbox" value="school_admin" name="check"  class="hidden role" checked="checked">';
+		$field_false = '<input type="checkbox" value="school_admin" name="check"  class="hidden role" >';
+
+		$user['id']=$id;
+
+		$temp = $this->parser->parse_string($user_field,$user,TRUE);
+
+		$data['user_field'] =$temp;
+
+		if($this->aauth->is_allowed('school_admin', $id)){
+			$data['checkbox_field'] = $field_true;
+		}else{
+			$data['checkbox_field'] = $field_false;
+		}
+
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->parser->parse('admin/show',$data);
+		$this->load->view('template/footer2');
+
 	}
 
 	public function allow_role(){
@@ -75,8 +93,5 @@ class Admin extends CI_Controller{
 		$this->aauth->deny_user($userid, $role);
 	}
 
-	public function import_csv(){
-		$this->aauth->allow_user(2,'admin');
-	}
 }
 ?>

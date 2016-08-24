@@ -64,8 +64,9 @@ class Profile_Model extends CI_Model
 		$config = array(
 				'upload_path'   => './assets/uploads/',
 				'allowed_types' => 'gif|jpg|png',
-				'max_size'      => '5000',
-				'max_width'     => '4000',
+				'max_size'      => '10000',
+				'max_width'     => '5000',
+				'max_height'	=> '5000'
 		);
 	
 	
@@ -90,18 +91,4 @@ class Profile_Model extends CI_Model
 		$query = $this->db->get('aauth_user_profile');
 		return $query->result();
 	}
-	
-	public function view_profile($id){
-		$this->db->select('*');
-		$this->db->from('aauth_users');
-		$this->db->join('aauth_user_profile', 'aauth_user_profile.user_id = aauth_users.id');
-		$this->db->where('user_id', $id);
-		$query = $this->db->get();
-		return $query->result();
 	}
-
-	public function user_info_model($user_id){
-		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $user_id));
-		return $query->result_array();
-	}
-}

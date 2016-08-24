@@ -14,7 +14,6 @@
 							<div class="ui top attached tabular menu">
 								<a class="active item" id="personal" data-tab="personal"><i class="icon edit sign"></i>Personal Information</a>
 								<a class="item" id="account" data-tab="account"><i class="icon edit sign"></i>Account Settings</a>
-								<a class="item" id="others" data-tab="others"><i class="icon edit sign"></i>Others</a>
 							</div>
 							
 							
@@ -35,28 +34,34 @@
 								  	<div class="field">
 								  	<label>Gender</label>
 								    	<div class="ui radio checkbox">
-								      		<input type="radio" name="gender" id="gender" value="Male" checked="checked">
+								      		<input checked type="radio" class="gender" name="gender" value="Male">
 								      		<label><i class="male icon"></i>Male</label>
 								      	</div>
 								     </div>
 								    <div class="field">
 								    	<div class="ui radio checkbox">
-								      		<input type="radio" name="gender" id="gender" value="Female">
-								      		<label><i class="female icon"></i>Female</label>
+								      		<input type="radio" class="gender" name="gender" value="Female">
+								      		<label><i class="female  icon"></i>Female</label>
 								      	</div>
 								    </div>
 								  </div>
 								  <div class="field">
 								    <label>Birthday</label>
-								    <input type="date" name="birthday" id="birthday" value="<?php echo $information->birthday; ?>"required>
+								    <div class="ui labeled input">
+								    	<div class="ui label"><i id="birthdayicon" class="pointer calendar teal icon"></i></div>
+								    <input type="text" name="birthday" id="birthday" value="<?php echo $information->birthday; ?>"required>
+								  </div>
 								  </div>
 								  <div class="field">
 								    <label>Age</label>
-								    <input type="number" name="age" id="age" min="1" max="100" value="<?php echo $information->age; ?>"required>
+								    <input name="age" type="number" id="age" min="1" max="100" value="<?php echo $information->age; ?>"required>
 								  </div>
 								   <div class="field">
 								    <label>Contact Number</label>
-								    <input type="number" name="contact_number" id="contact_number" value="<?php echo $information->contact_number;?>"required>
+								    <div class="ui labeled input">
+  									<div class="ui label">+63</div>
+								    <input name="contact_number" type="number" id="contact_number" value="<?php echo $information->contact_number;?>"required>
+								  </div>
 								  </div>
 								  <div class="field">
 								    <label>Address</label>
@@ -123,19 +128,31 @@ $(document).ready(function(){
 	  .tab()
 	;
 });
+$('#birthday').datepicker({
+	dateFormat: "yy-mm-dd",
+	changeMonth: true,
+	changeYear: true,
+	yearRange: '1900:'+ new Date().getFullYear()
+
+});
+$( "#birthday").datepicker( "option", "showAnim", "clip" );
+
+$('#birthdayicon').click(function() {
+$("#birthday").datepicker( "show" );
+});
 
 $(function(){
 
 	$('#personal_submit').click(function(){
 
 		  var form_data = {
-			        firstname: $('#firstname').val(),
-			        lastname: $('#lastname').val(),
-			        gender: $('#gender').val(),
-			        birthday: $('#birthday').val(),
-			        age: $('#age').val(),
-			        contact_number: $('#contact_number').val(),
-			        address: $('#address').val()
+			        firstname: $('#firstname').val().trim(),
+			        lastname: $('#lastname').val().trim(),
+			        gender: $('input[name=gender]:checked.gender').val(),
+			        birthday: $('#birthday').val().trim(),
+			        age: $('#age').val().trim(),
+			        contact_number: $('#contact_number').val().trim(),
+			        address: $('#address').val().trim()
 			    };
 	console.log(form_data);
 	
@@ -146,9 +163,9 @@ $(function(){
 		        success: function(msg) {
 		            if (msg == 'true'){	
 			            $('#gohome.profile').show('slow');
-		                $('#personal_load').html('<i style="color: green">Successfully Updated!</i>. <i class="big green checkmark icon"></i>');
+		                $('#personal_load').html('<i style="color: green">Successfully Updated!</i><i class="big green checkmark icon"></i>');
 		            }else{
-		                $('#personal_load').html('<i style="color: red">Invalid to update!</i>. <i class="big red wrong icon"></i>');
+		                $('#personal_load').html('<i style="color: red">Unable to update! Make sure to input valid information and fill all the fields.</i><i class="big red wrong icon"></i>');
 		        }
 		        }
 		    });
@@ -255,10 +272,10 @@ $(function(){
 						   success: function(msg){
 						    if(msg == "true"){
 					            $('#gohome.account').show('slow');
-							    $("#account_validation").fadeIn(100).html('<i style="color: green">Successfully Updated!</i>. <i class="big green checkmark icon"></i>');
+							    $("#account_validation").fadeIn(100).html('<i style="color: green">Successfully Updated!</i><i class="big green checkmark icon"></i>');
 							    
 						    }else{
-						     $("#account_validation").fadeIn(100).html('<i style="color: red">Unable to update!</i>. <i class="big red remove icon"></i>');
+						     $("#account_validation").fadeIn(100).html('<i style="color: red">Unable to update!</i><i class="big red remove icon"></i>');
 							 }
 						   }
 						  });

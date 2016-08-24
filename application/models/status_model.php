@@ -13,6 +13,19 @@ class Status_model extends CI_Model
 		return $query;
 	}
 	
+	//get status of specific user
+	public function get_status_user($start, $limit=0, $user_id){
+		$this->db->select ( '*' );
+		$this->db->where('status.user_id',$user_id);
+		$this->db->limit($start, $limit);
+		$this->db->from ( 'status' );
+		$this->db->join ( 'aauth_user_profile', 'aauth_user_profile.user_id = status.user_id' , 'left' );
+		$this->db->join ( 'aauth_users', 'aauth_users.id = aauth_user_profile.user_id' , 'left' );
+		$this->db->order_by("status_id","desc");
+		$query = $this->db->get ();
+		return $query->result ();
+	}
+	
 	//get all status
 	public function get_status($start, $limit=0){
 		$this->db->select ( '*' );
