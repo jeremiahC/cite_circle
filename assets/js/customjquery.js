@@ -1,3 +1,4 @@
+var base_url = 'http://localhost/cite_circle/'
 	function readURL(input) {
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
@@ -11,11 +12,11 @@
 	function checkImage(src) {
 		  var img = new Image();
 		  img.onload = function() {
-		      // code to set the src on success
+		      // code to set the src on succexss
 		  };
 		  img.onerror = function() {
 		    // doesn't exist or error loading
-		    document.getElementById("curentImg").src="http://localhost/cite_circle/assets/images/new-user-image-default.png";
+		    document.getElementById("curentImg").src= base_url + "assets/images/new-user-image-default.png";
 		  };
 
 		  img.src = src; // fires off loading of image
@@ -28,11 +29,25 @@
 
 $(document).ready(function(){
 
+	$('.menu .item')
+	  .tab()
+	;
+
+	$('.opt').hide();
+	$('.img').click(function(){
+		$('.opt')
+		  .transition({
+		  	animation:'drop',
+		  	duration: '1s'
+		  })
+		;
+	});
+
 var imageNgaUsbon = document.getElementById('blah');
 
 	imageNgaUsbon.addEventListener('load', function(){
 		$('.ui.basic.modal').modal('refresh');
-	})
+	});
 
 	checkImage($('#curentImg').attr('src'));
 	
@@ -41,11 +56,10 @@ var imageNgaUsbon = document.getElementById('blah');
 		});
 			
 	var timer;
-	$("a.wew").mouseenter(function() {
+	$("#upload").click(function() {
 		var that = this;
 		$("#uploadBtn").attr("onchange");
-		timer = setTimeout(function(){
-			$('.ui.basic.modal').modal({
+			$('.ui.basic.modal.modal_pic').modal({
 				autofocus: false,
 				onHide: function(){
 					var la = $('#curentImg').attr('src');
@@ -64,10 +78,8 @@ var imageNgaUsbon = document.getElementById('blah');
 			}).modal('show');
 			$("div#commit").hide();
 			$("div#hidden").hide();
-			}, 1000);
-			}).mouseleave(function() {
-				clearTimeout(timer);
-			   });
+
+			});
 				
 
 	$('.ui.fluid.card .image').dimmer({
@@ -90,22 +102,26 @@ var imageNgaUsbon = document.getElementById('blah');
 	});
 
 	$('#blah').on('load', function () {
-		console.log('Image source changed');
    		$("div.editCaption").hide();
 	});
 
-	// $('#blah').load(function() {
- //    var imageObj = $(this);
- //    if (!(imageObj.width() == 1 && imageObj.height() == 1)) {
- //        console.log('Image source changed');
- //        	$("div.editCaption").hide();
- //    }
-// });
-
-	// $("#blah").change(function(){
-	// 	$("div.editCaption").hide();
-	// });
-
-
-
+	//START view profile identifier
+var user_id = $('.view').val();
+$.ajax({
+	  method: "POST",
+	  url: base_url+"ProfileController/user_info",
+	  data: 'user_id='+user_id,
+	  success: function(data){
+	  	$('#aresult').html(data);
+	  }
+});
+	$.ajax({
+		  method: "POST",
+		  url: base_url+"status/display_status_specific_user",
+		  data: 'user_id='+user_id,
+		  success: function(data){
+		  	$('#presult').html(data);
+		  }
+});
+	//END view profile identifier
 });

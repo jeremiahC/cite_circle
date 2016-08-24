@@ -3,25 +3,38 @@
     <div class="ui  menu">
 	<div class="left menu navbar">
 		<div class="header item">
-	  	<?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="ui mini image"');?>
+			<a href="<?php echo base_url();?>home" class="ui mini image">
+				<img src="<?php echo base_url();?>assets/images/logo1.png" alt="Home" />
+			</a>
 	  	</div>
-	  	<?php echo anchor('home','<i class="large home icon"></i>','id="home" class="item"')?>
-		<?php echo anchor('status','<i class="large browser icon"></i>','id="feed" class="item"')?>
-		<?php echo anchor('post_news','<i class="large newspaper icon"></i>','id="news" class="item"')?>
+			<a href="<?php echo base_url();?>status" id="feed" class="item">
+				<i class="large browser icon"></i>
+			</a>
+			<a href="<?php echo base_url();?>postnews" id="news" class="item">
+				<i class="large newspaper icon"></i>
+			</a>
         </div>
 	<div class="right menu">
-
-		<?php echo anchor('users','<i class="large users outline icon"></i>','id="users" class="item"')?>
-		<?php echo anchor('pm','<i class="large mail outline icon"></i>','id="pm" class="item"')?>
+		<a href="<?php echo base_url();?>pm" id="pm" class="item">
+			<div class="notification"></div><i class="large mail outline icon"></i>
+		</a>
 
 		 <div class="ui inline dropdown item" id="select">
-		 	<i class="big icons">
-			  <i class="settings purple icon"></i>
-			  <i class="corner grey dropdown icon"></i>
-			</i>
+		 	<?php if(empty($this->session->userdata('user_picture'))){?>
+		 		<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>"  class="ui avatar image">
+		 	<?php }else{?>
+		 		<img class="ui avatar image" src="<?php echo ''.base_url().'assets/uploads/'.$this->session->userdata('user_picture');?>">
+		 	<?php }?>
+		 	<b><?php echo $this->session->userdata('name')?></b>
 		    <div class="menu">
-		      <?php echo anchor('myprofile/'.$_SESSION['name'],'<div class="item"><i class="user olive icon"></i>Profile</div>','id="profile"')?>
-		      <?php echo anchor('login/logout','<div class="item"><i class="power red icon"></i>Log out</div>')?>
+		    	<a class="item" href="<?php echo base_url();?>myprofile" id="pm" id="profile">
+							<i class="user olive icon"></i>
+							Profile
+		    	</a>
+				<a class="item" href="<?php echo base_url();?>login/logout" id="pm">
+							<i class="power red icon"></i>
+							Log out
+				</a>
 
 		    </div>
 		 </div>
@@ -39,14 +52,43 @@
 	</div>
 	<div class="right menu">
   		<?php echo anchor('login','Log in','class="item"')?>
-          <?php echo anchor('register','Sign Up','class="item"')?>
+         <?php echo anchor('register','Sign Up','class="item"')?>
   	</div>
 	</div>
 <?php }?>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
 //js for dropdown the settings
-$('#select')
-  .dropdown()
-;
+	$('#select').dropdown();
+		
+	//START
+	function update_pms(){
+
+		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
+			if(data >= 1){
+				$('.notification').html('<div class="ui mini circular red label">'+data+'</div>');
+			}else{
+				$('.notification').html(' ');	
+			}
+		});
+
+	}
+
+
+	function update_online(){
+
+		$.post('<?php echo base_url(); ?>ProfileController/update_online');
+
+	}
+	setInterval(function (){
+		update_pms();
+		update_online();
+	}, 6000);
+	//END
+
+
+
+});
 </script>

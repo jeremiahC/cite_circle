@@ -29,46 +29,21 @@ if(count($query) > 0){?>
 			</div>
 		<?php }else{}?>
 	     </div>
-
 	      <div class="summary">
-	      	<a class="hover">
-		    	
+	      	<?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
+	      		<a href="myprofile">
+						      	<?php }else{?>
+		        <a href="profile/<?php echo $status->user_id;?>">
+							    <?php };?> 
 		        	<!-- first name condition START-->
 					<?php if($status->firstname == ''){
 						echo $status->name;
 					}else{
-						echo $status->firstname;
+						echo $status->firstname.' '.$status->lastname;
 					}?>
-			</a>
 					<!-- first name condition END -->
-					<div class="ui flowing popup top left transition visible animating scale out profile">
-					  <div class="ui column divided center aligned grid">
-					    <div class="column">
-					      <h4 class="ui header"><?php echo $status->firstname?> <?php echo $status->lastname?></h4>
-					      <?php if($status->user_picture == ""){?>
-							<img src="<?php echo ''.base_url().'assets/images/new-user-image-default.png';?>" class="ui mini avatar circular image">
-							<?php }else{?>
-							<img src="<?php echo ''.base_url().'assets/uploads/'.$status->user_picture.'';?>" class="ui mini avatar circular image">
-							<?php }?>
-							<br><br>
-					   
-					      		<?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
-						      		<a class="green ui button" href="myprofile/<?php echo $_SESSION["name"]?> ">
-						      			sdafasdf
-						      	<?php }else{?>
-							        <a class="green ui button" href="profile/<?php  echo $status->user_id;?>">
-							        	View Profile
-							    <?php };?> 
-						
 							    </a>
-					      	
-					    </div>
-					  </div>
-					</div>
-		        
 		    	        <div class="date">
-
-
 	        <!--  YOU CAN PUT SOMETHING IN HERE  -->
 	        </div>
 	        
@@ -211,12 +186,16 @@ if(count($query) > 0){?>
 			    </div>
 			    <div class="content">
 			      <div class="summary">
-			        <a class="user">
+			        <?php if($this->aauth->get_user_id($email=false) === $comments->user_id){?>
+		      		<a href="myprofile"  class="user">
+							      	<?php }else{?>
+			        <a href="profile/<?php echo $comments->user_id;?>" class="user">
+							    <?php };?> 
 			        <!-- 			first name condition -->
 			          <?php if($comments->firstname == ''){
-				      		echo $status->name;
+				      		echo $comments->name;
 				      	}else{
-				      		echo $comments->firstname;
+				      		echo $comments->firstname.' '.$comments->lastname;
 				      	}?>
 			        </a>
 			        <div class="date">
@@ -305,5 +284,4 @@ if(count($query) > 0){?>
 <script>
 $.getScript("<?php echo base_url()?>assets/js/display_status.js", function(){
 	});
-
 </script>

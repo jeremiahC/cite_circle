@@ -3,6 +3,7 @@
 var base_url = "http://localhost/cite_circle/";
 
 $(document).ready(function(){
+
 	//START comment body toggler
 	$('.comment_body').hide();
 	$('.down.toggle_icon').hide();
@@ -155,55 +156,6 @@ $(function(){
 	}
 });
 
-//LIKE FUNCTION BELOW --- START/////////////////////////////////////////////////////////////////////////
-
-// //like_html append
-// $(function(){
-// 	$('.like_append').each(function(){
-
-// 		$id = $(this).attr('id');
-// 		var like_html = '<div id="'+$id+'" class="like_infos ui labeled button" tabindex="0">'
-// 		  +'<div id="'+$id+'" class="like_toggle unlike_icon_'+$id+' ui basic blue button">'
-// 		  +'<i id="unlike" class="empty red heart icon"></i> Like'
-// 		  +'</div>'
-// 		  +'<div id="'+$id+'" class="like_toggle like_icon_'+$id+' ui basic blue button">'
-// 		    +'<i id="like" class="red heart icon"></i> Like'
-// 		  +'</div>'
-// 		  +'<a id="'+$id+'" class="like_count likes_count_'+$id+' ui basic blue left pointing label">'
-// 		  +'</a>'
-// 		+'</div>';
-// 		$(this).html(like_html);
-// 	});
-// });
-
-// //query if nka like naba ang user
-// $(function(){
-// 	$('.like_append').each(function(){
-// 			var id=$(this).attr('id');
-// 			$.ajax({
-// 					method:"POST",
-// 				    url: base_url+"status/like_check/",
-// 				    data:"&status_id="+id,
-// 				    success:function(data){
-// 						if(data == "true"){
-// 							$('.unlike_icon_'+id).hide();
-// 						 	$('.like_icon_'+id).show();
-// 						 	like_counter();
-// 							like_unlike();
-// 							see_likers();
-// 					 	}else{
-// 					 		$('.unlike_icon_'+id).show();
-// 					 		$('.like_icon_'+id).hide();
-// 						 	like_counter();
-// 							like_unlike();
-// 							see_likers();
-// 						}
-// 				   }
-// 			});
-// 	});
-// });
-
-
 //query if nka like naba ang user
 $(function(){
 	$('.like_append').each(function(){
@@ -295,29 +247,6 @@ function like_unlike(){
 });
 }
 
-
-// //see who likes
-// function see_likers(){
-// 	$('.like_count').click(function(){
-// 		var status_id = $(this).attr('id');
-// 		var like_value = parseInt($('.likes_count_'+status_id).html());
-// 		if(like_value == 0){
-// 			$('#no_likes_modal').modal('show');
-// 		}else{
-// 			$.ajax({
-// 			method:"POST",
-// 			url: base_url+"status/see_who_likes/",
-// 			data:"status_id="+status_id,
-// 			success:function(datas){
-// 				console.log(datas);
-// 				$('#modal_seewholikes_'+ status_id).modal('show');
-// 				$('#likers_' +status_id).html(datas);		
-// 			}
-// 			});
-// 		}	
-		
-// 	});
-
 //see who likes
 function see_likers(){
 	$('.like_count').click(function(){
@@ -340,16 +269,3 @@ function see_likers(){
 		
 	});
 }
-
-// $('#user_hover').each(function(){
-// 	var status_id = $(this).val();
-// 	console.log(status_id);
-// });
-$('.hover').popup({
-    popup : $('.profile'),
-    on    : 'hover',
-    delay:{
-    	show: 100,
-    	hide: 2000,
-    }
-});

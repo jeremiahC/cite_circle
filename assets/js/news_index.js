@@ -5,7 +5,7 @@ $(document).ready(function(){
     //get the posts
     $.get('news/post_show',function(data){
         $("#loader").hide();  
-        $('#displaynews').html(data).hide().fadeIn('slow');
+        $('#displaynews').html(data);
     });
     $(".btn-options").hide();
 

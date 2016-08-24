@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /*************************************
  **** Author : Jeremiah Caballero ****
  **** Date : May 02, 2016         ****
@@ -9,15 +10,9 @@ class News extends CI_Controller{
     
 	public function __construct(){
 	    parent::__construct();
-            $this->load->library("Aauth");
-            $this->load->library("parser");
-            $this->load->model('newsmodel');
+        $this->load->helper('url');
 	}
 
-    // public function school_admin(){
-    //     $this->aauth->deny_user(2,'school_admin');
-    // }
-        //default page
 	public function index(){
             
             if ( $this->aauth->is_loggedin() ){    
@@ -37,8 +32,9 @@ class News extends CI_Controller{
 	public function post_data(){
             $title =  $this->input->post('header');
             $content = $this->input->post('postnews');
+            $label = $this->input->post('label');
             $this->newsmodel->post($content,$title);
-            redirect('post_news');
+            redirect('postnews');
 	}
         
         //show your entry at the news page
@@ -58,18 +54,37 @@ class News extends CI_Controller{
                     'post_user'    => 'School Admin',
                     'post_date'    => $rows->date,
                     'post_title'   => $rows->title,
+                    'post_id'      => $rows->news_id
                 );
                 
-            }$data['body']= 'news/view'; 
+            $data['comment'] = $this->newsmodel->get_comments($data['post_id']);
+            $data['count'] = $this->newsmodel->count_comments($data['post_id']);
+
+            }
+
+            $data['body']= 'news/view'; 
             $this->parser->parse('template/template',$data);
+
     }
         
-	public function vote(){
-//              $data['query'] = $this->newsmodel->get_news_id();
-                $this->newsmodel->vote();   
-		$this->load->view('news/index');
-	}
-        
+    public function post_comment(){
+        $user_id = $this->session->userdata('id');
+        $news_id = $this->input->post('news_id');
+        $content = $this->input->post('comments');
+        // exit(var_dump($content));
+        $data['user_id']= $user_id;
+        $data['content']= $content;
+        $data['cmt_status_id']= $news_id;
+        $datas=array(
+                'user_id'=>$data['user_id'] ,
+                'content'=>$data['content'],
+                'news_id'=>$data['cmt_status_id']
+                );
+        $data['inserted_id'] = $this->newsmodel->insert_comment($datas);
+        $this->load->view('news/comments',$data);
+
+    }
+
     public function delete(){
             $news_id = $this->input->post('news_id');
             $this->newsmodel->delete($news_id);

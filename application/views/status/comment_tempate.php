@@ -1,21 +1,22 @@
+<?php  foreach ($user_info as $user) { ?>
 <div id="<?php echo $inserted_id;?>" class="ui feed">
 		<div class="event">
 			    <div class="label">
 			    <!-- 			user_picture condition -->
-			      	<?php if($this->session->userdata('user_picture') == ""){?>
+			      	<?php if($user->user_picture == ""){?>
 					<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" class="ui mini avatar rounded image">
 					<?php }else {?>
-					<img src="<?php echo base_url()?>assets/uploads/<?php echo $this->session->userdata('user_picture')?>" class="ui mini rounded image">
+					<img src="<?php echo base_url()?>assets/uploads/<?php echo $user->user_picture; ?>" class="ui mini rounded image">
 					<?php }?>
 			    </div>
 			    <div class="content">
 			      <div class="summary">
 			        <a class="user">
 			        <!-- first name condition -->
-			          <?php if($this->session->userdata('firstname') == ''){
+			          <?php if($user->firstname == ''){
 				      		echo $this->session->userdata('name');
 				      	}else{
-				      		echo $this->session->userdata('firstname');
+				      		echo $user->firstname.' '.$user->lastname;
 				      	}?>
 			        </a>
 			        <div class="date">
@@ -41,3 +42,4 @@
 			    </div>
 			  </div>
 </div>
+<?php } ?>

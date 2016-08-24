@@ -8,6 +8,8 @@ class Pm extends CI_Controller {
 	    if ( !$this->aauth->is_loggedin() ){
 	    	redirect('/');
 	    }
+	    $this->load->model('profile_model');
+	    date_default_timezone_set('Asia/Manila');
 	}
 	
 	function index(){
@@ -15,6 +17,36 @@ class Pm extends CI_Controller {
 		$this->load->view('template/template', $data);
 	}
 
-		
+	function send_pm(){
+		$sender_id = $this->session->userdata('id');
+		$receiver_id = $this->input->post('receiver_id');
+		$subj = $this->input->post('subj');
+		$message = $this->input->post('message');
+
+		$this->aauth->send_pm($sender_id, $receiver_id, $subj, $message);
+	}
+
+	function read_pm(){
+		$pm_id = $this->input->post('pm_id');
+		$this->aauth->get_pm($pm_id);
+	}
+
+	function count_unread_pms(){
+		$receiver_id = $this->session->userdata('id');
+		echo $this->aauth->count_unread_pms($receiver_id);
+	}
+
+	function display_users(){
+		$data['users'] = $this->profile_model->getAllUsersInfo();
+		echo $this->load->view('pm/display_users',$data,TRUE);
+	}
+
+	function display_pms(){
+		$receiver_id = $this->session->userdata('id');
+		$limit = 5;
+		$offset = 0;
+		$data['pms'] = $this->aauth->list_pms($limit, $offset, $receiver_id , $sender_id= FALSE);
+		echo $this->load->view('pm/display_pms',$data,TRUE);
+	}
 
 }

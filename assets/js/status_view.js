@@ -1,5 +1,29 @@
+$(window).on('beforeunload', function() {
+    $(window).scrollTop(0); 
+}); 
 $(document).ready(function(){
-	var base_url = "http://localhost/cite_circle/";
+var base_url = "http://localhost/cite_circle/";
+//Check to see if the window is top if not then display button
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 100) {
+			$('.scrollToTop').fadeIn();
+		} else {
+			$('.scrollToTop').fadeOut();
+		}
+	});
+	
+	//Click event to scroll to top
+	$('.scrollToTop').click(function(){
+		$('html, body').animate({scrollTop : 0},800);
+		return false;	//Click event to scroll to top
+
+	}).mouseover(function(){ 
+		$(this).children().removeClass('basic');
+	}).mouseleave(function(){
+		$(this).children().addClass('basic');
+	});
+
+	
 	
 	//get the posts
 	$.post(base_url+'status/display_status/',function(data){
@@ -26,7 +50,6 @@ $(document).ready(function(){
                  success: function(data){
                 	 $(data).appendTo("#displaystatus").hide().slideDown('slow');
                 	 $(".ui.basic.modal").hide();
-                	 // $("#statusloader").hide();
                 	 $(".statusloader_icon").hide();
                  }
              });

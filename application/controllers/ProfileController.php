@@ -18,14 +18,13 @@ class ProfileController extends CI_Controller {
 	{
 		$user_id = $this->session->userdata('id');
 		$data['error'] = $this->profile_model->do_upload();
-		$user_id = $this->session->userdata('id');
+
 		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
 		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}
-	
-	
+
 	public function editUpdateProfile(){
 		$user_id = $this->session->userdata('id');
 		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
@@ -74,7 +73,7 @@ class ProfileController extends CI_Controller {
 			$user_id = $this->session->userdata('id');
 			$user_firstname = $this->input->post('firstname');
 			$user_lastname= $this->input->post('lastname');
-			$user_birthday = $this->input->post('birthday');
+			$user_birthday = strtotime($this->input->post('birthday'));
 			$user_age= $this->input->post('age');
 			$user_contact= $this->input->post('contact_number');
 			$user_address = $this->input->post('address');
@@ -84,7 +83,7 @@ class ProfileController extends CI_Controller {
 					'user_id' => $user_id,
 					'firstname' => $user_firstname,
 					'lastname' => $user_lastname,
-					'birthday' => $user_birthday,
+					'birthday' => date('Y-m-d',$user_birthday),
 					'age' => $user_age,
 					'contact_number' => $user_contact,
 					'address' => $user_address,
@@ -154,18 +153,28 @@ class ProfileController extends CI_Controller {
 	}
 	
 	public function view_profile($id){
-		$data['user_profile'] = $this->profile_model->view_profile($id);
+		$data['user_profile'] = $this->profile_model->getUserInfo($id);
 		$data['upload_files'] = $this->profile_model->get_upload($id);
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}	
 
 	public function user_info(){
-		$user_id = $this->input->post('user_id');
-
-		$data['information']= $this->profile_model->user_info_model($user_id);
-		echo $this->load->view('profile/user_infos', $data, true);
+			$sess_user = $this->session->userdata('id');
+			$user_id = $this->input->post('user_id');
+		if($user_id == $sess_user){
+			$data['information']= $this->profile_model->getUserInfo($sess_user);
+			$this->load->view('profile/user_infos', $data);
+		}else{
+			$data['information']= $this->profile_model->getUserInfo($user_id);
+			$this->load->view('profile/user_infos', $data);
+		}
 		
+	}
+
+	public function update_online(){
+		$time = time();
+		$this->profile_model->update_online($time);
 	}
 }
 	

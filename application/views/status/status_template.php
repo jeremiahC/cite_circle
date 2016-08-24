@@ -28,15 +28,19 @@ if(count($query) > 0){?>
 			<?php }else{}?>
 	     </div>
 	      <div class="summary">
-	        <a>
-	        	<!-- first name condition START-->
-				<?php if($status->firstname == ''){
-					echo $status->name;
-				}else{
-					echo $status->firstname;
-				}?>
+	        <?php if($this->aauth->get_user_id($email=false) === $status->user_id){?>
+	      		<a href="myprofile">
+						      	<?php }else{?>
+		        <a href="profile/<?php echo $status->user_id;?>">
+							    <?php };?> 
+		        	<!-- first name condition START-->
+					<?php if($status->firstname == ''){
+						echo $status->name;
+					}else{
+						echo $status->firstname.' '.$status->lastname;
+					}?>
 				<!-- first name condition END -->
-	        </a>
+			</a>
 	        <div class="date">
 	        <!--  YOU CAN PUT SOMETHING IN HERE  -->
 	        </div>
@@ -113,7 +117,7 @@ if(count($query) > 0){?>
 	<!-- Comment input box START-->
 	<?php foreach ($upload_files as $image) {?>
 	<div class="ui fluid icon action input teal basic label ">
-		<?php if($status->user_picture == ""){?>
+		<?php if($image->user_picture == ""){?>
 		<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" class="ui small avatar rounded image">
 		<?php }else {?>
 		<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" class="ui small rounded image">
@@ -164,7 +168,11 @@ if(count($query) > 0){?>
 			    </div>
 			    <div class="content">
 			      <div class="summary">
-			        <a class="user">
+			        <?php if($this->aauth->get_user_id($email=false) === $comments->user_id){?>
+		      		<a href="myprofile"  class="user">
+							      	<?php }else{?>
+			        <a href="profile/<?php echo $comments->user_id;?>" class="user">
+							    <?php };?> 
 			        <!-- 			first name condition -->
 			          <?php if($comments->firstname == ''){
 				      		echo $status->name;
