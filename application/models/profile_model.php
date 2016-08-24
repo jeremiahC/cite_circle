@@ -91,4 +91,10 @@ class Profile_Model extends CI_Model
 		$query = $this->db->get('aauth_user_profile');
 		return $query->result();
 	}
+
+	public function update_online($time){
+		$user_id = $this->session->userdata('id');
+		$this->db->where('id', $user_id);
+		$this->db->update('aauth_users', array('online'=>$time));
 	}
+}

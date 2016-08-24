@@ -193,7 +193,7 @@ if(count($query) > 0){?>
 							    <?php };?> 
 			        <!-- 			first name condition -->
 			          <?php if($comments->firstname == ''){
-				      		echo $status->name;
+				      		echo $comments->name;
 				      	}else{
 				      		echo $comments->firstname.' '.$comments->lastname;
 				      	}?>

@@ -9,14 +9,10 @@ class Pm extends CI_Controller {
 	    	redirect('/');
 	    }
 	    $this->load->model('profile_model');
+	    date_default_timezone_set('Asia/Manila');
 	}
 	
 	function index(){
-		$receiver_id = $this->session->userdata('id');
-		$limit = 5;
-		$offset = 0;
-		$data['pms'] = $this->aauth->list_pms($limit, $offset, $receiver_id , $sender_id= FALSE);
-		$data['users'] = $this->profile_model->getAllUsersInfo();
 		$data['body'] = 'pm/pm'; // call your content
 		$this->load->view('template/template', $data);
 	}
@@ -38,6 +34,19 @@ class Pm extends CI_Controller {
 	function count_unread_pms(){
 		$receiver_id = $this->session->userdata('id');
 		echo $this->aauth->count_unread_pms($receiver_id);
-	}	
+	}
+
+	function display_users(){
+		$data['users'] = $this->profile_model->getAllUsersInfo();
+		echo $this->load->view('pm/display_users',$data,TRUE);
+	}
+
+	function display_pms(){
+		$receiver_id = $this->session->userdata('id');
+		$limit = 5;
+		$offset = 0;
+		$data['pms'] = $this->aauth->list_pms($limit, $offset, $receiver_id , $sender_id= FALSE);
+		echo $this->load->view('pm/display_pms',$data,TRUE);
+	}
 
 }

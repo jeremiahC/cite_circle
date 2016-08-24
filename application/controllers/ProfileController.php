@@ -171,6 +171,11 @@ class ProfileController extends CI_Controller {
 		}
 		
 	}
+
+	public function update_online(){
+		$time = time();
+		$this->profile_model->update_online($time);
+	}
 }
 	
 

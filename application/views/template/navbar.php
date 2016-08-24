@@ -63,7 +63,7 @@ $(document).ready(function(){
 //js for dropdown the settings
 	$('#select').dropdown();
 		
-	//START mail notification
+	//START
 	function update_pms(){
 
 		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
@@ -75,10 +75,20 @@ $(document).ready(function(){
 		});
 
 	}
+
+
+	function update_online(){
+
+		$.post('<?php echo base_url(); ?>ProfileController/update_online');
+
+	}
 	setInterval(function (){
 		update_pms();
-	}, 1500);
-	//END mail notification
+		update_online();
+	}, 6000);
+	//END
+
+
 
 });
 </script>

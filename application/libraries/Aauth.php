@@ -497,13 +497,10 @@ class Aauth {
 			$this->CI->input->set_cookie($cookie);
 		}
 		
-		//START added by chevy
 		$user_id = $this->CI->session->userdata('id');
 		$data['last_login'] = time();
-		$data['online'] = 0;
 		$this->aauth_db->where('id', $user_id);
 		$this->aauth_db->update($this->config_vars['users'], $data);
-		//END added by chevy 
 		
 		return $this->CI->session->sess_destroy();
 	}
@@ -1166,9 +1163,6 @@ class Aauth {
 
 		if($user_id==FALSE){return FALSE;}
 
-		//START added by chevy
-		$data['online'] = 1;
-		//END added by chevy
 		$data['last_activity'] = date("Y-m-d H:i:s");
 
 		$query = $this->aauth_db->where('id',$user_id);
