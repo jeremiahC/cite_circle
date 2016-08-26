@@ -15,6 +15,7 @@ class Profile_Model extends CI_Model
 		$this->db->select('*');
 		$this->db->from('aauth_users');
 		$this->db->join('aauth_user_profile', 'aauth_user_profile.user_id = aauth_users.id');
+		$this->db->order_by("firstname asc");
 		$query = $this->db->get();
 		return $query->result();
 	}

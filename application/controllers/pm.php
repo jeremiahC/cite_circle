@@ -43,10 +43,21 @@ class Pm extends CI_Controller {
 
 	function display_pms(){
 		$receiver_id = $this->session->userdata('id');
-		$limit = 5;
+		$limit_count = $this->input->post('limit');
+		$limit = $limit_count;
 		$offset = 0;
 		$data['pms'] = $this->aauth->list_pms($limit, $offset, $receiver_id , $sender_id= FALSE);
 		echo $this->load->view('pm/display_pms',$data,TRUE);
+	}
+
+	function display_more_pms(){
+		$receiver_id = $this->session->userdata('id');
+		$offset_count = $this->input->post('offset');
+		$data['batch_no'] = $this->input->post('batch_no');
+		$limit = 5;
+		$offset = $offset_count;
+		$data['pms'] = $this->aauth->list_pms($limit, $offset, $receiver_id , $sender_id= FALSE);
+		echo $this->load->view('pm/display_pms_template',$data,TRUE);
 	}
 
 }

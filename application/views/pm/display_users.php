@@ -1,4 +1,6 @@
 <script type="text/javascript">
+$(document).ready(function(){
+
 //mail icon click to show compose message
 	$('.circular.inverted.mail.icon').click(function(){
 		$('.received_message').slideUp();
@@ -19,17 +21,61 @@
 			$('.set_receiver_id').val(id);
 		}
 	});
+
+	//START filters
+	//btn filter start
+	$('#filter_all').removeClass('basic');
+	$('.filter_btn').click(function(){
+		var filter = $(this).attr('id');
+		$('.filter_btn').removeClass('basic');
+		$('.filter_btn').addClass('basic');
+		$('#'+filter).removeClass('basic');
+		$('.online_identifier').each(function(){
+			var online_attr = $(this).attr('id');
+			if(filter == 'filter_all'){
+				$(this).slideDown();
+			}else if(filter == 'filter_online'){
+				$(this).slideDown();
+				if( online_attr == 0){
+					$(this).slideUp();
+				}
+			}else if(filter == 'filter_offline'){
+				$(this).slideDown();
+				if(online_attr == 1){
+					$(this).slideUp();
+				}
+			}
+
+		});
+	});
+	//btn filter end
+	//END filters
+
+});
 </script>
 
 <!-- START display users -->
-	<div class="display_users ui secondary segment">
+	<div class="display_users ui secondary segment centered">
 		<div class="ui fluid transparent input">
-			<h3>Online Users</h3>
-		</div>
-	<div class="ui celled list scrollusers">
+			<h3>Users</h3>
+		</div><br>
+		<div class="ui buttons">
+			  <div id="filter_all" class="filter_btn ui teal basic button">All</div>
+			  <div id="filter_online" class="filter_btn ui teal basic button">Online</div>
+			  <div id="filter_offline" class="filter_btn ui teal basic button">Offline</div>
+			</div>
+	<div id="scrollusers" class="ui celled list scrollusers">
 
 		<?php foreach ($users as $user){ if($user->id == $this->session->userdata('id')){}else{?>
-			  <div class="item">
+			  <div id="<?php 
+			          $time_online = $user->online;
+			          $now = time();
+			          $time_ago =  timespan($time_online, $now, 1);
+			          if($time_ago == 'Just now' || strpos($time_ago, 'Seconds') !== false){ 
+			          	echo 1;
+			          }else{
+			          	echo 0;
+			          } ?>" class="online_identifier item">
 			  	<div class="right floated content">
 			     	<i class="circular inverted mail icon pointer"></i>
 			     	<!-- DUMMY -->
@@ -69,12 +115,8 @@
 			          $time_online = $user->online;
 			          $now = time();
 			          $time_ago =  timespan($time_online, $now, 1);
-			          if($time_ago == 'Just now'){ ?>
+			          if($time_ago == 'Just now' || strpos($time_ago, 'Seconds') !== false){ ?>
 			          	<i class="circle green icon"></i>Online
-
-			          <?php }else if(strpos($time_ago, 'Seconds') !== false){ ?>
-			          	<i class="circle green icon"></i>Online
-			          	
 			          <?php }else{ ?>
 			          	<i class="circle grey icon"></i>Active
 			          	<?php echo $time_ago; ?>
@@ -82,7 +124,6 @@
 			    </div>
 			  </div>
 		<?php }} ?>
-
 	</div>
 	</div>
 	<!-- END display users -->

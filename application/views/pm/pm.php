@@ -16,19 +16,25 @@ $(document).ready(function(){
 		display_users();
 	}, 30000);
 
-
-
-	$.post('<?php echo base_url(); ?>pm/display_pms', function (data){
+	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 5}, function (data){
 			$("#display_pms").html(data) ;
 		});
-	function display_pms(){
-	$.post('<?php echo base_url(); ?>pm/display_pms', function (data){
-			$("#display_pms").html(data) ;
-		});
-	}
-	setInterval(function (){
-		display_pms();
-	}, 5000);
+	
+	// setInterval(function (){
+	// 	$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
+	// 		if(data >= 1){
+	// 			var limit = $('#pm_limit').val();
+	// 			display_pms(limit);
+	// 		}else{
+	// 		}
+	// 	});
+	// }, 5000);
+
+	// function display_pms(limit){
+	// $.post('<?php echo base_url(); ?>pm/display_pms',{'limit': limit}, function (data){
+	// 		$("#display_pms").html(data) ;
+	// 	});
+	// }
 	// END GET THE display_users and display_pms view
 
 	
@@ -93,10 +99,9 @@ $(document).ready(function(){
 			cache: false,
 			success: function(data)
 				{
-					console.log('success' +data);
-					$('.set_message').val('');
-					$('.set_subj').val('');
-					$('.set_receiver_id').val('');
+					$('.set_reply_message').val('');
+					$('.set_reply_pm_title').val('');
+					$('.set_reply_receiver_id').val('');
 				}
 			});
 
@@ -124,7 +129,7 @@ $(document).ready(function(){
 		<div class="compose_message hide">
 			<div class="ui segment">
     			To:&nbsp;&nbsp; <a class="set_label ui image label">
-  				<input hidden class="set_receiver_id">
+  				<input hidden class=" ">
   				<img class="set_pic"></img>
   				<span class="set_name"></span>
 				</a>
@@ -222,7 +227,10 @@ $(document).ready(function(){
 
 
 	<!-- START List PMs -->
-	<div id="display_pms" class="four wide column"></div>
+	<input hidden id="pm_limit" value="10"/>
+	<input hidden id="pm_offset"/>
+	<div id="display_pms" class="four wide column">
+	</div>
 	<!-- END List PMs -->
 
 </div>
