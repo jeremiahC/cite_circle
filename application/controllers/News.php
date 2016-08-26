@@ -17,6 +17,8 @@ class News extends CI_Controller{
             
             if ( $this->aauth->is_loggedin() ){    
                     $data['body']= 'news/index'; 
+                    $user_id = $this->session->userdata('id');
+                    $data['upload_files'] = $this->profile_model->get_upload($user_id);
                     $this->parser->parse('template/template',$data);
             } else {
                 redirect('/');
@@ -25,6 +27,8 @@ class News extends CI_Controller{
         //goes to create page
     public function post_create(){ 
             $data['body']= 'news/create'; 
+            $user_id = $this->session->userdata('id');
+                    $data['upload_files'] = $this->profile_model->get_upload($user_id);
             $this->parser->parse('template/template',$data);             
     }
         
@@ -63,6 +67,10 @@ class News extends CI_Controller{
             }
 
             $data['body']= 'news/view'; 
+            //navbar user picture
+            $user_id = $this->session->userdata('id');
+            $data['upload_files'] = $this->profile_model->get_upload($user_id);
+            
             $this->parser->parse('template/template',$data);
 
     }

@@ -1,20 +1,12 @@
 
 <div id="profile" class="nav_identifier">							
-
-
+	
 	<div class="ui grid centered">
 	<?php foreach ($user_profile as $information):?>
 
 			<div class="column row">
-				<?php if($this->aauth->get_user_id($email=false) === $information->user_id){?>
-					<span>
-						<a href="ProfileController/editUpdateProfile" class="ui huge circular green icon button opt">
-						  <i class="write icon"></i>
-						</a>
-					</span>
-				<?php };?>
 				<?php foreach ($upload_files as $image) { ?>
-				<a class="" href="#" data-toggle="tooltip" data-placement="top" title="upload picture">
+				<a class="" href="#" data-toggle="tooltip" title="View Image" >
 					<?php if($image->user_picture == ""){?>
 					<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" width='200' height="200" class="ui circular image img" id="curentImg">
 					<?php }else{?>
@@ -29,14 +21,15 @@
 												<div class="eight wide column">
 													<div class="ui fluid card">
 														<div class="blurring dimmable image">
-
-															<a class="ui fluid image" href="#">
-																<?php if($image->user_picture == ""){?>
-																<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" id="blah">
-																<?php }else{?>
-																<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" id="blah">
-																<?php }?>
-															</a>
+															<span title="Update Account">
+																<a class="ui fluid image" href="#">
+																	<?php if($image->user_picture == ""){?>
+																	<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>" id="preview_picture">
+																	<?php }else{?>
+																	<img src="<?php echo base_url().'assets/uploads/'.$image->user_picture.'';?>" id="preview_picture">
+																	<?php }?>
+																</a>
+															</span>
 															<?if($this->aauth->get_user_id($email=false) === $information->user_id):?>
 															<div class="ui dimmer">
 																<div class="content">
@@ -107,14 +100,6 @@
 										</div>	
 									</div>
 
-				<?php if($this->aauth->get_user_id($email=false) === $information->user_id){?>
-				<span>
-					<a class="ui huge circular blue icon button opt" id="upload">
-					  <i class="photo icon"></i>
-					</a>
-				</span>
-				<?php };?>
-
 			</div>
 
 			<div class="column row">
@@ -174,7 +159,7 @@ $(document).ready(function(){
              			}, 
                  success: function(data){
                 	 $(data).appendTo("#presult").hide().slideDown('slow');
-                	 $(".ui.basic.modal").hide();
+                	 $("#modal_delete").hide();
                 	 $(".statusloader_icon").hide();
                  }
              });

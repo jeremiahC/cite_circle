@@ -14,6 +14,8 @@ class Pm extends CI_Controller {
 	
 	function index(){
 		$data['body'] = 'pm/pm'; // call your content
+		$user_id = $this->session->userdata('id');
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$this->load->view('template/template', $data);
 	}
 

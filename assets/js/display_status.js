@@ -90,7 +90,7 @@ $(document).ready(function(){
 		//delete status
 		$('.remove_icon').click(function(){
 			$('.popup-button').popup('hide');
-	    	$('.ui.basic.modal').modal('show'); 
+	    	$('#modal_delete').modal('show'); 
 	    	$('.delete_status').click(deleteClick);
 		
 	    	function deleteClick () {

@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
-<html>
+<html>  
 	<head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,7 +66,7 @@
                   </div>
                 </div>
                 <br>
-                <input class="ui fluid large teal submit button"  type="submit" value="Sign Up">
+                <input class="ui fluid large teal submit button"  type="button" value="Sign Up">
               </div>
              
                 <?php if (validation_errors()) : ?>
@@ -83,7 +83,7 @@
 
             </form>
       </div>
-
+      <div class="errorregister"></div>
       <div class="column row">
           <div class="ui message">
             Already have account? <?php echo anchor('login','Log in')?>
@@ -91,7 +91,29 @@
       </div>
 
     </div>
-
+    
 </div>
 </body>
 </html>
+<script>
+  $(document).ready(function(){
+      $('.submit').click(function(){
+    var data = {
+          name: $('#name').val(),
+          email: $('#email').val(),
+          password : $('#password').val(),
+          password_confirm : $('#password_confirm').val(),
+    };
+    console.log(data);
+         $.ajax({
+             method: "POST",
+             url: "<?php echo base_url();?>register/register",
+             data: data,
+             success: function(data){
+
+              }
+            });
+         return false;
+      });
+  });
+</script>

@@ -26,8 +26,8 @@ class Register extends CI_Controller {
 		// set validation rules
 		$this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[4]');
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[13]');
-		$this->form_validation->set_rules('password_confirm', 'Confirm Password', 'trim|required|min_length[6]|max_length[13]|matches[password]');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]');
+		$this->form_validation->set_rules('password_confirm', 'Confirm Password', 'trim|required|min_length[6]|matches[password]');
 	
 		if ($this->form_validation->run() === false) {
 			// validation not ok, send validation errors to the view

@@ -54,10 +54,14 @@
 
                 <div class="content">
                   <div class="summary">
-                    <a class="user">
+                    <?php if($this->aauth->get_user_id($email=false) === $comments->user_id){?>
+                    <a href="<?php echo base_url();?>myprofile"  class="user">
+                                    <?php }else{?>
+                    <a href="<?php echo base_url();?>profile/<?php echo $comments->user_id;?>" class="user">
+                                <?php };?> 
                     <!--            first name condition -->
-                      <?php if($comments->firstname == ''){
-                            echo $this->session->userdata('username');
+                      <?php if($comments->firstname == ""){
+                            echo $this->session->userdata('name');
                         }else{
                             echo $comments->firstname;
                         }?>

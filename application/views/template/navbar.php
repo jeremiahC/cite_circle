@@ -20,11 +20,13 @@
 		</a>
 
 		 <div class="ui inline dropdown item" id="select">
-		 	<?php if(empty($this->session->userdata('user_picture'))){?>
-		 		<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>"  class="ui avatar image">
-		 	<?php }else{?>
-		 		<img class="ui avatar image" src="<?php echo ''.base_url().'assets/uploads/'.$this->session->userdata('user_picture');?>">
-		 	<?php }?>
+		 	<?php foreach ($upload_files as $image) { ?>
+			 	<?php if($image->user_picture == ""){?>
+			 		<img src="<?php echo base_url().'assets/images/new-user-image-default.png';?>"  class="ui avatar image">
+			 	<?php }else{?>
+			 		<img class="ui avatar image" src="<?php echo ''.base_url().'assets/uploads/'.$image->user_picture;?>">
+			 	<?php }?>
+			 <?php }?>
 		 	<b><?php echo $this->session->userdata('name')?></b>
 		    <div class="menu">
 		    	<a class="item" href="<?php echo base_url();?>myprofile" id="pm" id="profile">

@@ -7,11 +7,11 @@
                   Personal Info
                 </h3>
                 <div class="column">
-                  <label><b>Firstname:</b></label>
+                  <label><b>First name:</b></label>
                   <?php echo $info->firstname;?>
                 </div>
                 <div class="column">
-                  <label><b>Lastname:</b></label>
+                  <label><b>Last name:</b></label>
                   <?php echo $info->lastname;?>
                 </div>
                 <div class="column">
@@ -23,6 +23,7 @@
                   <?php echo $info->gender;?>
                 </div>
             </div>
+            <a href="ProfileController/editUpdateProfile" class="fluid ui inverted green button">Update Info</a>
         </div>
         <div class="four wide column">
             <div class="ui red segment">

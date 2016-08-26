@@ -6,7 +6,7 @@
 </div>
 
 <div class="ui bottom attached pushable">
-  <div class="ui inverted vertical fixed sidebar menu">
+  <div class="ui vertical fixed sidebar menu">
   	<div class="item">
   		<h4 class="ui grey center aligned header">Admin</h4>
       <a href="<?php echo base_url();?>login/logout">logout</a>

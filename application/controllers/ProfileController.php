@@ -28,6 +28,7 @@ class ProfileController extends CI_Controller {
 	public function editUpdateProfile(){
 		$user_id = $this->session->userdata('id');
 		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
+		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$data['body'] = 'profile/update'; // call your content
 		$this->load->view('template/template', $data);
 	}

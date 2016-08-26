@@ -11,9 +11,9 @@ if(count($query) > 0){?>
 	    <div class="label">
 		    <!-- user_picture condition START -->
 			<?php if($status->user_picture == ""){?>
-			<img src="<?php echo ''.base_url().'assets/images/new-user-image-default.png';?>" class="ui mini avatar circular image">
+			<img src="<?php echo ''.base_url().'assets/images/new-user-image-default.png';?>" class="ui avatar image">
 			<?php }else{?>
-			<img src="<?php echo ''.base_url().'assets/uploads/'.$status->user_picture.'';?>" class="ui mini avatar circular image">
+			<img src="<?php echo ''.base_url().'assets/uploads/'.$status->user_picture.'';?>" class="ui avatar image">
 			<?php }?>
 			<!-- user_picture condition END -->
 	    </div>
@@ -237,7 +237,7 @@ if(count($query) > 0){?>
 	<br/><br/>
 	
 <!-- 	DELETE STATUS MODAL START -->
-	<div class="ui basic modal">
+	<div class="ui basic modal " id="modal_delete">
 	  <i class="close icon"></i>
 	  <div class="header">
 	    Delete Status Confirmation
