@@ -19,22 +19,23 @@ $(document).ready(function(){
 	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
 			$("#display_pms").html(data) ;
 		});
-	
-	setInterval(function (){
-		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
-			if(data >= 1){
-				var limit = $('#pm_limit').val();
-				display_pms();
-			}else{
-			}
-		});
-	}, 5000);
 
 	function display_pms(){
 	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
 			$("#display_pms").html(data) ;
 		});
 	}
+	
+	setInterval(function (){
+		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
+			if(data >= 1){
+				display_pms();
+			}else{
+			}
+		});
+	}, 3000);
+
+	
 	// END GET THE display_users and display_pms view
 
 	
@@ -138,6 +139,7 @@ $(document).ready(function(){
     				<div class="">
     					Subject:
       					<input class="set_subj"/>
+      					<input class="set_receiver_id" hidden/>
     				</div>
     				<br/>
     				<div class="field">
