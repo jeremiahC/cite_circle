@@ -3,7 +3,7 @@ var base_url = 'http://localhost/cite_circle/'
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
-	            $('#blah').attr('src', e.target.result);
+	            $('#preview_picture').attr('src', e.target.result);
 	        };
 	        reader.readAsDataURL(input.files[0]);
 	    }
@@ -33,20 +33,10 @@ $(document).ready(function(){
 	  .tab()
 	;
 
-	$('.opt').hide();
-	$('.img').click(function(){
-		$('.opt')
-		  .transition({
-		  	animation:'drop',
-		  	duration: '1s'
-		  })
-		;
-	});
-
-var imageNgaUsbon = document.getElementById('blah');
+var imageNgaUsbon = document.getElementById('preview_picture');
 
 	imageNgaUsbon.addEventListener('load', function(){
-		$('.ui.basic.modal').modal('refresh');
+		$('.modal_pic').modal('refresh');
 	});
 
 	checkImage($('#curentImg').attr('src'));
@@ -56,17 +46,17 @@ var imageNgaUsbon = document.getElementById('blah');
 		});
 			
 	var timer;
-	$("#upload").click(function() {
+	$(".img").click(function() {
 		var that = this;
 		$("#uploadBtn").attr("onchange");
-			$('.ui.basic.modal.modal_pic').modal({
+			$('.modal_pic').modal({
 				autofocus: false,
 				onHide: function(){
 					var la = $('#curentImg').attr('src');
 		            //remove the preview image
 		            $("#uploadBtn").removeAttr("onchange");
 		            //use the previous image source
-			    	$('#blah').attr('src', la);
+			    	$('#preview_picture').attr('src', la);
 
 			        
 			    },
@@ -87,7 +77,7 @@ var imageNgaUsbon = document.getElementById('blah');
 	});
 	
 	$(".closemodal").click(function(){
-		  $('.ui.basic.modal').modal('hide');
+		  $('.modal_pic').modal('hide');
 		});
 	$("input#caption").click(function(){
 		$oldVal = document.getElementById("caption").value;
@@ -101,7 +91,7 @@ var imageNgaUsbon = document.getElementById('blah');
 		})
 	});
 
-	$('#blah').on('load', function () {
+	$('#preview_picture').on('load', function () {
    		$("div.editCaption").hide();
 	});
 

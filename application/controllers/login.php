@@ -44,6 +44,8 @@ class Login extends CI_Controller {
 			} elseif ($this->aauth->login($username, $password, true)) {
 				// user login ok
 				$data['body'] = 'home_view'; // call your content
+				$user_id = $this->session->userdata('id');
+                    $data['upload_files'] = $this->profile_model->get_upload($user_id);
 				$this->load->view('template/template', $data);
 			
 			} else {

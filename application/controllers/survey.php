@@ -29,6 +29,8 @@ class Survey extends CI_Controller {
 		if ($this->form_validation->run() == FALSE) // validation hasn't been passed
 		{
 			$data['body'] = 'survey/survey_view'; // call your content
+			$user_id = $this->session->userdata('id');
+                    $data['upload_files'] = $this->profile_model->get_upload($user_id);
 			$this->load->view('template/template', $data);
 		}
 		else // passed validation proceed to post success logic
@@ -67,6 +69,8 @@ class Survey extends CI_Controller {
 	function success()
 	{
 			$data['body'] = 'survey/survey_success'; // call your content
+			$user_id = $this->session->userdata('id');
+                    $data['upload_files'] = $this->profile_model->get_upload($user_id);
 			$this->load->view('template/template', $data);
 	}
 }

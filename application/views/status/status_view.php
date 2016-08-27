@@ -52,26 +52,24 @@
 
 			var append_chat_data = function (chat_data) {
 				chat_data.forEach(function (data) {
-					var html = '<li class="">';
+					var data_html = '<li class="">';
 					if(data.user_picture == '' || data.user_picture == null){
-						html += '<img class="ui avatar image" src="<?php echo base_url()?>assets/images/new-user-image-default.png">';
+						data_html += '<img class="ui avatar image" src="<?php echo base_url()?>assets/images/new-user-image-default.png">';
 					}else{
-						html += '<img class="ui avatar image" src="<?php echo base_url()?>assets/uploads/'+data.user_picture+'">';
+						data_html += '<img class="ui avatar image" src="<?php echo base_url()?>assets/uploads/'+data.user_picture+'">';
 					}
 					
 					if(data.firstname == '' || data.firstname == null){
-						html += '<span>'+data.name+'</span>';
+						data_html += '<span>'+data.name+'</span>';
 					}else{
-						html += '<span>'+data.firstname+' '+data.lastname+'</span>';
+						data_html += '<span>'+data.firstname+' '+data.lastname+'</span>';
 					}
-					html += '<div><b>'+ data.message + '</b></div>';
-					html += '<div class="meta"><i class="wait icon"></i>'+parseTimestamp(data.timestamp) +'</div>';
-					html += '<div class="ui divider"></div>';
-					html += '</li>';
-					$("#received").html( $("#received").html() + html);
+					data_html += '<div><b>'+ data.message + '</b></div>';
+					data_html += '<div class="meta"><i class="wait icon"></i>'+parseTimestamp(data.timestamp) +'</div>';
+					data_html += '<div class="ui divider"></div>';
+					data_html += '</li>';
+					$(data_html).prependTo('#received');
 				});
-			  
-				$('#received').animate({ scrollTop: $('#received').height()}, 1000);
 			}
 
 			var update_chats = function () {
@@ -104,6 +102,12 @@
 				}
 			});
 
+			$('#message').bind('keypress', function(e){
+				if (e.which == 13) {
+	    		$('#submit').trigger('click');
+	    		}
+			});
+
 			setInterval(function (){
 				update_chats();
 			}, 1500);
@@ -122,6 +126,7 @@
 		<br>
 		<div id="chatbox">
 			<ul id="received" class="scrollchat">
+				<li id="received_messages"></li>
 			</ul>
 
 			<div class="ui fluid transparent input">
@@ -135,20 +140,20 @@
   <div id="second_column" class="eight wide column">
   
 	  <div class="ui grid">
-	  	<div class="twelve wide column ui form">
+	  	<div class="fourteen wide column ui form">
 		  <div class="field">
 		    <label>Share your thoughts!</label>
 		    <textarea rows="2" id="status_input"></textarea>
 		  </div>
 		</div>
-		 <div class="four wide column">
+		 <div class="two wide column">
 		 	<br><br>
 		 	<div id="<?php echo  $this->session->userdata('id');?>" class="submitBtn disabled ui circular small green inverted vertical animated button" tabindex="0">
 		    <div class="hidden content closemodal">POST</div>
 		    <div class="visible content closemodal">
-	        <i class="send icon"></i>
-		 </div>
-	  </div>
+		        <i class="send icon"></i>
+			 </div>
+	  	</div>
 					
 		 </div>
 	  </div>

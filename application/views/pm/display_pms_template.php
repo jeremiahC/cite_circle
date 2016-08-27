@@ -1,25 +1,5 @@
 <script type="text/javascript">
 $(document).ready(function(){
-	var offset = 15;
-	var batch_no = 1;
-	$('#loadpms').click(function(){
-		loadpms(offset,batch_no);
-		offset += 5;
-		batch_no++;
-	});
-	function loadpms(offset,batch_no){
-		$.ajax({
-                 type:'POST',
-                 url: '<?php echo base_url(); ?>pm/display_more_pms/',
-                 data: {"offset" : offset,
-             			"batch_no" : batch_no}, 
-                 success: function(data){
-                	 $(data).insertBefore("#loadpms");
-                 }
-             });
-		return false;
-	}
-
 //START LIST_PMs /////////////////////////////////////////////////
 	//START set name and pic for list of pms
 	$('.list_set_name').each(function(){
@@ -35,7 +15,7 @@ $(document).ready(function(){
 	//END set name and pic for list of pms
 
 	//for list_pm  click of specific pm
-	$('.view_pm').click(function(){
+	$('.view_pm_'+<?php echo $batch_no; ?>).click(function(){
 		$('.compose_message').slideUp();
 		$('.received_message').slideUp();
 		$('.received_message').slideDown();
@@ -71,18 +51,12 @@ $(document).ready(function(){
 	});
 });
 </script>
-<div class="display_pm_list ui secondary segment">
-		<div class="ui fluid transparent input">
-			<h3>Received messages</h3>
-		</div>
-	<div class="ui relaxed divided list scrollpms infinitescroll">
-
-		<?php foreach ($pms as $pm) {
+<?php foreach ($pms as $pm) {
 
 		if($pm->date_read == null){?>
-		 <div id="<?php echo $pm->id; ?>" class="item unread pointer_list view_pm">
+		 <div id="<?php echo $pm->id; ?>" class="item unread pointer_list view_pm_<?php echo $batch_no; ?>">
 		 <?php }else{?>
-		 <div id="<?php echo $pm->id; ?>" class="item pointer_list view_pm">
+		 <div id="<?php echo $pm->id; ?>" class="item pointer_list view_pm_<?php echo $batch_no; ?>">
 		  <?php } ?>
 		    <img id="<?php echo $pm->sender_id; ?>" class="list_set_pic ui avatar image">
 		    <div class="content">
@@ -102,6 +76,3 @@ $(document).ready(function(){
 			<!-- DUMMY for setting infos -->
 
 		<?php } ?>
-		<div id="loadpms"><button class="fluid ui button">View more messages</button></div>
-	</div>
-	</div>

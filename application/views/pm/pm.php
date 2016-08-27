@@ -16,19 +16,26 @@ $(document).ready(function(){
 		display_users();
 	}, 30000);
 
-
-
-	$.post('<?php echo base_url(); ?>pm/display_pms', function (data){
+	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
 			$("#display_pms").html(data) ;
 		});
+
 	function display_pms(){
-	$.post('<?php echo base_url(); ?>pm/display_pms', function (data){
+	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
 			$("#display_pms").html(data) ;
 		});
 	}
+	
 	setInterval(function (){
-		display_pms();
-	}, 5000);
+		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
+			if(data >= 1){
+				display_pms();
+			}else{
+			}
+		});
+	}, 3000);
+
+	
 	// END GET THE display_users and display_pms view
 
 	
@@ -93,10 +100,9 @@ $(document).ready(function(){
 			cache: false,
 			success: function(data)
 				{
-					console.log('success' +data);
-					$('.set_message').val('');
-					$('.set_subj').val('');
-					$('.set_receiver_id').val('');
+					$('.set_reply_message').val('');
+					$('.set_reply_pm_title').val('');
+					$('.set_reply_receiver_id').val('');
 				}
 			});
 
@@ -124,7 +130,7 @@ $(document).ready(function(){
 		<div class="compose_message hide">
 			<div class="ui segment">
     			To:&nbsp;&nbsp; <a class="set_label ui image label">
-  				<input hidden class="set_receiver_id">
+  				<input hidden class=" ">
   				<img class="set_pic"></img>
   				<span class="set_name"></span>
 				</a>
@@ -133,6 +139,7 @@ $(document).ready(function(){
     				<div class="">
     					Subject:
       					<input class="set_subj"/>
+      					<input class="set_receiver_id" hidden/>
     				</div>
     				<br/>
     				<div class="field">
