@@ -20,21 +20,21 @@ $(document).ready(function(){
 			$("#display_pms").html(data) ;
 		});
 	
-	// setInterval(function (){
-	// 	$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
-	// 		if(data >= 1){
-	// 			var limit = $('#pm_limit').val();
-	// 			display_pms();
-	// 		}else{
-	// 		}
-	// 	});
-	// }, 5000);
+	setInterval(function (){
+		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
+			if(data >= 1){
+				var limit = $('#pm_limit').val();
+				display_pms();
+			}else{
+			}
+		});
+	}, 5000);
 
-	// function display_pms(){
-	// $.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 10}, function (data){
-	// 		$("#display_pms").html(data) ;
-	// 	});
-	// }
+	function display_pms(){
+	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
+			$("#display_pms").html(data) ;
+		});
+	}
 	// END GET THE display_users and display_pms view
 
 	
@@ -227,10 +227,7 @@ $(document).ready(function(){
 
 
 	<!-- START List PMs -->
-	<input hidden id="pm_limit" value="10"/>
-	<input hidden id="pm_offset"/>
-	<div id="display_pms" class="four wide column">
-	</div>
+	<div id="display_pms" class="four wide column"></div>
 	<!-- END List PMs -->
 
 </div>

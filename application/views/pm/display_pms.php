@@ -4,7 +4,6 @@ $(document).ready(function(){
 	var batch_no = 1;
 	$('#loadpms').click(function(){
 		loadpms(offset,batch_no);
-		limit = limit + 5;
 		offset += 5;
 		batch_no++;
 	});
@@ -15,7 +14,6 @@ $(document).ready(function(){
                  data: {"offset" : offset,
              			"batch_no" : batch_no}, 
                  success: function(data){
-                	 $('#pm_offset').val(offset);
                 	 $(data).insertBefore("#loadpms");
                  }
              });
@@ -77,7 +75,7 @@ $(document).ready(function(){
 		<div class="ui fluid transparent input">
 			<h3>Received messages</h3>
 		</div>
-	<div class="ui relaxed divided list scrollusers infinitescroll">
+	<div class="ui relaxed divided list scrollpms infinitescroll">
 
 		<?php foreach ($pms as $pm) {
 

@@ -82,7 +82,7 @@ $(document).ready(function(){
 			     	<input class="get_id" value="<?php echo $user->user_id; ?>" hidden/>
 			     	<div id="get_pic_<?php echo $user->user_id ?>" class="get_pic" hidden >
 			     		<?php if($user->user_picture == '' || $user->user_picture == null){?>
-					    <?php echo base_url()?>assets/images/new-user-image-default.png ?>
+					    <?php echo base_url()?>assets/images/new-user-image-default.png
 					    <?php }else{ ?>
 					    <?php echo base_url()?>assets/uploads/<?php echo $user->user_picture ?>
 					    <?php } ?>

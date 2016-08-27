@@ -100,6 +100,12 @@ ul{
 
 .scrollusers{
   overflow-y: auto;
+  height: 470px;
+  border: 1px 1px 1px 1px;
+}
+
+.scrollpms{
+  overflow-y: auto;
   height: 530px;
   border: 1px 1px 1px 1px;
 }
