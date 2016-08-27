@@ -1,44 +1,21 @@
 <script type="text/javascript">
 $(document).ready(function(){
-	var limit = parseInt($('#pm_limit').val());
-	var offset = 5;
+	var offset = 15;
 	var batch_no = 1;
 	$('#loadpms').click(function(){
-<<<<<<< HEAD
-<<<<<<< HEAD
 		loadpms(offset,batch_no);
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of c85e801... fix pm
-		loadpms(limit,offset,batch_no);
 		limit = limit + 5;
->>>>>>> parent of c85e801... fix pm
-=======
-		limit = limit + 5;
->>>>>>> parent of 0a08380... minor changes pm
 		offset += 5;
 		batch_no++;
 	});
-	function loadpms(limit,offset,batch_no){
+	function loadpms(offset,batch_no){
 		$.ajax({
                  type:'POST',
                  url: '<?php echo base_url(); ?>pm/display_more_pms/',
                  data: {"offset" : offset,
              			"batch_no" : batch_no}, 
                  success: function(data){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of c85e801... fix pm
-                	 $('#pm_limit').val(limit);
                 	 $('#pm_offset').val(offset);
->>>>>>> parent of c85e801... fix pm
-=======
-                	 $('#pm_offset').val(offset);
->>>>>>> parent of 0a08380... minor changes pm
                 	 $(data).insertBefore("#loadpms");
                  }
              });
