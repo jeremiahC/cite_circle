@@ -1,22 +1,20 @@
 <script type="text/javascript">
 $(document).ready(function(){
-	var limit = parseInt($('#pm_limit').val());
-	var offset = 5;
+	var offset = 15;
 	var batch_no = 1;
 	$('#loadpms').click(function(){
-		loadpms(limit,offset,batch_no);
+		loadpms(offset,batch_no);
 		limit = limit + 5;
 		offset += 5;
 		batch_no++;
 	});
-	function loadpms(limit,offset,batch_no){
+	function loadpms(offset,batch_no){
 		$.ajax({
                  type:'POST',
                  url: '<?php echo base_url(); ?>pm/display_more_pms/',
                  data: {"offset" : offset,
              			"batch_no" : batch_no}, 
                  success: function(data){
-                	 $('#pm_limit').val(limit);
                 	 $('#pm_offset').val(offset);
                 	 $(data).insertBefore("#loadpms");
                  }
