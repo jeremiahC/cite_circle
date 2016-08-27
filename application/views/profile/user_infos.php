@@ -23,7 +23,9 @@
                   <?php echo $info->gender;?>
                 </div>
             </div>
-            <a href="ProfileController/editUpdateProfile" class="fluid ui inverted green button">Update Info</a>
+            <?if($this->aauth->get_user_id($email=false) === $info->user_id):?>
+              <a href="ProfileController/editUpdateProfile" class="fluid ui inverted green button">Update Info</a>
+            <?endif;?>
         </div>
         <div class="four wide column">
             <div class="ui red segment">

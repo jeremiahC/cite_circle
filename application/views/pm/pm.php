@@ -16,58 +16,25 @@ $(document).ready(function(){
 		display_users();
 	}, 30000);
 
-	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 5}, function (data){
-			$("#display_pms").html(data) ;
-		});
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-	setInterval(function (){
-		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
-			if(data >= 1){
-				var limit = $('#pm_limit').val();
-				display_pms();
-			}else{
-			}
-		});
-	}, 5000);
-
-	function display_pms(){
 	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
 			$("#display_pms").html(data) ;
 		});
-	}
-=======
-=======
->>>>>>> parent of 0a08380... minor changes pm
+	
 	// setInterval(function (){
 	// 	$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
 	// 		if(data >= 1){
 	// 			var limit = $('#pm_limit').val();
-<<<<<<< HEAD
-	// 			display_pms(limit);
-=======
 	// 			display_pms();
->>>>>>> parent of 0a08380... minor changes pm
 	// 		}else{
 	// 		}
 	// 	});
 	// }, 5000);
 
-<<<<<<< HEAD
-	// function display_pms(limit){
-	// $.post('<?php echo base_url(); ?>pm/display_pms',{'limit': limit}, function (data){
-	// 		$("#display_pms").html(data) ;
-	// 	});
-	// }
->>>>>>> parent of c85e801... fix pm
-=======
 	// function display_pms(){
 	// $.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 10}, function (data){
 	// 		$("#display_pms").html(data) ;
 	// 	});
 	// }
->>>>>>> parent of 0a08380... minor changes pm
 	// END GET THE display_users and display_pms view
 
 	
