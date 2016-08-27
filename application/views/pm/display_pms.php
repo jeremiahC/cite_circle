@@ -5,8 +5,11 @@ $(document).ready(function(){
 	var batch_no = 1;
 	$('#loadpms').click(function(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 		loadpms(offset,batch_no);
 =======
+=======
+>>>>>>> parent of c85e801... fix pm
 		loadpms(limit,offset,batch_no);
 		limit = limit + 5;
 >>>>>>> parent of c85e801... fix pm
@@ -21,7 +24,10 @@ $(document).ready(function(){
              			"batch_no" : batch_no}, 
                  success: function(data){
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c85e801... fix pm
                 	 $('#pm_limit').val(limit);
                 	 $('#pm_offset').val(offset);
 >>>>>>> parent of c85e801... fix pm
