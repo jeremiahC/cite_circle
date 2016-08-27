@@ -7,12 +7,16 @@ $(document).ready(function(){
 <<<<<<< HEAD
 <<<<<<< HEAD
 		loadpms(offset,batch_no);
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of c85e801... fix pm
 		loadpms(limit,offset,batch_no);
 		limit = limit + 5;
 >>>>>>> parent of c85e801... fix pm
+=======
+		limit = limit + 5;
+>>>>>>> parent of 0a08380... minor changes pm
 		offset += 5;
 		batch_no++;
 	});
@@ -25,12 +29,16 @@ $(document).ready(function(){
                  success: function(data){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of c85e801... fix pm
                 	 $('#pm_limit').val(limit);
                 	 $('#pm_offset').val(offset);
 >>>>>>> parent of c85e801... fix pm
+=======
+                	 $('#pm_offset').val(offset);
+>>>>>>> parent of 0a08380... minor changes pm
                 	 $(data).insertBefore("#loadpms");
                  }
              });
@@ -92,7 +100,7 @@ $(document).ready(function(){
 		<div class="ui fluid transparent input">
 			<h3>Received messages</h3>
 		</div>
-	<div class="ui relaxed divided list scrollpms infinitescroll">
+	<div class="ui relaxed divided list scrollusers infinitescroll">
 
 		<?php foreach ($pms as $pm) {
 
