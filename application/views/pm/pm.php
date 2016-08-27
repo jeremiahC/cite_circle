@@ -16,10 +16,11 @@ $(document).ready(function(){
 		display_users();
 	}, 30000);
 
-	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 15}, function (data){
+	$.post('<?php echo base_url(); ?>pm/display_pms',{'limit': 5}, function (data){
 			$("#display_pms").html(data) ;
 		});
 	
+<<<<<<< HEAD
 	setInterval(function (){
 		$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
 			if(data >= 1){
@@ -35,6 +36,23 @@ $(document).ready(function(){
 			$("#display_pms").html(data) ;
 		});
 	}
+=======
+	// setInterval(function (){
+	// 	$.get('<?php echo base_url(); ?>pm/count_unread_pms', function (data){
+	// 		if(data >= 1){
+	// 			var limit = $('#pm_limit').val();
+	// 			display_pms(limit);
+	// 		}else{
+	// 		}
+	// 	});
+	// }, 5000);
+
+	// function display_pms(limit){
+	// $.post('<?php echo base_url(); ?>pm/display_pms',{'limit': limit}, function (data){
+	// 		$("#display_pms").html(data) ;
+	// 	});
+	// }
+>>>>>>> parent of c85e801... fix pm
 	// END GET THE display_users and display_pms view
 
 	
