@@ -15,16 +15,13 @@ var base_url = "http://localhost/cite_circle/";
 	//Click event to scroll to top
 	$('.scrollToTop').click(function(){
 		$('html, body').animate({scrollTop : 0},800);
-		return false;	//Click event to scroll to top
-
+		return false;	
 	}).mouseover(function(){ 
 		$(this).children().removeClass('basic');
 	}).mouseleave(function(){
 		$(this).children().addClass('basic');
 	});
 
-	
-	
 	//get the posts
 	$.post(base_url+'status/display_status/',function(data){
     	$("#loader").hide();
@@ -57,7 +54,6 @@ var base_url = "http://localhost/cite_circle/";
      }
    //END window scroll load more status
 	
-	
 	//post submit button disabler
 	$("#status_input").keyup(function(){
     	$status = $(this).val().trim();
@@ -89,8 +85,6 @@ var base_url = "http://localhost/cite_circle/";
 			error: function(){
 				alert('Network Error.');
 				}
-			});
-			
+			});		
 	});
-
 });

@@ -19,9 +19,7 @@
 <body>
 <br><br><br><br><br><br>
 <div class="ui container">
-
     <div class="ui centered grid">
-
       <div class="column row">
           <h2 class="ui teal image header">
             <?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="image"');?>
@@ -30,12 +28,9 @@
             </div>
           </h2>
       </div>
-
       <div class="column row">
           <?= form_open('register/register') ?>
-    
             <form class="ui large form">
-             
               <div class="ui stacked green segment">
               <br>
                 <div class="field">
@@ -68,7 +63,6 @@
                 <br>
                 <input class="ui fluid large teal submit button"  type="submit" value="Sign Up">
               </div>
-             
                 <?php if (validation_errors()) : ?>
             <div class="ui error message">
               <?= validation_errors() ?>
@@ -83,15 +77,12 @@
 
             </form>
       </div>
-
       <div class="column row">
           <div class="ui message">
             Already have account? <?php echo anchor('login','Log in')?>
           </div>
       </div>
-
     </div>
-
 </div>
 </body>
 </html>

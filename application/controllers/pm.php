@@ -11,38 +11,37 @@ class Pm extends CI_Controller {
 	    $this->load->model('profile_model');
 	    date_default_timezone_set('Asia/Manila');
 	}
-	
+	//PRIVATE MESSAGES PAGE
 	function index(){
 		$data['body'] = 'pm/pm'; // call your content
 		$user_id = $this->session->userdata('id');
 		$data['upload_files'] = $this->profile_model->get_upload($user_id);
 		$this->load->view('template/template', $data);
 	}
-
+	//FUNCTION TO SEND A PM TO SPECIFIC USER
 	function send_pm(){
 		$sender_id = $this->session->userdata('id');
 		$receiver_id = $this->input->post('receiver_id');
 		$subj = $this->input->post('subj');
 		$message = $this->input->post('message');
-
 		$this->aauth->send_pm($sender_id, $receiver_id, $subj, $message);
 	}
-
+	//FUNCTION TO MARK PM AS READ (DATE INPUTTED)
 	function read_pm(){
 		$pm_id = $this->input->post('pm_id');
 		$this->aauth->get_pm($pm_id);
 	}
-
+	//COUNT ALL UNREAD PRIVATE MESSAGES
 	function count_unread_pms(){
 		$receiver_id = $this->session->userdata('id');
 		echo $this->aauth->count_unread_pms($receiver_id);
 	}
-
+	//DISPLAY ALL USERS
 	function display_users(){
 		$data['users'] = $this->profile_model->getAllUsersInfo();
 		echo $this->load->view('pm/display_users',$data,TRUE);
 	}
-
+	//DIPLAY LATEST PM WITH LIMIT
 	function display_pms(){
 		$receiver_id = $this->session->userdata('id');
 		$limit_count = $this->input->post('limit');
@@ -51,7 +50,7 @@ class Pm extends CI_Controller {
 		$data['pms'] = $this->aauth->list_pms($limit, $offset, $receiver_id , $sender_id= FALSE);
 		echo $this->load->view('pm/display_pms',$data,TRUE);
 	}
-
+	//LOAD MORE PMS
 	function display_more_pms(){
 		$receiver_id = $this->session->userdata('id');
 		$offset_count = $this->input->post('offset');
@@ -63,3 +62,4 @@ class Pm extends CI_Controller {
 	}
 
 }
+?>

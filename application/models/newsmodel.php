@@ -6,7 +6,7 @@ class Newsmodel	extends CI_Model
     public function __construct() {
         parent::__construct();
     }
-    
+    // insert post to db
     public function post($content,$title){
         $format = "Y-m-d";
 	    $data = array(
@@ -16,40 +16,29 @@ class Newsmodel	extends CI_Model
         );
         $this->db->insert('news', $data);
     }
-    
+    //retrieve a specific news from db
     public function show($id){
         $query = $this->db->get_where('news', array('news_id' => $id));
         return $query->result();
     }
-    
+    //retrieve all news entry from db
     public function show_all(){
         $this->db->order_by('news_id','DESC');
         $query = $this->db->get('news');
         return $query->result();
     }
-    
+    //delete a news entry in table news
     public function delete($id){
         $this->db->where('news_id', $id);
         $this->db->delete('news');
     }
-    
-    public function vote(){
-        $user_id = $this->input->post('user_id');
-        $news_id = $this->input->post('news_id');
-        
-         $data = array(
-             'news_id'=>$news_id,
-             'user_id'=>$user_id
-         );
-        $this->db->insert('votes',$data);
-    }
-
+    //insert a comment entry in news_comments table
     public function insert_comment($data){
         $this->db->insert('news_comments',$data);
         $inserted_id = $this->db->insert_id();
         return $inserted_id;
     }
-
+    //retrieve comments entry from news_comments table
     public function get_comments($news_id){
         $this->db->select('*');
         $this->db->where('news_id',$news_id);
@@ -60,13 +49,11 @@ class Newsmodel	extends CI_Model
         $query = $this->db->get ();
         return $query->result ();
     }
-
+    //count all entries in table news_comments
     public function count_comments($news_id){
         $this->db->where('news_id',$news_id);
         $this->db->from('news_comments');
         return $this->db->count_all_results();
     }
-
 }
-
 ?>

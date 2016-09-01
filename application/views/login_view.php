@@ -15,7 +15,6 @@
 	<!-- online script -->
 	<script src='https://www.google.com/recaptcha/api.js'></script>                
 
-	
 	</head>
 <body>
 <br><br><br><br><br><br>
@@ -27,14 +26,11 @@
             <div class="content">
               Log-in to your account
             </div>
-     
           </h2>
       </div>
       <div class="column row">
           <?= form_open('login/login') ?>
-    
             <form class="ui large form">
-             
               <div class="ui stacked green segment">
               <br>
                 <div class="field">
@@ -70,15 +66,12 @@
 
       </div>
       <div class="column row">
-        
             <div class="ui message">
               New to us? <?php echo anchor('register','Sign Up')?>
             </div>
       </div>
   </div>
 </div>
-
-
 </body>
 </html>
 

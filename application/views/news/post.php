@@ -65,9 +65,7 @@
 	</div>
 <!-- 	DELETE STATUS MODAL END  -->
 
-
 <script>
 $.getScript("<?php echo base_url()?>assets/js/news_post.js", function(){
     });
-
 </script>

@@ -7,9 +7,7 @@
     
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title>Sign Up - Cite Circle</title>
-	
 	<script src="<?php echo base_url()?>assets/js/jquery-2.1.1.min.js"></script>
-	
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/vendor/semantic/ui/dist/semantic.min.css">
 	<script src="<?php echo base_url()?>assets/vendor/semantic/ui/dist/semantic.min.js"></script>
 	<!-- online script -->
@@ -19,9 +17,7 @@
 <body>
 <br><br><br><br><br><br>
 <div class="ui container">
-
-    <div class="ui centered grid">
-
+  <div class="ui centered grid">
       <div class="column row">
           <h2 class="ui teal image header">
             <?php echo  anchor('home', '<img src="'.base_url().'assets/images/logo1.png" alt="Home" />','class="image"');?>
@@ -30,12 +26,9 @@
             </div>
           </h2>
       </div>
-
       <div class="column row">
           <?= form_open('register/register') ?>
-    
             <form class="ui large form">
-             
               <div class="ui stacked green segment">
               <br>
                 <div class="field">
@@ -74,13 +67,11 @@
               <?= validation_errors() ?>
             </div>
             <?php endif; ?>
-            
             <?php if (isset($error)) : ?>
             <div class="ui error message">
                 <?= $error ?>
             </div>
             <?php endif; ?>
-
             </form>
       </div>
       <div class="errorregister"></div>
@@ -89,9 +80,7 @@
             Already have account? <?php echo anchor('login','Log in')?>
           </div>
       </div>
-
     </div>
-    
 </div>
 </body>
 </html>
@@ -110,7 +99,6 @@
              url: "<?php echo base_url();?>register/register",
              data: data,
              success: function(data){
-
               }
             });
          return false;

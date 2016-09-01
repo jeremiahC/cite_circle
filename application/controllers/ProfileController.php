@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class ProfileController extends CI_Controller {
-
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('profile_model');
@@ -13,9 +11,8 @@ class ProfileController extends CI_Controller {
 			redirect('/');
 		}
 	}
-	
-	public function index()
-	{
+	// display user's profile and picture
+	public function index(){
 		$user_id = $this->session->userdata('id');
 		$data['error'] = $this->profile_model->do_upload();
 
@@ -24,7 +21,7 @@ class ProfileController extends CI_Controller {
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}
-
+	// display the edit and update user's profile function
 	public function editUpdateProfile(){
 		$user_id = $this->session->userdata('id');
 		$data['user_profile'] = $this->profile_model->getUserInfo($user_id);
@@ -32,15 +29,12 @@ class ProfileController extends CI_Controller {
 		$data['body'] = 'profile/update'; // call your content
 		$this->load->view('template/template', $data);
 	}
-	
-	
-	public function update_account()
-	{
+	// update user's account such as username & password
+	public function update_account(){
 		$this->form_validation->set_rules('username' ,'User name', 'trim|required|min_length[4]');
 		$this->form_validation->set_rules('password','Password', 'trim|required|min_length[6]');
 		$this->form_validation->set_rules('conf_password', 'Confirm Password', 'trim|required|min_length[6]|matches[password]');
 		$this->form_validation->set_rules('email','Email','trim|required|valid_email');
-		
 		if($this->form_validation->run() == FALSE){
 			echo "false";
 		}else{
@@ -48,7 +42,6 @@ class ProfileController extends CI_Controller {
 			$user_name = $this->input->post('username');
 			$user_email= $this->input->post('email'); 
 			$user_password = $this->input->post('password');
-			
 			if($this->aauth->update_user($user_id, $user_email, $user_password, $user_name)){
 				echo "true";
 			}else{
@@ -56,21 +49,17 @@ class ProfileController extends CI_Controller {
 			}
 		}
 	}
-	
-	
+	// update profile validation
 	public function update_profile(){
-	
 		$this->form_validation->set_rules('firstname', 'First name' ,'required');
 		$this->form_validation->set_rules('lastname', 'Last name' ,'required');
 		$this->form_validation->set_rules('birthday','Birthday', 'required');
 		$this->form_validation->set_rules('contact_number', 'Contact number', 'required');
 		$this->form_validation->set_rules('address', 'Address', 'required');
 		$this->form_validation->set_rules('age', 'Age', 'required');
-	
 		if($this->form_validation->run() == FALSE){
 			echo "false";
 		}else{
-	
 			$user_id = $this->session->userdata('id');
 			$user_firstname = $this->input->post('firstname');
 			$user_lastname= $this->input->post('lastname');
@@ -79,7 +68,6 @@ class ProfileController extends CI_Controller {
 			$user_contact= $this->input->post('contact_number');
 			$user_address = $this->input->post('address');
 			$user_gender = $this->input->post('gender');
-	
 			$data = array(
 					'user_id' => $user_id,
 					'firstname' => $user_firstname,
@@ -96,11 +84,8 @@ class ProfileController extends CI_Controller {
 				echo "false";
 			}
 		}
-	
 	}
-	
-	
-	
+	// checking username account existence in updating username account
 	public function check_user(){
 		 $username = $this->input->post('name');
 		 $username_sess = $this->session->userdata('name');
@@ -115,7 +100,7 @@ class ProfileController extends CI_Controller {
 			 }
 		 }
 	}
-	
+	// checking password length in updating account password
 	public function password_check_length($input, $max){
 		$length = strlen($input);
 		if($length >= $max){
@@ -124,7 +109,6 @@ class ProfileController extends CI_Controller {
 			return false;
 		}
 	}
-	
 	public function check_pass(){
 		$password = $this->input->post('password');
 		$max = 6;
@@ -134,9 +118,8 @@ class ProfileController extends CI_Controller {
 		}else{
 			echo  "false";
 		}
-		
 	}
-	
+	// check email validation in updating account
 	public function check_email(){
  		$email = $this->input->post('email');
  		$origemail = $this->session->userdata('email');
@@ -150,16 +133,15 @@ class ProfileController extends CI_Controller {
 				echo "true";
 			}
 		}
-		
 	}
-	
+	// view your profile and other user's profile
 	public function view_profile($id){
 		$data['user_profile'] = $this->profile_model->getUserInfo($id);
 		$data['upload_files'] = $this->profile_model->get_upload($id);
 		$data['body'] = 'profile/profile_view'; // call your content
 		$this->load->view('template/template', $data);
 	}	
-
+	// displaying user's information in viewing profile
 	public function user_info(){
 			$sess_user = $this->session->userdata('id');
 			$user_id = $this->input->post('user_id');
@@ -170,13 +152,11 @@ class ProfileController extends CI_Controller {
 			$data['information']= $this->profile_model->getUserInfo($user_id);
 			$this->load->view('profile/user_infos', $data);
 		}
-		
 	}
-
+	// insert or update time for online
 	public function update_online(){
 		$time = time();
 		$this->profile_model->update_online($time);
 	}
 }
-	
-
+?>

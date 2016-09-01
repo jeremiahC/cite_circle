@@ -7,7 +7,6 @@ $(document).ready(function(){
     });
     $('.btn-delete').hide();
     $(".delete").click(function(){
-        
         $('.btn-delete').show();
         $('.btn-delete').transition('set looping')
                          .transition('shake');
@@ -17,12 +16,10 @@ $(document).ready(function(){
             $('.ui.basic.modal').modal('show'); 
             $('.delete_news').click(deleteclick);
 
-
             function deleteclick(){
                 delete_news($news_id);
             }
             function delete_news(news_id){
-                    
                     $.ajax({
                         url: 'postdelete',
                         type: 'POST',

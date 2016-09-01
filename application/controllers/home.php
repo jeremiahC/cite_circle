@@ -4,10 +4,9 @@ class Home extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		// Your own constructor code
 		$this->load->library("Aauth");
 	}
-	
+	//IF LOGGED IN, PROCEED TO HOMEPAGE ELSE REDIRECT TO LOGIN PAGE
 	public function index(){
 	 	if ( $this->aauth->is_loggedin() ){
             $data['body'] = 'home_view'; // call your content
@@ -20,3 +19,4 @@ class Home extends CI_Controller {
 	}
 	
 }
+?>

@@ -40,9 +40,7 @@
                 </div>
     </div>
     <div class="column">
-        
             <div id="displaycomments"></div>
-            
             <?php foreach ($comment as $comments){?>
             <div class="ui segment feed">
             <div class="event">
@@ -76,20 +74,15 @@
                 </div>
               </div>
               </div>
-            <?php };?>
-        
-        
-    </div>
-    
+            <?php };?>   
+    </div> 
 </div>
 </div>
 <script>
 
-
 $(document).ready(function(){
     var base_url = 'http://localhost/cite_circle/';
-    $('#postbtn').click(function(){
-        
+    $('#postbtn').click(function(){   
         var comment = $("#comment").val().trim();
         var news_id = $("#news_id").val();
         post_comment(comment,news_id);

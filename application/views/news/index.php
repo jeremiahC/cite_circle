@@ -29,5 +29,4 @@
 <script>
 $.getScript("<?php echo base_url()?>assets/js/news_index.js", function(){
     });
-
 </script>

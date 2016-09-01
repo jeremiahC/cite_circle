@@ -1,5 +1,4 @@
 <div class="ui container grid">
-
 	<div class="column row">
 		<h1>Dashboard</h1>
 		<div class="ui icon message">
@@ -16,7 +15,6 @@
 			<div class="column">
 				<div class="ui teal inverted center aligned segment">
 					<div class="ui statistic">
-
 					  <div class="value">
 					    <i class="users icon"></i> 5,550
 					  </div>
@@ -53,7 +51,6 @@
 		</div>
 		<div class="column row">
 			<div class="column">
-				
 					<div class="ui two column centered grid">
 						<div class="column">
 							<div class="ui segment">
@@ -73,10 +70,8 @@
 							</div>
 						</div>
 					</div>
-				
 			</div>
 		</div>
-
 </div>
 
   <script type="text/javascript">
@@ -101,7 +96,6 @@
               }
               ]
           });
- 
           chart.render();
       }
   </script>

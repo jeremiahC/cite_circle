@@ -23,11 +23,8 @@
                                     <label>Label:</label>
                                     <div class="ui fitted divider"></div>
                                     <ul id="sortable1" class="connectedSortable" name="label">
-
                                     </ul>
-
                                 </div>
-                                
                                 <div class="field">
                                     <div class="ui fitted divider"></div>
                                     <input type="file">
@@ -60,5 +57,4 @@
 <script>
 $.getScript("<?php echo base_url()?>assets/js/news_create.js", function(){
     });
-
 </script>

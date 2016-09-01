@@ -13,14 +13,14 @@ class Status extends CI_Controller {
 	    	redirect('/');
 	    }
 	}
-	
+	//STATUS PAGE VIEW
 	function index(){
 			$data['body'] = 'status/status_view'; // call your content
 			$user_id = $this->session->userdata('id');
 			$data['upload_files'] = $this->profile_model->get_upload($user_id);
 			$this->load->view('template/template', $data);
 	}
-
+	//GET STATUS FROM A SPECIFIC USER WITH LIMIT
 	public function display_status_specific_user(){
 		$user_id = $this->input->post('user_id');
 		$config['base_url'] = base_url().'status/display_status_specific_user';
@@ -35,7 +35,7 @@ class Status extends CI_Controller {
 		$this->pagination->initialize($config);
 		echo $this->load->view('status/display_status',$data,TRUE);
 	}
-
+	//GET MORE STATUS (5) FROM A SPECIFIC USER
 	public function display_more_status_specific_user(){
 		$user_id = $this->input->post('user_id');
 		$page = $this->input->post('pagenumber');
@@ -55,7 +55,7 @@ class Status extends CI_Controller {
 		$data['batchNo'] = $page;
 		echo $this->load->view('status/status_template',$data,TRUE);
 	}
-	
+	//GET ALL STATUS OF ALL USERS WITH LIMIT
 	public function display_status(){
 		$config['base_url'] = base_url().'status/display_status';
 		$config['total_rows'] = $this->status_model->count_status();
@@ -70,7 +70,7 @@ class Status extends CI_Controller {
 		$this->pagination->initialize($config);
 		echo $this->load->view('status/display_status',$data,TRUE);
 	}
-
+	//GET MORE STATUS OF ALL USERS
 	public function display_more_status(){
 		$page = $this->input->post('pagenumber');
 		$start = 5 * ($page-1);
@@ -91,7 +91,7 @@ class Status extends CI_Controller {
 		$data['batchNo'] = $page;
 		echo $this->load->view('status/status_template',$data,TRUE);
 	}
-	
+	//INSERT A STATUS TO DB
 	public function insert_status(){
 		$data['user_id']=$this->input->post('user_id');
 		$data['status']=$this->input->post('status');
@@ -102,16 +102,15 @@ class Status extends CI_Controller {
 		$this->status_model->insert_status($datas);
 		$this->display_status();
 	}
-	
+	//DELETE STATUS
 	public function delete_status(){
 		$this->status_model->delete_status();
 	}
-	
+	//UPDATE/EDIT STATUS
 	public function update_status(){
 		$this->status_model->update_status();
 	}
-	
-	//comment functions below
+	//INSERT COMMENTS TO STATUS
 	public function insert_comment(){
 		$data['user_id']=$this->input->post('user_id');
 		$data['content']=$this->input->post('content');
@@ -125,21 +124,21 @@ class Status extends CI_Controller {
 		$data['user_info'] = $this->profile_model->get_upload($this->session->userdata('id'));
 		echo $this->load->view('status/comment_tempate',$data,TRUE);
 	}
-
+	//UNLIKE A STATUS
 	public function likeToUnlike(){
 		$status_id=  $this->input->post('status_id');
 		$user_id = $this->session->userdata('id');
 		$result = $this->status_model->delete_like($status_id, $user_id);
 		return $result;
 	}
-
+	//LIKE A STATUS
 	public function unlikeToLike(){
 		$status_id=  $this->input->post('status_id');
 		$user_id = $this->session->userdata('id');
 		$result = $this->status_model->insert_like($status_id, $user_id);
 		return $result;
 	}
-    
+    //CHECK IF USER LIKED THE STATUS
 	public function like_check(){
 		$status_id=  $this->input->post('status_id');
 		$user_id = $this->session->userdata('id');
@@ -151,14 +150,13 @@ class Status extends CI_Controller {
 			echo "false";
 		}
 	}
-	
+	//COUNT ALL VOTE/LIKE 
 	public function count_vote(){
-	
 		$status_id=  $this->input->post("status_id");
 		$result=  $this->status_model->count_likes($status_id);
 		echo $result['likes_count'];
 	}
-	
+	//GET USER WHO LIKE STATUS
 	public function see_who_likes(){
 	$status_id=  $this->input->post('status_id');
 	$user_liked = $this->status_model->user_who_likes($status_id);
@@ -181,13 +179,11 @@ class Status extends CI_Controller {
 	 							echo '<a class="ui image label"><img src="http://localhost/cite_circle/assets/uploads/'.$datas['user_picture'].'">'.$datas['firstname']." ".$datas['lastname'].'</a>';
 	 						};
 	 				}
-	 			}
+	 		}
 		}
-
 	}
-
 	
 }
-
+?>
 /* End of file status.php */
 /* Location: ./application/controllers/status.php */

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     var base_url = "http://localhost/cite_circle/";
     
     //get the posts

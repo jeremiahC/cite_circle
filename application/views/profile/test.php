@@ -24,7 +24,7 @@
 										</a>
 										<br><br>
 										
-										<div class="ui basic modal shupaolark">
+										<div class="ui basic modal displayTop">
 											<div class="ui centered grid">
  											<i class="large right floated gray close icon pointer closemodal"></i>
 												<div class="eight wide column">

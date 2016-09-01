@@ -85,7 +85,6 @@ $(document).ready(function(){
 		            }
 		        });
 		    }
-	        
 	    });
 		//delete status
 		$('.remove_icon').click(function(){
@@ -115,9 +114,6 @@ $(document).ready(function(){
 		    }
 	    });
 	});
-	
-	
-
 });
 
 //when comment submit button is clicked
@@ -156,7 +152,7 @@ $(function(){
 	}
 });
 
-//query if nka like naba ang user
+//queries when the user already liked
 $(function(){
 	$('.like_append').each(function(){
 			var this_location = $(this);
@@ -195,7 +191,6 @@ $(function(){
 				   }
 			});
 	});
-
 });
 
 //like counter

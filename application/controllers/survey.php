@@ -1,18 +1,15 @@
 <?php
-
 class Survey extends CI_Controller {
-               
-	function __construct()
-	{
+	function __construct(){
  		parent::__construct();
  		$this->load->library("Aauth");
 	    if ( !$this->aauth->is_loggedin() ){
 	    	redirect('/');
 	    }
 		$this->load->model('survey_model');
-	}	
-	function index()
-	{			
+	}
+	//LOAD SURVEY PAGE AND VALIDATE
+	function index(){			
 		$this->form_validation->set_rules('citenian', 'This ', 'max_length[155]');			
 		$this->form_validation->set_rules('social_media[]', 'This ', 'required|trim|max_length[155]');			
 		$this->form_validation->set_rules('make_friends', 'This ', 'required|trim|max_length[15]');		
@@ -32,9 +29,7 @@ class Survey extends CI_Controller {
 			$user_id = $this->session->userdata('id');
                     $data['upload_files'] = $this->profile_model->get_upload($user_id);
 			$this->load->view('template/template', $data);
-		}
-		else // passed validation proceed to post success logic
-		{
+		}else{
 		 	// build array for the model
 			$social_media = set_value('social_media');
 			$social_media_useful = set_value('social_media_useful');
@@ -54,23 +49,18 @@ class Survey extends CI_Controller {
 						);
 					
 			// run insert model to write data to db
-		
-			if ($this->survey_model->SaveForm($form_data) == TRUE) // the information has therefore been successfully saved in the db
-			{
+			if ($this->survey_model->SaveForm($form_data) == TRUE){
 				redirect('survey/success');   // or whatever logic needs to occur
-			}
-			else
-			{
+			}else{
 			echo 'An error occurred saving your information. Please try again later';
-			// Or whatever error handling is necessary
 			}
 		}
 	}
-	function success()
-	{
+	//SUCCESS PAGE OF SURVEY
+	function success(){
 			$data['body'] = 'survey/survey_success'; // call your content
 			$user_id = $this->session->userdata('id');
-                    $data['upload_files'] = $this->profile_model->get_upload($user_id);
+            $data['upload_files'] = $this->profile_model->get_upload($user_id);
 			$this->load->view('template/template', $data);
 	}
 }

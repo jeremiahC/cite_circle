@@ -18,7 +18,6 @@ var base_url = 'http://localhost/cite_circle/'
 		    // doesn't exist or error loading
 		    document.getElementById("curentImg").src= base_url + "assets/images/new-user-image-default.png";
 		  };
-
 		  img.src = src; // fires off loading of image
 		}
 

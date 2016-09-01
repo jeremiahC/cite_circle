@@ -428,65 +428,16 @@ $(function(){
 	});
 });
 
-
-// //query if nka like naba ang user
-// $(function(){
-// 	$('.like_append_<?php echo $batchNo?>').each(function(){
-// 			$id = $(this).attr('id');
-// 			var this_location = $(this);
-// 			var like_html = '<div id="'+$id+'" class="like_infos_<?php echo $batchNo?> ui labeled button" tabindex="0">'
-// 			  +'<div id="'+$id+'" class="like_toggle_<?php echo $batchNo?> unlike_icon_'+$id+' ui basic blue button">'
-// 			  +'<i id="unlike" class="empty red heart icon"></i> Like'
-// 			  +'</div>'
-// 			  +'<div id="'+$id+'" class="like_toggle_<?php echo $batchNo?> like_icon_'+$id+' ui basic blue button">'
-// 			    +'<i id="like" class="red heart icon"></i> Like'
-// 			  +'</div>'
-// 			  +'<a id="'+$id+'" class="like_count likes_count_'+$id+' ui basic blue left pointing label">'
-// 			  +'</a>'
-// 			+'</div>';
-// 			this_location.html(like_html);
-// 			$.ajax({
-// 					method:"POST",
-// 				    url: base_url+"status/like_check/",
-// 				    data:"&status_id="+$id,
-// 				    success:function(data){
-// 						if(data == "true"){
-// 							$('.unlike_icon_'+$id).hide();
-// 						 	$('.like_icon_'+$id).show();
-// 						 	like_counter();
-// 							like_unlike();
-// 							see_likers();
-// 					 	}else{
-// 					 		$('.unlike_icon_'+$id).show();
-// 					 		$('.like_icon_'+$id).hide();
-// 					 		like_counter();
-// 							like_unlike();
-// 							see_likers();
-// 						}
-// 				   }
-// 			});
-// 	});
-
-
-	
-// });
-
 function like_counter(status_id){
-		//$(".like_append_<?php echo $batchNo?>").each(function(){
-			//var status_id= $(this).attr('id');
 				$.ajax({
 	            	method:"POST",
 	           		url: base_url+"status/count_vote/",
 	          		data:"status_id="+status_id,
 	           		success:function(data){
-	           			//ako ok
 	           			$('.likes_count_'+status_id).html(data);
 	           		}
 	       		});
-	   		//});
 	}
-
-
 
 //if click like button (like/unlike)
 function like_unlike(){

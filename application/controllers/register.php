@@ -7,21 +7,15 @@ class Register extends CI_Controller {
 		// Your own constructor code
 		$this->load->library("Aauth");
 	}
-	
+	//REGISTER PAGE VIEW
 	public function index(){
 		if ( $this->aauth->is_loggedin() ){
 			redirect('/');
 		}else{
 		$this->load->view('register_view');
+		}
 	}
-	}
-	
-	/**
-	 * register function.
-	 *
-	 * @access public
-	 * @return void
-	 */
+	//FORM VALIDATION FOR REGISTER
 	public function register() {
 		// set validation rules
 		$this->form_validation->set_rules('name', 'Name', 'trim|required|min_length[4]');
@@ -32,29 +26,22 @@ class Register extends CI_Controller {
 		if ($this->form_validation->run() === false) {
 			// validation not ok, send validation errors to the view
 			$this->load->view('register_view');
-				
 		} else {
-				
 			// set variables from the form
 			$name = $this->input->post('name');
 			$email    = $this->input->post('email');
 			$password = $this->input->post('password');
 			
 			if ($this->aauth->create_user($email,$password,$name) == true) {
-	
 				$data['body'] = 'pages/register_success'; // cal your content
 				$this->load->view('template/template', $data);
-	
 			} else {
 				// send error to the view
 				$data['error'] = $this->aauth->print_errors();
 				$this->load->view('register_view', $data);
 			}
-				
 		}
-	
 	}
-	
 
-	
 }
+?>

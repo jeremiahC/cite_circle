@@ -14,7 +14,6 @@
 					<?php }?>
 				</a>
 
-
 				<div class="ui basic modal modal_pic">
 											<div class="ui centered grid">
  											<i class="large right floated gray close icon pointer closemodal"></i>

@@ -16,8 +16,6 @@
 								<a class="item" id="account" data-tab="account"><i class="icon edit sign"></i>Account Settings</a>
 							</div>
 							
-							
-							
 							<div class="ui bottom attached active tab segment" data-tab="personal">
 							<?php echo form_open('ProfileController/edit_profile');?>
 							<div class="ui form">
@@ -76,10 +74,6 @@
 								<?php echo form_close();?>
 							</div>
 							
-							
-							
-							
-							
 							<div class="ui bottom attached tab segment" data-tab="account">
 							<?php echo form_open('ProfileController/update_account');?>
 							<div class="ui form">
@@ -108,9 +102,7 @@
 								   </div>
 								</div>
 								<?php echo form_close();?>
-							</div>
-							
-							
+							</div>		
 				</div>
 				</div>
 			</div>
@@ -218,14 +210,11 @@ $(function(){
 					    
 					   }
 					  });
-
 			});
-
 	});
 		
 	$(function(){
 
-		
 		$('#email').keyup(function(){
 				var dataString = {email: $("#email").val()};
 				console.log(dataString);

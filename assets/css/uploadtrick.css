@@ -1,5 +1,5 @@
-/*change name hahaha*/
-.shupaolark {
+
+.displayTop {
 	top: 300px !important;
 }
 .fileUpload {
@@ -20,22 +20,18 @@
 	font-size: 20px;
 	cursor: pointer;
 	opacity: 0;
-/* 	filter: alpha(opacity=0); */
 	height: 100%;
 	text-align: center;
 }
 .custom-span{ font-family: Arial; font-weight: bold;font-size: 100px; color: #FE57A1}
 #uploadFile{border: none;margin-left: 10px; width: 200px;}
 .custom-para{font-family: arial;font-weight: bold;font-size: 24px; color:#585858;}
-
-
 .display-pic {
     height: 51%;
     position: absolute;
     width: 100%;
     background-image: url('../../assets/images/background.png');
 }
-
 .profile-pic {
     position: absolute;
     width: 350px;
@@ -44,7 +40,6 @@
     top: 80px;
     z-index: 1;
 }
-
 .username {
     position: absolute;
     margin-right: 200px;

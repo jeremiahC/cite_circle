@@ -46,11 +46,9 @@ if(count($query) > 0){?>
 		    	        <div class="date">
 	        <!--  YOU CAN PUT SOMETHING IN HERE  -->
 	        </div>
-	        
 	      </div>
 	      
 	      <div class="extra text">
-	      
 				<!-- display status content START-->
 		     	<div id="origbody_<?php echo $status->status_id;?>" class="origbody">
 					<?php $mod_status = str_replace(["\r\n", "\r", "\n"], "<br/>", $status->status); 

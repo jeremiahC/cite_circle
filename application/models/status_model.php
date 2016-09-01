@@ -1,13 +1,12 @@
 <?php
 class Status_model extends CI_Model
 {
-	public function __construct()
-	{//Core controller constructor
+	public function __construct(){
 	parent::__construct();
 	date_default_timezone_set('Asia/Manila');
 	$this->postTable = 'status';
 	}
-	
+	//COUNT ALL STATUS FOR PAGINATION
 	function count_status(){
 		$query = $this->db->count_all_results('status');
 		return $query;
@@ -79,20 +78,20 @@ class Status_model extends CI_Model
 		$inserted_id = $this->db->insert_id();
 		return $inserted_id;
 	}
-
+	//UNLIKE A STATUS
 	public function delete_like($status_id, $user_id){
 		$this->db->where('voted_status_id', $status_id);
 		$this->db->where('vote_user_id', $user_id);
 		$this->db->delete('vote');
 		return true;
 	}
-
+	//LIKE A STATUS
 	public function insert_like($status_id, $user_id){
 		$this->db->insert('vote', array('voted_status_id' => $status_id,'vote_user_id' => $user_id));
 		return true;
 
 	}
-
+	//CHECK IF USER LIKED A STATUS
 	public function like_check($status_id,$user_id){
 		$this->db->select("*");
 		$this->db->from("vote");
@@ -105,7 +104,7 @@ class Status_model extends CI_Model
 			return false;
 		}
 	}
-	
+	//COUNT LIKES/VOTE OF A STATUS
 	public function count_likes($status_id){
 		$this->db->select("COUNT(*) AS likes_count");
 		$this->db->from("vote");
@@ -113,17 +112,17 @@ class Status_model extends CI_Model
 		$result= $this->db->get();
 		return $result->row_array();
 	}
-
+	//GET USERS WHO LIKES/VOTES THE STATUS
 	public function user_who_likes($status_id){
 		$query = $this->db->get_where('vote', array('voted_status_id' => $status_id));
 		return $query->result_array();
 	}
-	
+	//GET INFO OF USERS WHO LIKES THE STATUS FROM USER PROFILE TABLE
 	public function get_who_likes($voted_user){
 		$query = $this->db->get_where('aauth_user_profile', array('user_id' => $voted_user));
 		return $query->result_array();
 	 }
-
+	 //GET INFO OF USERS WHO LIKE THE STATUS FROM USERS TABLE
 	 public function get_userdata($id){
 	 	$query = $this->db->get_where('aauth_users', array('id' => $id));
 		return $query->result_array();

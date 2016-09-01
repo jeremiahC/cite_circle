@@ -13,14 +13,12 @@
 						<form class="ui form">
 							<div class="inline field">
 								<label>Role Access</label>
-
 							    <div class="ui slider checkbox">
 							    	<label>School Admin</label>
 							    	{checkbox_field}
 							    </div>
-							   	
-							 	</div>
-							  	<div class="result"></div>
+							</div>
+							<div class="result"></div>
 						</form>
 					</div>
 				</div>
@@ -40,6 +38,5 @@
 <script>
 $.getScript("<?php echo base_url()?>assets/js/admin_show.js", function(){
 	});
-
 </script>
 
